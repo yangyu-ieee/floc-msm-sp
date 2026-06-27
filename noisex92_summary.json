@@ -1,0 +1,14 @@
+{
+  "win_count": {
+    "scratch": 0,
+    "mse": 4,
+    "l1": 6,
+    "floc": 6
+  },
+  "SNR": 5,
+  "noise_sources": [
+    "machinegun.wav",
+    "factory1.wav",
+    "factory2.wav"
+  ]
+}

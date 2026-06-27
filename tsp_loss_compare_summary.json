@@ -1,0 +1,232 @@
+{
+  "source": "D:\\deepl\\paper2_floc_msm\\logs\\tsp_loss_compare_fixed_20260612\\results.json",
+  "note": "Corrected experiment: downstream train/test data uses the same alpha as pretraining; previous tsp_loss_compare_20260611 used alpha=1.5 inside eval_downstream for every alpha.",
+  "best_by_condition": {
+    "a=2.0/n=50": {
+      "best_loss": "mse",
+      "best_mean": 1.0,
+      "best_std": 0.0,
+      "second_loss": "l1",
+      "second_mean": 1.0,
+      "margin": 0.0
+    },
+    "a=2.0/n=100": {
+      "best_loss": "mse",
+      "best_mean": 1.0,
+      "best_std": 0.0,
+      "second_loss": "l1",
+      "second_mean": 1.0,
+      "margin": 0.0
+    },
+    "a=2.0/n=200": {
+      "best_loss": "mse",
+      "best_mean": 1.0,
+      "best_std": 0.0,
+      "second_loss": "l1",
+      "second_mean": 1.0,
+      "margin": 0.0
+    },
+    "a=2.0/n=500": {
+      "best_loss": "mse",
+      "best_mean": 1.0,
+      "best_std": 0.0,
+      "second_loss": "l1",
+      "second_mean": 1.0,
+      "margin": 0.0
+    },
+    "a=1.5/n=50": {
+      "best_loss": "charbonnier",
+      "best_mean": 0.6815999865531921,
+      "best_std": 0.02868867169416385,
+      "second_loss": "floc_1.2",
+      "second_mean": 0.6727999925613404,
+      "margin": 0.008799993991851718
+    },
+    "a=1.5/n=100": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.7691999912261963,
+      "best_std": 0.03545362580001074,
+      "second_loss": "floc_1.0",
+      "second_mean": 0.7531999945640564,
+      "margin": 0.015999996662139915
+    },
+    "a=1.5/n=200": {
+      "best_loss": "l1",
+      "best_mean": 0.8212000012397767,
+      "best_std": 0.018486753624848567,
+      "second_loss": "charbonnier",
+      "second_mean": 0.8175999999046326,
+      "margin": 0.003600001335144043
+    },
+    "a=1.5/n=500": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.9216000080108643,
+      "best_std": 0.01656018763569879,
+      "second_loss": "charbonnier",
+      "second_mean": 0.9111999988555908,
+      "margin": 0.010400009155273504
+    },
+    "a=1.0/n=50": {
+      "best_loss": "floc_1.0",
+      "best_mean": 0.5343999981880188,
+      "best_std": 0.024245416034165444,
+      "second_loss": "charbonnier",
+      "second_mean": 0.5340000092983246,
+      "margin": 0.00039998888969416946
+    },
+    "a=1.0/n=100": {
+      "best_loss": "floc_1.5",
+      "best_mean": 0.620800006389618,
+      "best_std": 0.055879884983703054,
+      "second_loss": "charbonnier",
+      "second_mean": 0.6168000102043152,
+      "margin": 0.003999996185302779
+    },
+    "a=1.0/n=200": {
+      "best_loss": "floc_1.0",
+      "best_mean": 0.7396000027656555,
+      "best_std": 0.04215019311917611,
+      "second_loss": "floc_1.2",
+      "second_mean": 0.7224000096321106,
+      "margin": 0.017199993133544922
+    },
+    "a=1.0/n=500": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.8700000047683716,
+      "best_std": 0.01926655819653379,
+      "second_loss": "floc_1.0",
+      "second_mean": 0.8680000066757202,
+      "margin": 0.0019999980926513894
+    }
+  },
+  "best_by_alpha": {
+    "2.0": {
+      "50": {
+        "best_loss": "mse",
+        "best_mean": 1.0,
+        "best_std": 0.0,
+        "second_loss": "l1",
+        "second_mean": 1.0,
+        "margin": 0.0
+      },
+      "100": {
+        "best_loss": "mse",
+        "best_mean": 1.0,
+        "best_std": 0.0,
+        "second_loss": "l1",
+        "second_mean": 1.0,
+        "margin": 0.0
+      },
+      "200": {
+        "best_loss": "mse",
+        "best_mean": 1.0,
+        "best_std": 0.0,
+        "second_loss": "l1",
+        "second_mean": 1.0,
+        "margin": 0.0
+      },
+      "500": {
+        "best_loss": "mse",
+        "best_mean": 1.0,
+        "best_std": 0.0,
+        "second_loss": "l1",
+        "second_mean": 1.0,
+        "margin": 0.0
+      }
+    },
+    "1.5": {
+      "50": {
+        "best_loss": "charbonnier",
+        "best_mean": 0.6815999865531921,
+        "best_std": 0.02868867169416385,
+        "second_loss": "floc_1.2",
+        "second_mean": 0.6727999925613404,
+        "margin": 0.008799993991851718
+      },
+      "100": {
+        "best_loss": "floc_1.2",
+        "best_mean": 0.7691999912261963,
+        "best_std": 0.03545362580001074,
+        "second_loss": "floc_1.0",
+        "second_mean": 0.7531999945640564,
+        "margin": 0.015999996662139915
+      },
+      "200": {
+        "best_loss": "l1",
+        "best_mean": 0.8212000012397767,
+        "best_std": 0.018486753624848567,
+        "second_loss": "charbonnier",
+        "second_mean": 0.8175999999046326,
+        "margin": 0.003600001335144043
+      },
+      "500": {
+        "best_loss": "floc_1.2",
+        "best_mean": 0.9216000080108643,
+        "best_std": 0.01656018763569879,
+        "second_loss": "charbonnier",
+        "second_mean": 0.9111999988555908,
+        "margin": 0.010400009155273504
+      }
+    },
+    "1.0": {
+      "50": {
+        "best_loss": "floc_1.0",
+        "best_mean": 0.5343999981880188,
+        "best_std": 0.024245416034165444,
+        "second_loss": "charbonnier",
+        "second_mean": 0.5340000092983246,
+        "margin": 0.00039998888969416946
+      },
+      "100": {
+        "best_loss": "floc_1.5",
+        "best_mean": 0.620800006389618,
+        "best_std": 0.055879884983703054,
+        "second_loss": "charbonnier",
+        "second_mean": 0.6168000102043152,
+        "margin": 0.003999996185302779
+      },
+      "200": {
+        "best_loss": "floc_1.0",
+        "best_mean": 0.7396000027656555,
+        "best_std": 0.04215019311917611,
+        "second_loss": "floc_1.2",
+        "second_mean": 0.7224000096321106,
+        "margin": 0.017199993133544922
+      },
+      "500": {
+        "best_loss": "floc_1.2",
+        "best_mean": 0.8700000047683716,
+        "best_std": 0.01926655819653379,
+        "second_loss": "floc_1.0",
+        "second_mean": 0.8680000066757202,
+        "margin": 0.0019999980926513894
+      }
+    }
+  },
+  "win_count": {
+    "mse": 4,
+    "charbonnier": 1,
+    "floc_1.2": 3,
+    "l1": 1,
+    "floc_1.0": 2,
+    "floc_1.5": 1
+  },
+  "family_win_count": {
+    "mse": 4,
+    "charbonnier": 1,
+    "floc": 6,
+    "l1": 1
+  },
+  "claim_checks": {
+    "alpha_2_saturated": true,
+    "mse_never_best_impulsive": true,
+    "floc_best_all_cauchy_conditions": true,
+    "floc_not_universally_best": true
+  },
+  "paper_safe_claims": [
+    "Under impulsive alpha-stable corruption (alpha=1.5 and 1.0), MSE is not the best reconstruction loss in any corrected synthetic condition.",
+    "No single robust loss dominates: Charbonnier, L1, and FLOC alternate at alpha=1.5.",
+    "FLOC occupies the extreme heavy-tail regime: a FLOC loss is best in all alpha=1.0 conditions.",
+    "The alpha=2.0 condition is saturated and should not be used for loss ranking without making the task harder."
+  ]
+}

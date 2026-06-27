@@ -1,0 +1,31 @@
+{
+  "win_count": {
+    "scratch": 1,
+    "mse": 3,
+    "l1": 6,
+    "huber": 2,
+    "charbonnier": 6,
+    "floc": 2
+  },
+  "total": 20,
+  "losses": [
+    "scratch",
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc"
+  ],
+  "datasets": [
+    "ECG200",
+    "ECG5000",
+    "Wafer",
+    "FordA",
+    "GunPoint",
+    "CBF",
+    "FaceAll",
+    "SwedishLeaf",
+    "ItalyPowerDemand",
+    "ChlorineConcentration"
+  ]
+}
