@@ -1,0 +1,24 @@
+{
+  "experiment": "R3_multi_seed_multi_direction_local_loss_landscape",
+  "generator": "symmetric CMS S1, alpha=1.5, CF exp(-|t|^alpha)",
+  "normalization": "per-sequence max-abs after corruption, retained to match corrected main benchmark",
+  "architecture": "Conv1d(k=8,stride=4,pad=2,d=64) + 4-layer Transformer(d=64,heads=4,ff=256,dropout=0.1); pooled linear decoder",
+  "mask_ratio": 0.5,
+  "losses": [
+    "mse",
+    "l1",
+    "charbonnier",
+    "floc_1.2"
+  ],
+  "seeds": 3,
+  "random_directions_per_trained_model": 5,
+  "pretrain_samples": 10000,
+  "epochs": 20,
+  "validation_samples": 1000,
+  "device": "cuda",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "script_sha256": "1e3155bf622ebcba1e9f57a0a7e5e034d06913f2d8c0ad358ba8d1c599171b84"
+}

@@ -1,0 +1,37 @@
+{
+  "experiment": "floc_msm_main",
+  "alpha": 1.5,
+  "seq_len": 128,
+  "d_model": 64,
+  "n_heads": 4,
+  "n_layers": 4,
+  "pt_epochs": 20,
+  "pt_samples": 10000,
+  "mask_ratio": 0.5,
+  "n_seeds": 1,
+  "n_labeled": [
+    50,
+    100,
+    200,
+    500
+  ],
+  "n_test": 500,
+  "ft_epochs": 30,
+  "scratch_epochs": 80,
+  "losses": [
+    "scratch",
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc_1.2"
+  ],
+  "mask_strategy": "random_token",
+  "class_mode": "family_randomized",
+  "mask_count_rule": "exactly round(mask_ratio * token_count) per sequence",
+  "seed": 3,
+  "device": "cuda",
+  "generator": "symmetric CMS S1; exp(-|t|^alpha)",
+  "normalization": "per-sequence max-abs after corruption (retained to isolate sampler correction)",
+  "code_sha256": "e6b3517e3c66e564142d50b8eef66ca5a23683312c800c7c2370073d0e4272c3"
+}

@@ -1,0 +1,142 @@
+{
+  "ECG200": {
+    "train_shape": [
+      100,
+      96
+    ],
+    "test_shape": [
+      100,
+      96
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9947780323403892,
+    "noisy_train_abs_q99": 1.0,
+    "noisy_test_abs_q99": 1.0
+  },
+  "ECG5000": {
+    "train_shape": [
+      500,
+      140
+    ],
+    "test_shape": [
+      4500,
+      140
+    ],
+    "n_classes": 5,
+    "clean_train_global_rms": 0.9964221706847042,
+    "noisy_train_abs_q99": 0.9091715216636658,
+    "noisy_test_abs_q99": 0.9117568135261536
+  },
+  "Wafer": {
+    "train_shape": [
+      1000,
+      152
+    ],
+    "test_shape": [
+      6164,
+      152
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9967050983697185,
+    "noisy_train_abs_q99": 0.8264504671096802,
+    "noisy_test_abs_q99": 0.8267205953598022
+  },
+  "FordA": {
+    "train_shape": [
+      3601,
+      500
+    ],
+    "test_shape": [
+      1320,
+      500
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9989994994631247,
+    "noisy_train_abs_q99": 0.48204049468040466,
+    "noisy_test_abs_q99": 0.48728400468826294
+  },
+  "GunPoint": {
+    "train_shape": [
+      50,
+      150
+    ],
+    "test_shape": [
+      150,
+      150
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9966610924919743,
+    "noisy_train_abs_q99": 0.8092228174209595,
+    "noisy_test_abs_q99": 0.8219583630561829
+  },
+  "CBF": {
+    "train_shape": [
+      30,
+      128
+    ],
+    "test_shape": [
+      900,
+      128
+    ],
+    "n_classes": 3,
+    "clean_train_global_rms": 0.9960860904791776,
+    "noisy_train_abs_q99": 0.8880152702331543,
+    "noisy_test_abs_q99": 0.8983026742935181
+  },
+  "FaceAll": {
+    "train_shape": [
+      560,
+      131
+    ],
+    "test_shape": [
+      1690,
+      131
+    ],
+    "n_classes": 14,
+    "clean_train_global_rms": 0.9961758941305257,
+    "noisy_train_abs_q99": 0.9145795106887817,
+    "noisy_test_abs_q99": 0.9079717993736267
+  },
+  "SwedishLeaf": {
+    "train_shape": [
+      500,
+      128
+    ],
+    "test_shape": [
+      625,
+      128
+    ],
+    "n_classes": 15,
+    "clean_train_global_rms": 0.996086090866498,
+    "noisy_train_abs_q99": 0.9088819026947021,
+    "noisy_test_abs_q99": 0.9054888486862183
+  },
+  "ItalyPowerDemand": {
+    "train_shape": [
+      67,
+      24
+    ],
+    "test_shape": [
+      1029,
+      24
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9789450121468026,
+    "noisy_train_abs_q99": 1.0,
+    "noisy_test_abs_q99": 1.0
+  },
+  "ChlorineConcentration": {
+    "train_shape": [
+      467,
+      166
+    ],
+    "test_shape": [
+      3840,
+      166
+    ],
+    "n_classes": 3,
+    "clean_train_global_rms": 0.9969834019217402,
+    "noisy_train_abs_q99": 0.8463465571403503,
+    "noisy_test_abs_q99": 0.8475393652915955
+  }
+}

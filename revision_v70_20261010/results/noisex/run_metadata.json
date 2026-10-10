@@ -1,0 +1,213 @@
+{
+  "experiment": "NOISEX-92_UCR_full_pipeline_seeded_rerun",
+  "started_unix": 1791376410.7110672,
+  "elapsed_seconds": 820.5749793052673,
+  "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "deterministic_algorithms": true,
+  "master_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "datasets": {
+    "ECG200": {
+      "train_tsv_sha256": "bd08b37147ebf205231ad43e02c42dd5c14bc348f4ccc7614f85634c8916bf21",
+      "test_tsv_sha256": "c8ac02caf98be23c47c044fde026219301ceaf0b2f97bc107bd0cd96330b867c",
+      "train_shape": [
+        100,
+        96
+      ],
+      "test_shape": [
+        100,
+        96
+      ],
+      "class_labels": [
+        -1.0,
+        1.0
+      ]
+    },
+    "ECG5000": {
+      "train_tsv_sha256": "df86ac15d7e283e731db6be7865f5004b65bc639014cb8b9753c26e24a9092a1",
+      "test_tsv_sha256": "0192997dd1793880633bfb34ae3ad5129c09a8e0f210c469225451b92cdd8548",
+      "train_shape": [
+        500,
+        140
+      ],
+      "test_shape": [
+        4500,
+        140
+      ],
+      "class_labels": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "Wafer": {
+      "train_tsv_sha256": "a5d44c056e929ce6f406c9e88c135f1d0996bfe73f3aa4508804914956477a02",
+      "test_tsv_sha256": "d29ecddadb3f2258242743bf476c650d9eb79e2cdb76fe230dab74303a74331f",
+      "train_shape": [
+        1000,
+        152
+      ],
+      "test_shape": [
+        6164,
+        152
+      ],
+      "class_labels": [
+        -1.0,
+        1.0
+      ]
+    },
+    "GunPoint": {
+      "train_tsv_sha256": "4d14e4f44a6230087cb4b4ed7844c8b0feb76f07a76108cc367d689e0de8f609",
+      "test_tsv_sha256": "5537eb2f3050e1514f3221b5f4c9799b350fb229ea15eed9e78bbae855505ccf",
+      "train_shape": [
+        50,
+        150
+      ],
+      "test_shape": [
+        150,
+        150
+      ],
+      "class_labels": [
+        1.0,
+        2.0
+      ]
+    },
+    "CBF": {
+      "train_tsv_sha256": "eb25c656d86a28328bca2a3c4bd0dcd54f27546b6a83f84a635cf581a55cead4",
+      "test_tsv_sha256": "9485e783f961cbc6343f7da504fd8f6f9502e9000fd379bc60c688ff5d637965",
+      "train_shape": [
+        30,
+        128
+      ],
+      "test_shape": [
+        900,
+        128
+      ],
+      "class_labels": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    },
+    "FaceAll": {
+      "train_tsv_sha256": "ac1957cc8aac3cfd7951a0d46e7ea1147fd3a23db3eeda2a30484764584a3242",
+      "test_tsv_sha256": "ae3cc831966b5b28684ca2563813bd550beb8648b3c3737d585b3eca79271d11",
+      "train_shape": [
+        560,
+        131
+      ],
+      "test_shape": [
+        1690,
+        131
+      ],
+      "class_labels": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0
+      ]
+    },
+    "SwedishLeaf": {
+      "train_tsv_sha256": "b3c6c99d5b298b27a73d42edc6d3d33dc4df78d3bd4bc2d09483191292639c0e",
+      "test_tsv_sha256": "a11cd64664dfffe9d01901fbd8233b55a9f2acd3256a947fa907e05c6d17d33e",
+      "train_shape": [
+        500,
+        128
+      ],
+      "test_shape": [
+        625,
+        128
+      ],
+      "class_labels": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ]
+    },
+    "ChlorineConcentration": {
+      "train_tsv_sha256": "8b9e3a5196bb114def12785495934c653e206ec4278e61efa9fbbf1f6a4185df",
+      "test_tsv_sha256": "5f53255d7b357f97b82c464c68bab102c24d4a4841d5d719804bb10cac98cbdd",
+      "train_shape": [
+        467,
+        166
+      ],
+      "test_shape": [
+        3840,
+        166
+      ],
+      "class_labels": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    }
+  },
+  "noise_file_sha256": {
+    "machinegun.wav": "0e518e50795329c89deeb2bc4f43db538869e2840ad5826cbee9707a8808d652",
+    "factory1.wav": "804f3a9105fab577ffb366cd5f79b9a2365ca2bb211fdb0bf01d33e2861824e8",
+    "factory2.wav": "0b12a4ae17309ca77297f61592c6ebf3735a8729b5ad903340b9e3d5a717094d"
+  },
+  "ucr_source": "Official UCR Time Series Classification Archive 2018",
+  "ucr_source_archive_sha256": "a7163f6edd2b6876d195ab0ee5bcce5ec09873cba75512d35bc64a8a493d9d4a",
+  "script_sha256": "764ea352577872fb2cd885285c22e669a51658b374477b67225df3612940690b",
+  "protocol": {
+    "noise_sources": [
+      "machinegun.wav",
+      "factory1.wav",
+      "factory2.wav"
+    ],
+    "snr_db": 5,
+    "max_abs_normalization_after_noise": true,
+    "pretraining_corpus_size_approx": 3000,
+    "pretraining_epochs": 20,
+    "downstream_epochs": {
+      "scratch": 80,
+      "pretrained": 50
+    },
+    "fewshot_per_class": [
+      5,
+      10
+    ],
+    "losses": [
+      "mse",
+      "l1",
+      "floc"
+    ],
+    "replication_unit": "full pipeline seed, including noise realization and pretraining",
+    "matching": "same replicate noisy data, pretrained data, sampled few-shot indices, and finetuning RNG seed across loss methods"
+  }
+}

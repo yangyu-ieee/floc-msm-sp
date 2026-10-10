@@ -1,0 +1,34 @@
+{
+  "experiment": "corrected multi-alpha loss sweep",
+  "alphas": [
+    1.5,
+    1.0
+  ],
+  "losses": [
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc_1.8",
+    "floc_1.5",
+    "floc_1.2",
+    "floc_1.0",
+    "floc_learnable"
+  ],
+  "label_budgets": [
+    50,
+    100,
+    200,
+    500
+  ],
+  "downstream_seeds": 5,
+  "pretraining_seed": 20261008,
+  "noise_generator": "verified symmetric CMS S1, exp(-|t|^alpha)",
+  "normalization": "per-sequence max-absolute after corruption",
+  "frozen_source": "Historical source path redacted; see the source-hash provenance fields below.",
+  "frozen_source_sha256": "ba1d0a36301e344bd47fabb3ab939cf63693913285e80d353476d9c4dd22af88",
+  "transformed_source_sha256": "e73efeb31fa72d898e48ff7ee016e9245255930dce6d83291afb10adebadb31b",
+  "runner_sha256": "71fc2aff3bb4abe46d67d5c8be8ada3e826b5bd2881d2aa0f59e2d3e13669e05",
+  "stable_noise_sha256": "5a507b3c297957368c09b23223227a8b397640fab6ad2b97ceef920e856a5aa4",
+  "elapsed_seconds": 913.412
+}

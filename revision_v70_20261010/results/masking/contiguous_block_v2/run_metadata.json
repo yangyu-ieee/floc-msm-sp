@@ -1,0 +1,14 @@
+{
+  "experiment": "exact-count contiguous-block masking comparison",
+  "elapsed_seconds": 103.36749172210693,
+  "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "script_sha256": "880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104",
+  "master_seed": 20261007,
+  "mask_strategy": "contiguous_block",
+  "mask_count_rule": "exactly 16 of 32 tokens per sequence"
+}

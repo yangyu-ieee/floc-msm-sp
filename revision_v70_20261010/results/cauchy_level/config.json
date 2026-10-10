@@ -1,0 +1,40 @@
+{
+  "log_dir": "logs/targeted_alpha10_sourceclosure_2026-10-07",
+  "seeds": 10,
+  "alpha": 1.0,
+  "n_labeled": [
+    50,
+    100,
+    200,
+    500
+  ],
+  "losses": [
+    "mse",
+    "l1",
+    "charbonnier",
+    "floc_1.0",
+    "floc_1.2",
+    "floc_1.5"
+  ],
+  "seq_len": 128,
+  "pt_samples": 10000,
+  "n_test": 500,
+  "pt_epochs": 20,
+  "ft_epochs": 30,
+  "ft_epochs_large": 50,
+  "scratch_epochs": 80,
+  "batch_size": 128,
+  "ft_batch_size": 32,
+  "mask_ratio": 0.5,
+  "lr": 0.001,
+  "d_model": 64,
+  "heads": 4,
+  "layers": 4,
+  "device": "cuda",
+  "script_sha256": "0bf45c6eb8c0fcef99aae5d5a431d6e9e83d5aa1f60556e4c1bb45aa4e47cb98",
+  "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti"
+}

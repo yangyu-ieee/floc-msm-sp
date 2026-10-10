@@ -1,0 +1,119 @@
+{
+  "by_condition": {
+    "50": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.5780000030994416,
+      "best_floc": "floc_1.2",
+      "best_floc_mean": 0.5780000030994416
+    },
+    "100": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.6444000005722046,
+      "best_floc": "floc_1.2",
+      "best_floc_mean": 0.6444000005722046
+    },
+    "200": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.7439999997615814,
+      "best_floc": "floc_1.2",
+      "best_floc_mean": 0.7439999997615814
+    },
+    "500": {
+      "best_loss": "l1",
+      "best_mean": 0.8673999965190887,
+      "best_floc": "floc_1.2",
+      "best_floc_mean": 0.8650000035762787
+    }
+  },
+  "comparisons": {
+    "50": {
+      "best_floc_vs_mse": {
+        "diff": 0.1492000013589859,
+        "p_value": 0.00030734438084685473,
+        "wins": 10,
+        "n": 10
+      },
+      "best_floc_vs_l1": {
+        "diff": 0.007000002264976502,
+        "p_value": 0.8249282307727439,
+        "wins": 3,
+        "n": 10
+      },
+      "best_floc_vs_charbonnier": {
+        "diff": 0.020799994468688965,
+        "p_value": 0.40693208889227234,
+        "wins": 7,
+        "n": 10
+      }
+    },
+    "100": {
+      "best_floc_vs_mse": {
+        "diff": 0.12640000581741334,
+        "p_value": 4.805938489091519e-06,
+        "wins": 10,
+        "n": 10
+      },
+      "best_floc_vs_l1": {
+        "diff": 0.019800007343292236,
+        "p_value": 0.19558866164364969,
+        "wins": 6,
+        "n": 10
+      },
+      "best_floc_vs_charbonnier": {
+        "diff": 0.0007999837398529053,
+        "p_value": 0.9797031199219854,
+        "wins": 4,
+        "n": 10
+      }
+    },
+    "200": {
+      "best_floc_vs_mse": {
+        "diff": 0.13839999437332154,
+        "p_value": 7.905497676421646e-06,
+        "wins": 10,
+        "n": 10
+      },
+      "best_floc_vs_l1": {
+        "diff": 0.010000002384185792,
+        "p_value": 0.6264497269005354,
+        "wins": 3,
+        "n": 10
+      },
+      "best_floc_vs_charbonnier": {
+        "diff": 0.006999999284744263,
+        "p_value": 0.6959332960264043,
+        "wins": 5,
+        "n": 10
+      }
+    },
+    "500": {
+      "best_floc_vs_mse": {
+        "diff": 0.057199996709823606,
+        "p_value": 0.00022654408676443455,
+        "wins": 10,
+        "n": 10
+      },
+      "best_floc_vs_l1": {
+        "diff": -0.0023999929428100584,
+        "p_value": 0.8342676712979389,
+        "wins": 5,
+        "n": 10
+      },
+      "best_floc_vs_charbonnier": {
+        "diff": 0.012999999523162841,
+        "p_value": 0.2006734584538046,
+        "wins": 6,
+        "n": 10
+      }
+    }
+  },
+  "win_count": {
+    "mse": 0,
+    "l1": 1,
+    "charbonnier": 0,
+    "floc_1.0": 0,
+    "floc_1.2": 3,
+    "floc_1.5": 0
+  },
+  "elapsed_sec": 943.9974820613861
+}

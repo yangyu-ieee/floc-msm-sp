@@ -1,0 +1,17 @@
+{
+  "experiment": "corrected CMS alpha=1.5 primary benchmark source-hash closure rerun",
+  "elapsed_seconds": 419.2893912792206,
+  "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "matplotlib": "3.11.0",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "deterministic_algorithms": true,
+  "script_sha256": "880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104",
+  "master_seeds": [0, 1, 2, 3, 4],
+  "data": "synthetically generated; corrected CMS S1 alpha-stable generator exp(-|t|^alpha)",
+  "normalization": "per-sequence max-absolute after corruption",
+  "masking": "random-token masking, exactly 16 of 32 tokens per sequence"
+}

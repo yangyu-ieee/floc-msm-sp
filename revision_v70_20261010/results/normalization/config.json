@@ -1,0 +1,38 @@
+{
+  "experiment": "G0_R5_sampler_and_normalization_audit",
+  "date": "2026-10-07 16:15:25",
+  "alpha": 1.5,
+  "sequence_length": 128,
+  "arms": [
+    "submitted_legacy_maxabs",
+    "cms_maxabs",
+    "cms_clean_global_rms"
+  ],
+  "losses": [
+    "mse",
+    "l1",
+    "charbonnier",
+    "floc_1.2"
+  ],
+  "pretrain_samples": 10000,
+  "pretrain_epochs": 20,
+  "fine_tune_epochs": 30,
+  "seeds": 5,
+  "shots": [
+    100,
+    200
+  ],
+  "test_size": 500,
+  "mask_ratio": 0.5,
+  "device": "cuda",
+  "torch": "2.12.0+cu130",
+  "numpy": "2.3.5",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:36:12) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "script_sha256": "5e2655170dbbeb54771fc4c473784cd27e6765dd5641ef51cc6c4fcfc6434cf9",
+  "preprocessing": {
+    "submitted_legacy_maxabs": "noise added at submitted scale, then each noisy sequence divided by its own max absolute value",
+    "cms_maxabs": "verified CMS S_alpha S noise at submitted scale, then each noisy sequence divided by its own max absolute value",
+    "cms_clean_global_rms": "clean signals divided by RMS estimated only from the corresponding clean training pool, then CMS noise added; no noisy-sample rescaling"
+  }
+}
