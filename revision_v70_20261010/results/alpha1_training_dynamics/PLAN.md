@@ -1,0 +1,15 @@
+# R3.2 alpha=1 training-dynamics diagnostic
+
+**Purpose.** Add finite-run evidence about optimization behavior in the Cauchy-level assumption-mismatch condition, complementing the existing ten-seed downstream accuracy rerun. This does not purport to establish a convergence theorem.
+
+**Baseline condition.** Reuse the targeted alpha=1 pretraining setup: symmetric CMS/Cauchy corruption, per-sequence max-absolute normalization, 10,000 unlabeled length-128 sequences, 20 pretraining epochs, batch size 128, Adam at 1e-3, 50% token masking, and the existing compact Transformer encoder/decoder.
+
+**Design.** Five seeds; MSE, L1, Charbonnier (epsilon 0.01), and FLOC p=1.2. For each seed, the losses share the generated pretraining and held-out signals; model/mask streams are deterministically seeded by loss. A fixed held-out set and fixed mask are evaluated at initialization and after each epoch. Record epoch-mean training objective, fixed-mask held-out objective, per-batch total gradient-norm median/q90/maximum before clipping, and non-finite steps.
+
+**Interpretation gate.** Only describe the observed finite runs. Loss magnitudes are family-specific and must not be directly ranked; emphasize within-loss trajectories, non-finite events, and gradient summaries. A finite trajectory cannot establish population convergence, stationarity, or behavior for all initializations. Do not infer the learned residual's tail law from injected alpha.
+
+**Reviewer mapping.** R3.2 asks what happens to convergence behavior when idealized assumptions fail. This diagnostic can provide additional empirical optimization evidence, but the request for a general convergence characterization remains unmet unless a mathematically valid result is separately derived.
+
+**Status/results.** Smoke test passed. The full run completed: 20 trajectories (five seeds × four losses), 21 observations per trajectory (initialization plus 20 epochs), and 420 epoch records. The deterministic summarizer reports zero non-finite updates; held-out objective decreased in every run; batch-gradient q90 decreased from epoch 1 to epoch 20 in every run. Median within-loss held-out reductions range from 70.1% (L1) to 76.0% (FLOC p=1.2). The audit script also cross-checks the exact S16 table rows against the raw trajectories and passes. Raw trajectories and configuration are in this directory; `summary.json` records the trajectory SHA-256. Runner and integrity/summarization script: `code/r3_2_alpha1_training_dynamics.py` and `code/audit_r3_2_training_dynamics.py`.
+
+**Boundary.** This is descriptive finite-run evidence under one model, optimizer, data generator, and 20-epoch schedule. It does not establish convergence, stationarity, generalization, or population-law assumptions. The result supplements R3.2 but does not resolve its theoretical convergence question. Manuscript, response, matrix, and submission-to-revision map are synchronized. Built-in compilation was attempted on both changed TeX sources but failed before TeX startup (`helper_unknown_error: setup refresh had errors`); current PDF, page count, and visual layout remain unverified.

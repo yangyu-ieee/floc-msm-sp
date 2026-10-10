@@ -1,0 +1,78 @@
+{
+  "results_sha256": "463f242fc6d32ac32188747688b8afc6bdb0388987453e1964634a2b5b9b00ad",
+  "selection_note": "FLOC p=1.0 is excluded as a separate candidate because its objective is exactly L1; its independently trained run is not treated as a new loss family.",
+  "cells": {
+    "alpha=1.5/n=50": {
+      "best_loss": "charbonnier",
+      "best_mean": 0.9464000105857849,
+      "best_std": 0.019283158964511177,
+      "best_seed_count": 5,
+      "second_loss": "l1",
+      "second_mean": 0.9375999927520752,
+      "best_second_margin": 0.008800017833709761
+    },
+    "alpha=1.5/n=100": {
+      "best_loss": "charbonnier",
+      "best_mean": 0.9704000115394592,
+      "best_std": 0.002653285440759342,
+      "best_seed_count": 5,
+      "second_loss": "floc_1.2",
+      "second_mean": 0.9695999979972839,
+      "best_second_margin": 0.000800013542175293
+    },
+    "alpha=1.5/n=200": {
+      "best_loss": "floc_1.2",
+      "best_mean": 0.9748000025749206,
+      "best_std": 0.009516301546152427,
+      "best_seed_count": 5,
+      "second_loss": "l1",
+      "second_mean": 0.9711999893188477,
+      "best_second_margin": 0.0036000132560729536
+    },
+    "alpha=1.5/n=500": {
+      "best_loss": "floc_1.5",
+      "best_mean": 0.9855999946594238,
+      "best_std": 0.007735633341469721,
+      "best_seed_count": 5,
+      "second_loss": "charbonnier",
+      "second_mean": 0.9847999930381774,
+      "best_second_margin": 0.0008000016212463823
+    },
+    "alpha=1.0/n=50": {
+      "best_loss": "charbonnier",
+      "best_mean": 0.5620000004768372,
+      "best_std": 0.0273934314219336,
+      "best_seed_count": 5,
+      "second_loss": "floc_1.2",
+      "second_mean": 0.5399999976158142,
+      "best_second_margin": 0.022000002861022994
+    },
+    "alpha=1.0/n=100": {
+      "best_loss": "floc_1.5",
+      "best_mean": 0.6019999980926514,
+      "best_std": 0.05837806406087242,
+      "best_seed_count": 5,
+      "second_loss": "floc_1.2",
+      "second_mean": 0.5991999983787537,
+      "best_second_margin": 0.0027999997138976607
+    },
+    "alpha=1.0/n=200": {
+      "best_loss": "charbonnier",
+      "best_mean": 0.7164000153541565,
+      "best_std": 0.04218814654000449,
+      "best_seed_count": 5,
+      "second_loss": "floc_1.2",
+      "second_mean": 0.7087999939918518,
+      "best_second_margin": 0.007600021362304754
+    },
+    "alpha=1.0/n=500": {
+      "best_loss": "l1",
+      "best_mean": 0.8455999970436097,
+      "best_std": 0.013588230015890768,
+      "best_seed_count": 5,
+      "second_loss": "charbonnier",
+      "second_mean": 0.8419999957084656,
+      "best_second_margin": 0.003600001335144043
+    }
+  }
+}

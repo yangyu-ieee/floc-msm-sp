@@ -1,0 +1,19 @@
+{
+  "n_local_slices": 60,
+  "left_endpoint_percent": {
+    "median": 3.285829987119826,
+    "min": 1.7012582629623907,
+    "max": 5.44819666179337
+  },
+  "right_endpoint_percent": {
+    "median": 3.0601371995343962,
+    "min": 1.8339015571336326,
+    "max": 6.009032366788092
+  },
+  "mean_of_two_endpoint_changes_percent": {
+    "median": 3.1525630095532833,
+    "min": 2.098183957332511,
+    "max": 4.8895360718405385
+  },
+  "result_sha256": "9d7c57d47c0c2498dc1fcec2f1ef3c3abc622e21faa30ca1d8d1d91334f58081"
+}

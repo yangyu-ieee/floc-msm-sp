@@ -1,0 +1,542 @@
+[
+  {
+    "seed": 0,
+    "shots": 10,
+    "loss": "scratch",
+    "accuracy": 0.24868835257082897
+  },
+  {
+    "seed": 0,
+    "shots": 10,
+    "loss": "mse",
+    "accuracy": 0.24554039874081846
+  },
+  {
+    "seed": 0,
+    "shots": 10,
+    "loss": "l1",
+    "accuracy": 0.2633788037775446
+  },
+  {
+    "seed": 0,
+    "shots": 10,
+    "loss": "huber",
+    "accuracy": 0.2633788037775446
+  },
+  {
+    "seed": 0,
+    "shots": 10,
+    "loss": "charbonnier",
+    "accuracy": 0.27492130115424973
+  },
+  {
+    "seed": 0,
+    "shots": 10,
+    "loss": "floc",
+    "accuracy": 0.26862539349422876
+  },
+  {
+    "seed": 0,
+    "shots": 20,
+    "loss": "scratch",
+    "accuracy": 0.2098635886673662
+  },
+  {
+    "seed": 0,
+    "shots": 20,
+    "loss": "mse",
+    "accuracy": 0.2497376705141658
+  },
+  {
+    "seed": 0,
+    "shots": 20,
+    "loss": "l1",
+    "accuracy": 0.25498426023084997
+  },
+  {
+    "seed": 0,
+    "shots": 20,
+    "loss": "huber",
+    "accuracy": 0.24134312696747115
+  },
+  {
+    "seed": 0,
+    "shots": 20,
+    "loss": "charbonnier",
+    "accuracy": 0.3116474291710388
+  },
+  {
+    "seed": 0,
+    "shots": 20,
+    "loss": "floc",
+    "accuracy": 0.2812172088142707
+  },
+  {
+    "seed": 0,
+    "shots": 50,
+    "loss": "scratch",
+    "accuracy": 0.24344176285414482
+  },
+  {
+    "seed": 0,
+    "shots": 50,
+    "loss": "mse",
+    "accuracy": 0.23504721930745015
+  },
+  {
+    "seed": 0,
+    "shots": 50,
+    "loss": "l1",
+    "accuracy": 0.30640083945435465
+  },
+  {
+    "seed": 0,
+    "shots": 50,
+    "loss": "huber",
+    "accuracy": 0.2539349422875131
+  },
+  {
+    "seed": 0,
+    "shots": 50,
+    "loss": "charbonnier",
+    "accuracy": 0.2654774396642183
+  },
+  {
+    "seed": 0,
+    "shots": 50,
+    "loss": "floc",
+    "accuracy": 0.3095487932843652
+  },
+  {
+    "seed": 1,
+    "shots": 10,
+    "loss": "scratch",
+    "accuracy": 0.2801678908709339
+  },
+  {
+    "seed": 1,
+    "shots": 10,
+    "loss": "mse",
+    "accuracy": 0.27177334732423925
+  },
+  {
+    "seed": 1,
+    "shots": 10,
+    "loss": "l1",
+    "accuracy": 0.2969569779643232
+  },
+  {
+    "seed": 1,
+    "shots": 10,
+    "loss": "huber",
+    "accuracy": 0.27911857292759706
+  },
+  {
+    "seed": 1,
+    "shots": 10,
+    "loss": "charbonnier",
+    "accuracy": 0.3011542497376705
+  },
+  {
+    "seed": 1,
+    "shots": 10,
+    "loss": "floc",
+    "accuracy": 0.2728226652675761
+  },
+  {
+    "seed": 1,
+    "shots": 20,
+    "loss": "scratch",
+    "accuracy": 0.2497376705141658
+  },
+  {
+    "seed": 1,
+    "shots": 20,
+    "loss": "mse",
+    "accuracy": 0.23084994753410285
+  },
+  {
+    "seed": 1,
+    "shots": 20,
+    "loss": "l1",
+    "accuracy": 0.2528856243441763
+  },
+  {
+    "seed": 1,
+    "shots": 20,
+    "loss": "huber",
+    "accuracy": 0.25813221406086045
+  },
+  {
+    "seed": 1,
+    "shots": 20,
+    "loss": "charbonnier",
+    "accuracy": 0.2465897166841553
+  },
+  {
+    "seed": 1,
+    "shots": 20,
+    "loss": "floc",
+    "accuracy": 0.229800629590766
+  },
+  {
+    "seed": 1,
+    "shots": 50,
+    "loss": "scratch",
+    "accuracy": 0.229800629590766
+  },
+  {
+    "seed": 1,
+    "shots": 50,
+    "loss": "mse",
+    "accuracy": 0.24239244491080797
+  },
+  {
+    "seed": 1,
+    "shots": 50,
+    "loss": "l1",
+    "accuracy": 0.25813221406086045
+  },
+  {
+    "seed": 1,
+    "shots": 50,
+    "loss": "huber",
+    "accuracy": 0.2738719832109129
+  },
+  {
+    "seed": 1,
+    "shots": 50,
+    "loss": "charbonnier",
+    "accuracy": 0.30325288562434416
+  },
+  {
+    "seed": 1,
+    "shots": 50,
+    "loss": "floc",
+    "accuracy": 0.291710388247639
+  },
+  {
+    "seed": 2,
+    "shots": 10,
+    "loss": "scratch",
+    "accuracy": 0.2654774396642183
+  },
+  {
+    "seed": 2,
+    "shots": 10,
+    "loss": "mse",
+    "accuracy": 0.25603357817418676
+  },
+  {
+    "seed": 2,
+    "shots": 10,
+    "loss": "l1",
+    "accuracy": 0.24763903462749212
+  },
+  {
+    "seed": 2,
+    "shots": 10,
+    "loss": "huber",
+    "accuracy": 0.2539349422875131
+  },
+  {
+    "seed": 2,
+    "shots": 10,
+    "loss": "charbonnier",
+    "accuracy": 0.24344176285414482
+  },
+  {
+    "seed": 2,
+    "shots": 10,
+    "loss": "floc",
+    "accuracy": 0.2644281217208814
+  },
+  {
+    "seed": 2,
+    "shots": 20,
+    "loss": "scratch",
+    "accuracy": 0.25813221406086045
+  },
+  {
+    "seed": 2,
+    "shots": 20,
+    "loss": "mse",
+    "accuracy": 0.2623294858342078
+  },
+  {
+    "seed": 2,
+    "shots": 20,
+    "loss": "l1",
+    "accuracy": 0.27492130115424973
+  },
+  {
+    "seed": 2,
+    "shots": 20,
+    "loss": "huber",
+    "accuracy": 0.2770199370409234
+  },
+  {
+    "seed": 2,
+    "shots": 20,
+    "loss": "charbonnier",
+    "accuracy": 0.25918153200419725
+  },
+  {
+    "seed": 2,
+    "shots": 20,
+    "loss": "floc",
+    "accuracy": 0.28436516264428124
+  },
+  {
+    "seed": 2,
+    "shots": 50,
+    "loss": "scratch",
+    "accuracy": 0.2707240293809024
+  },
+  {
+    "seed": 2,
+    "shots": 50,
+    "loss": "mse",
+    "accuracy": 0.25498426023084997
+  },
+  {
+    "seed": 2,
+    "shots": 50,
+    "loss": "l1",
+    "accuracy": 0.25918153200419725
+  },
+  {
+    "seed": 2,
+    "shots": 50,
+    "loss": "huber",
+    "accuracy": 0.2812172088142707
+  },
+  {
+    "seed": 2,
+    "shots": 50,
+    "loss": "charbonnier",
+    "accuracy": 0.3011542497376705
+  },
+  {
+    "seed": 2,
+    "shots": 50,
+    "loss": "floc",
+    "accuracy": 0.3116474291710388
+  },
+  {
+    "seed": 3,
+    "shots": 10,
+    "loss": "scratch",
+    "accuracy": 0.25918153200419725
+  },
+  {
+    "seed": 3,
+    "shots": 10,
+    "loss": "mse",
+    "accuracy": 0.2518363064008394
+  },
+  {
+    "seed": 3,
+    "shots": 10,
+    "loss": "l1",
+    "accuracy": 0.3179433368310598
+  },
+  {
+    "seed": 3,
+    "shots": 10,
+    "loss": "huber",
+    "accuracy": 0.2696747114375656
+  },
+  {
+    "seed": 3,
+    "shots": 10,
+    "loss": "charbonnier",
+    "accuracy": 0.2570828961175236
+  },
+  {
+    "seed": 3,
+    "shots": 10,
+    "loss": "floc",
+    "accuracy": 0.29485834207764955
+  },
+  {
+    "seed": 3,
+    "shots": 20,
+    "loss": "scratch",
+    "accuracy": 0.2654774396642183
+  },
+  {
+    "seed": 3,
+    "shots": 20,
+    "loss": "mse",
+    "accuracy": 0.2654774396642183
+  },
+  {
+    "seed": 3,
+    "shots": 20,
+    "loss": "l1",
+    "accuracy": 0.3315844700944386
+  },
+  {
+    "seed": 3,
+    "shots": 20,
+    "loss": "huber",
+    "accuracy": 0.3011542497376705
+  },
+  {
+    "seed": 3,
+    "shots": 20,
+    "loss": "charbonnier",
+    "accuracy": 0.30640083945435465
+  },
+  {
+    "seed": 3,
+    "shots": 20,
+    "loss": "floc",
+    "accuracy": 0.2885624344176285
+  },
+  {
+    "seed": 3,
+    "shots": 50,
+    "loss": "scratch",
+    "accuracy": 0.23819517313746066
+  },
+  {
+    "seed": 3,
+    "shots": 50,
+    "loss": "mse",
+    "accuracy": 0.24239244491080797
+  },
+  {
+    "seed": 3,
+    "shots": 50,
+    "loss": "l1",
+    "accuracy": 0.2402938090241343
+  },
+  {
+    "seed": 3,
+    "shots": 50,
+    "loss": "huber",
+    "accuracy": 0.2633788037775446
+  },
+  {
+    "seed": 3,
+    "shots": 50,
+    "loss": "charbonnier",
+    "accuracy": 0.2644281217208814
+  },
+  {
+    "seed": 3,
+    "shots": 50,
+    "loss": "floc",
+    "accuracy": 0.3179433368310598
+  },
+  {
+    "seed": 4,
+    "shots": 10,
+    "loss": "scratch",
+    "accuracy": 0.2161594963273872
+  },
+  {
+    "seed": 4,
+    "shots": 10,
+    "loss": "mse",
+    "accuracy": 0.23084994753410285
+  },
+  {
+    "seed": 4,
+    "shots": 10,
+    "loss": "l1",
+    "accuracy": 0.24449108079748164
+  },
+  {
+    "seed": 4,
+    "shots": 10,
+    "loss": "huber",
+    "accuracy": 0.25078698845750264
+  },
+  {
+    "seed": 4,
+    "shots": 10,
+    "loss": "charbonnier",
+    "accuracy": 0.2266526757607555
+  },
+  {
+    "seed": 4,
+    "shots": 10,
+    "loss": "floc",
+    "accuracy": 0.24134312696747115
+  },
+  {
+    "seed": 4,
+    "shots": 20,
+    "loss": "scratch",
+    "accuracy": 0.2518363064008394
+  },
+  {
+    "seed": 4,
+    "shots": 20,
+    "loss": "mse",
+    "accuracy": 0.2602308499475341
+  },
+  {
+    "seed": 4,
+    "shots": 20,
+    "loss": "l1",
+    "accuracy": 0.26652675760755506
+  },
+  {
+    "seed": 4,
+    "shots": 20,
+    "loss": "huber",
+    "accuracy": 0.2633788037775446
+  },
+  {
+    "seed": 4,
+    "shots": 20,
+    "loss": "charbonnier",
+    "accuracy": 0.30325288562434416
+  },
+  {
+    "seed": 4,
+    "shots": 20,
+    "loss": "floc",
+    "accuracy": 0.30640083945435465
+  },
+  {
+    "seed": 4,
+    "shots": 50,
+    "loss": "scratch",
+    "accuracy": 0.24134312696747115
+  },
+  {
+    "seed": 4,
+    "shots": 50,
+    "loss": "mse",
+    "accuracy": 0.2402938090241343
+  },
+  {
+    "seed": 4,
+    "shots": 50,
+    "loss": "l1",
+    "accuracy": 0.40083945435466944
+  },
+  {
+    "seed": 4,
+    "shots": 50,
+    "loss": "huber",
+    "accuracy": 0.24554039874081846
+  },
+  {
+    "seed": 4,
+    "shots": 50,
+    "loss": "charbonnier",
+    "accuracy": 0.30535152151101785
+  },
+  {
+    "seed": 4,
+    "shots": 50,
+    "loss": "floc",
+    "accuracy": 0.3242392444910808
+  }
+]

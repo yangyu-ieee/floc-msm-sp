@@ -1,0 +1,18 @@
+{
+  "experiment": "deterministic alpha=1.5 main-table reconciliation",
+  "elapsed_seconds": 325.9198977947235,
+  "python": "3.14.5",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "deterministic_algorithms": true,
+  "cudnn_deterministic": true,
+  "cudnn_benchmark": false,
+  "seed": 20261007,
+  "master_seeds": [0, 1, 2, 3, 4],
+  "runner_script_sha256": "880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104",
+  "wrapper_script": "code/provenance/run_main_table_reconciliation_executed_20261009.py",
+  "wrapper_script_sha256": "f26c9ea86483aa86003401ba4af363337c205400c24097a9ccf6d1bfa30e9e80",
+  "notes": "The wrapper enables deterministic PyTorch/CuDNN behavior before invoking the archived runner. The former primary result directory is retained separately as historical output and is superseded for manuscript Table 1."
+}

@@ -1,0 +1,23 @@
+{
+  "win_count": {
+    "scratch": 1,
+    "mse": 5,
+    "l1": 8,
+    "floc": 2
+  },
+  "n_conditions": 16,
+  "master_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "snr_db": 5,
+  "noise_sources": [
+    "machinegun.wav",
+    "factory1.wav",
+    "factory2.wav"
+  ],
+  "std_scope": "complete pipeline replicate; each seed re-mixes noise and re-pretrains"
+}

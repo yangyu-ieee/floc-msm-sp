@@ -1,0 +1,14 @@
+{
+  "audit_scope": "Archived finite-sample residual quantiles only; no population-law or full-gradient inference.",
+  "result_sha256": "124378ab7db1725ea7fa5312e539810d6a7a22182f1d188e61befb3ada25c987",
+  "main_source_sha256": "8fd8a8b343cf65d2dbca52fee9e997a89edd38b3a7262b7e7cf681bd8bd44119",
+  "supplement_source_sha256": "f3b97e02fcc2f498134e1f6bdab8ed3e58557602e74933e2440dd93c59bff58f",
+  "record_count": 100,
+  "residual_coordinates_per_record": 128000,
+  "p": 1.2,
+  "score_crossover": 0.528067042076036,
+  "absolute_residual_q90_min": 0.30298790037631995,
+  "absolute_residual_q90_max": 0.4261419057846073,
+  "records_below_crossover": 100,
+  "source_range_present_in_main_and_supplement": true
+}

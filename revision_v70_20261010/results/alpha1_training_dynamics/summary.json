@@ -1,0 +1,54 @@
+{
+  "n_trajectories": 20,
+  "epochs_including_init": 21,
+  "by_loss": {
+    "mse": {
+      "heldout_reduction_percent_median": 75.44687391827965,
+      "heldout_reduction_percent_min": 70.92628525147269,
+      "heldout_reduction_percent_max": 78.95117235315675,
+      "gradient_q90_epoch1_median": 0.02906545959413052,
+      "gradient_q90_epoch20_median": 0.010206600837409497,
+      "gradient_q90_ratio_e20_over_e1_median": 0.3580982054694497,
+      "gradient_q90_decreased_seed_count": 5,
+      "final_over_best_heldout_loss_max": 1.0002597202853902,
+      "nonfinite_steps": 0
+    },
+    "l1": {
+      "heldout_reduction_percent_median": 70.05936006537712,
+      "heldout_reduction_percent_min": 67.16584824669918,
+      "heldout_reduction_percent_max": 75.6842571383843,
+      "gradient_q90_epoch1_median": 0.15988925397396092,
+      "gradient_q90_epoch20_median": 0.060941051691770554,
+      "gradient_q90_ratio_e20_over_e1_median": 0.3814465492077616,
+      "gradient_q90_decreased_seed_count": 5,
+      "final_over_best_heldout_loss_max": 1.0,
+      "nonfinite_steps": 0
+    },
+    "charbonnier": {
+      "heldout_reduction_percent_median": 70.5147450281905,
+      "heldout_reduction_percent_min": 63.30191213220711,
+      "heldout_reduction_percent_max": 73.33075366353793,
+      "gradient_q90_epoch1_median": 0.135409614443779,
+      "gradient_q90_epoch20_median": 0.04432084411382675,
+      "gradient_q90_ratio_e20_over_e1_median": 0.33586391337410154,
+      "gradient_q90_decreased_seed_count": 5,
+      "final_over_best_heldout_loss_max": 1.0044601728398395,
+      "nonfinite_steps": 0
+    },
+    "floc_1.2": {
+      "heldout_reduction_percent_median": 75.98626518039411,
+      "heldout_reduction_percent_min": 67.47930597790845,
+      "heldout_reduction_percent_max": 77.05865586919141,
+      "gradient_q90_epoch1_median": 0.10024237781763078,
+      "gradient_q90_epoch20_median": 0.032702012360095976,
+      "gradient_q90_ratio_e20_over_e1_median": 0.31599827362309824,
+      "gradient_q90_decreased_seed_count": 5,
+      "final_over_best_heldout_loss_max": 1.0,
+      "nonfinite_steps": 0
+    }
+  },
+  "nonfinite_steps_total": 0,
+  "trajectory_sha256": "8e1568270669ed725381c66ee58b67f6d26c60932b95e5a9ece53d2b14cac45a",
+  "scope_note": "finite-run descriptive diagnostics; not a convergence guarantee",
+  "supplement_table_s16_matches_trajectories": true
+}

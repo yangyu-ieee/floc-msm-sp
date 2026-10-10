@@ -1,0 +1,71 @@
+{
+  "win_count": {
+    "scratch": 0,
+    "mse": 0,
+    "l1": 3,
+    "huber": 0,
+    "charbonnier": 0,
+    "floc": 1
+  },
+  "total": 4,
+  "losses": [
+    "scratch",
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc"
+  ],
+  "datasets": [
+    "ECG200",
+    "Wafer"
+  ],
+  "alpha": 1.5,
+  "scale": 0.3,
+  "shots": [
+    5,
+    10
+  ],
+  "n_seeds": 5,
+  "pt_epochs": 20,
+  "ft_epochs": 50,
+  "scratch_epochs": 80,
+  "device": "cuda",
+  "normalization": "clean_global_rms",
+  "generator": "symmetric CMS S1",
+  "seed": 20261007,
+  "config": {
+    "experiment": "UCR corrected-CMS robustness check",
+    "alpha": 1.5,
+    "scale": 0.3,
+    "generator": "symmetric CMS S1; exp(-|scale*t|^alpha)",
+    "normalization": "clean_global_rms",
+    "normalization_reference": "clean training split only",
+    "datasets": [
+      "ECG200",
+      "Wafer"
+    ],
+    "losses": [
+      "scratch",
+      "mse",
+      "l1",
+      "huber",
+      "charbonnier",
+      "floc"
+    ],
+    "shots": [
+      5,
+      10
+    ],
+    "n_seeds": 5,
+    "pt_epochs": 20,
+    "ft_epochs": 50,
+    "scratch_epochs": 80,
+    "seed": 20261007,
+    "device": "cuda",
+    "torch": "2.12.0+cu130",
+    "numpy": "2.3.5",
+    "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:36:12) [MSC v.1944 64 bit (AMD64)]",
+    "script_sha256": "2112c6e2c59b652043af590fa6c539aea803672c9198594314db2dfea9951664"
+  }
+}

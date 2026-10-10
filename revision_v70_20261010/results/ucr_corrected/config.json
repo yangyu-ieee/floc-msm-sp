@@ -1,0 +1,42 @@
+{
+  "experiment": "UCR corrected-CMS robustness check",
+  "alpha": 1.5,
+  "scale": 0.3,
+  "generator": "symmetric CMS S1; exp(-|scale*t|^alpha)",
+  "normalization": "maxabs",
+  "normalization_reference": "each corrupted sequence",
+  "datasets": [
+    "ECG200",
+    "ECG5000",
+    "Wafer",
+    "FordA",
+    "GunPoint",
+    "CBF",
+    "FaceAll",
+    "SwedishLeaf",
+    "ItalyPowerDemand",
+    "ChlorineConcentration"
+  ],
+  "losses": [
+    "scratch",
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc"
+  ],
+  "shots": [
+    5,
+    10
+  ],
+  "n_seeds": 5,
+  "pt_epochs": 20,
+  "ft_epochs": 50,
+  "scratch_epochs": 80,
+  "seed": 20261007,
+  "device": "cuda",
+  "torch": "2.12.0+cu130",
+  "numpy": "2.3.5",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:36:12) [MSC v.1944 64 bit (AMD64)]",
+  "script_sha256": "2112c6e2c59b652043af590fa6c539aea803672c9198594314db2dfea9951664"
+}

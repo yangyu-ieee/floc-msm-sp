@@ -1,0 +1,688 @@
+{
+  "pretraining": {
+    "clean_train_global_rms": 0.625311415410149,
+    "submitted_legacy_maxabs": {
+      "abs_q50": 0.031325340270996094,
+      "abs_q90": 0.20246067494153977,
+      "abs_q99": 0.8181334626674656,
+      "abs_q999": 1.0,
+      "abs_q9999": 1.0,
+      "abs_max": 1.0,
+      "finite_fraction": 1.0
+    },
+    "cms_maxabs": {
+      "abs_q50": 0.11684582754969597,
+      "abs_q90": 0.4652546614408494,
+      "abs_q99": 0.9247982835769654,
+      "abs_q999": 1.0,
+      "abs_q9999": 1.0,
+      "abs_max": 1.0,
+      "finite_fraction": 1.0
+    },
+    "cms_clean_global_rms": {
+      "abs_q50": 0.5920957028865814,
+      "abs_q90": 1.7820370197296143,
+      "abs_q99": 3.1586278152465823,
+      "abs_q999": 8.336034026145592,
+      "abs_q9999": 39.32436709175323,
+      "abs_max": 5028.859375,
+      "finite_fraction": 1.0
+    }
+  },
+  "downstream": {
+    "100": {
+      "0": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.019460796378552914,
+            "abs_q90": 0.138148207962513,
+            "abs_q99": 0.7870205873250965,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.02360082883387804,
+            "abs_q90": 0.13855204731225965,
+            "abs_q99": 0.7609519213438042,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.08221089839935303,
+            "abs_q90": 0.33517356514930724,
+            "abs_q99": 0.8764126753807081,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.09407047927379608,
+            "abs_q90": 0.34546786844730376,
+            "abs_q99": 0.8654726982116714,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7182203920133278,
+          "train_input": {
+            "abs_q50": 0.8949355185031891,
+            "abs_q90": 1.8399516701698304,
+            "abs_q99": 4.1242939424514855,
+            "abs_q999": 19.781441106796184,
+            "abs_q9999": 82.46405867158137,
+            "abs_max": 93.2899398803711,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.890477865934372,
+            "abs_q90": 1.853266108036041,
+            "abs_q99": 3.996861066818239,
+            "abs_q999": 18.487459981918168,
+            "abs_q9999": 121.76412036134641,
+            "abs_max": 486.612060546875,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "1": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.02616668865084648,
+            "abs_q90": 0.12752034813165666,
+            "abs_q99": 0.7760635691881193,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.02880997210741043,
+            "abs_q90": 0.153515450656414,
+            "abs_q99": 0.80207433462143,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.10166595131158829,
+            "abs_q90": 0.34501738250255587,
+            "abs_q99": 0.8597838830947887,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10793665423989296,
+            "abs_q90": 0.3565550774335861,
+            "abs_q99": 0.878889666795731,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7191069393438372,
+          "train_input": {
+            "abs_q50": 0.8830741047859192,
+            "abs_q90": 1.8541385173797609,
+            "abs_q99": 4.028343381881716,
+            "abs_q999": 15.813716265677082,
+            "abs_q9999": 83.69624259187326,
+            "abs_max": 313.36944580078125,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8925437033176422,
+            "abs_q90": 1.84508273601532,
+            "abs_q99": 3.926683573722846,
+            "abs_q999": 15.701120066642284,
+            "abs_q9999": 119.09758372507827,
+            "abs_max": 616.943115234375,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "2": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.03189593739807606,
+            "abs_q90": 0.16542687416076662,
+            "abs_q99": 0.8315984004735959,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.02848026715219021,
+            "abs_q90": 0.15181066095829007,
+            "abs_q99": 0.7809270066022892,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.11436935514211655,
+            "abs_q90": 0.37744650244712835,
+            "abs_q99": 0.8846375310420993,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10657643899321556,
+            "abs_q90": 0.35589076876640313,
+            "abs_q99": 0.8828468227386493,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7184481341296646,
+          "train_input": {
+            "abs_q50": 0.8944203555583954,
+            "abs_q90": 1.8409273028373718,
+            "abs_q99": 3.754769086837773,
+            "abs_q999": 15.081634177207011,
+            "abs_q9999": 207.0577462448854,
+            "abs_max": 479.26031494140625,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8894771933555603,
+            "abs_q90": 1.8521430730819701,
+            "abs_q99": 3.9396044111251975,
+            "abs_q999": 13.761340645789875,
+            "abs_q9999": 60.43191585771558,
+            "abs_max": 185.70176696777344,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "3": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.027110441587865353,
+            "abs_q90": 0.1297652840614319,
+            "abs_q99": 0.738144224286081,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.026361148804426193,
+            "abs_q90": 0.14444169104099275,
+            "abs_q99": 0.8084000951051802,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.10285135358572006,
+            "abs_q90": 0.3359794288873673,
+            "abs_q99": 0.8828777015209202,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10199716687202454,
+            "abs_q90": 0.3505328595638274,
+            "abs_q99": 0.8922736752033267,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7181917290231908,
+          "train_input": {
+            "abs_q50": 0.903248131275177,
+            "abs_q90": 1.8695905447006227,
+            "abs_q99": 3.900583448410035,
+            "abs_q999": 14.488073395728657,
+            "abs_q9999": 125.96228515397038,
+            "abs_max": 305.1438293457031,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8969045281410217,
+            "abs_q90": 1.854900550842285,
+            "abs_q99": 3.968755464553842,
+            "abs_q999": 15.662229797362567,
+            "abs_q9999": 74.97727040637588,
+            "abs_max": 198.8704833984375,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "4": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.02465329971164465,
+            "abs_q90": 0.143403646349907,
+            "abs_q99": 0.795851392745972,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.027019505389034748,
+            "abs_q90": 0.15273708403110503,
+            "abs_q99": 0.8051753324270273,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.09790586680173874,
+            "abs_q90": 0.3410141050815582,
+            "abs_q99": 0.8578348630666753,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10342053323984146,
+            "abs_q90": 0.3680111020803451,
+            "abs_q99": 0.901104150414467,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7189152127298641,
+          "train_input": {
+            "abs_q50": 0.8960688710212708,
+            "abs_q90": 1.8611353874206542,
+            "abs_q99": 4.164218988418582,
+            "abs_q999": 17.20646251487686,
+            "abs_q9999": 112.82523116379305,
+            "abs_max": 137.85586547851562,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8909249007701874,
+            "abs_q90": 1.8525527954101562,
+            "abs_q99": 3.8811283159255994,
+            "abs_q999": 15.198992980955927,
+            "abs_q9999": 66.5523087203986,
+            "abs_max": 112.70283508300781,
+            "finite_fraction": 1.0
+          }
+        }
+      }
+    },
+    "200": {
+      "0": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.022359933704137802,
+            "abs_q90": 0.15192083716392524,
+            "abs_q99": 0.7955232191085719,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.02360082883387804,
+            "abs_q90": 0.13855204731225965,
+            "abs_q99": 0.7609519213438042,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.09087492525577545,
+            "abs_q90": 0.34961873292922985,
+            "abs_q99": 0.8832163685560221,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.09407047927379608,
+            "abs_q90": 0.34546786844730376,
+            "abs_q99": 0.8654726982116714,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7187781581664058,
+          "train_input": {
+            "abs_q50": 0.8984319865703583,
+            "abs_q90": 1.8607708096504212,
+            "abs_q99": 3.847312650680535,
+            "abs_q999": 21.211314260483746,
+            "abs_q9999": 100.40556941146747,
+            "abs_max": 124.76447296142578,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8899551630020142,
+            "abs_q90": 1.852171528339386,
+            "abs_q99": 3.995693426132204,
+            "abs_q999": 18.48721048164351,
+            "abs_q9999": 121.76418434450072,
+            "abs_max": 486.6120910644531,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "1": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.022872548550367355,
+            "abs_q90": 0.12673832178115851,
+            "abs_q99": 0.766487018465994,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.02880997210741043,
+            "abs_q90": 0.153515450656414,
+            "abs_q99": 0.80207433462143,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.08901989087462425,
+            "abs_q90": 0.3324735462665562,
+            "abs_q99": 0.8665995389223046,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10793665423989296,
+            "abs_q90": 0.3565550774335861,
+            "abs_q99": 0.878889666795731,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7190166041917417,
+          "train_input": {
+            "abs_q50": 0.8887121081352234,
+            "abs_q90": 1.8581160187721253,
+            "abs_q99": 4.020559291839593,
+            "abs_q999": 20.982061883927724,
+            "abs_q9999": 118.32246104201596,
+            "abs_max": 679.5808715820312,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8926966786384583,
+            "abs_q90": 1.8451687335968017,
+            "abs_q99": 3.926853680610663,
+            "abs_q999": 15.700974121093273,
+            "abs_q9999": 119.09762338801161,
+            "abs_max": 616.943359375,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "2": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.029406806454062462,
+            "abs_q90": 0.1582794025540352,
+            "abs_q99": 0.8048552787303858,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.02848026715219021,
+            "abs_q90": 0.15181066095829007,
+            "abs_q99": 0.7809270066022892,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.10740626975893974,
+            "abs_q90": 0.365323629975319,
+            "abs_q99": 0.890213606953618,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10657643899321556,
+            "abs_q90": 0.35589076876640313,
+            "abs_q99": 0.8828468227386493,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7187507139414554,
+          "train_input": {
+            "abs_q50": 0.8953293859958649,
+            "abs_q90": 1.8395122647285473,
+            "abs_q99": 3.823077754974358,
+            "abs_q999": 17.045621114731453,
+            "abs_q9999": 62.24012769774926,
+            "abs_max": 556.5062255859375,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8890723288059235,
+            "abs_q90": 1.8515246748924254,
+            "abs_q99": 3.939368114471449,
+            "abs_q999": 13.761051208495868,
+            "abs_q9999": 60.432094495410894,
+            "abs_max": 185.70188903808594,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "3": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.02944595366716385,
+            "abs_q90": 0.14644882380962398,
+            "abs_q99": 0.7909161335229792,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.026361148804426193,
+            "abs_q90": 0.14444169104099275,
+            "abs_q99": 0.8084000951051802,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.1083337776362896,
+            "abs_q90": 0.35748843252658874,
+            "abs_q99": 0.8710623657703342,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10199716687202454,
+            "abs_q90": 0.3505328595638274,
+            "abs_q99": 0.8922736752033267,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7181492518477215,
+          "train_input": {
+            "abs_q50": 0.8950417637825012,
+            "abs_q90": 1.8521642804145817,
+            "abs_q99": 3.7784949421882463,
+            "abs_q999": 13.343426120760107,
+            "abs_q9999": 69.8160089328656,
+            "abs_max": 283.1885986328125,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8969119191169739,
+            "abs_q90": 1.8549779653549192,
+            "abs_q99": 3.9687582421302885,
+            "abs_q999": 15.662217327117204,
+            "abs_q9999": 74.97730091632461,
+            "abs_max": 198.8705291748047,
+            "finite_fraction": 1.0
+          }
+        }
+      },
+      "4": {
+        "submitted_legacy_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.027902135625481606,
+            "abs_q90": 0.164097972214222,
+            "abs_q99": 0.8301416057348227,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.027019505389034748,
+            "abs_q90": 0.15273708403110503,
+            "abs_q99": 0.8051753324270273,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_maxabs": {
+          "clean_train_global_rms": null,
+          "train_input": {
+            "abs_q50": 0.10428138449788094,
+            "abs_q90": 0.37178109586238894,
+            "abs_q99": 0.9098416781425448,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.10342053323984146,
+            "abs_q90": 0.3680111020803451,
+            "abs_q99": 0.901104150414467,
+            "abs_q999": 1.0,
+            "abs_q9999": 1.0,
+            "abs_max": 1.0,
+            "finite_fraction": 1.0
+          }
+        },
+        "cms_clean_global_rms": {
+          "clean_train_global_rms": 0.7189751584233776,
+          "train_input": {
+            "abs_q50": 0.8955547511577606,
+            "abs_q90": 1.842040538787843,
+            "abs_q99": 3.923358597755432,
+            "abs_q999": 16.295697990417906,
+            "abs_q9999": 91.77901406402066,
+            "abs_max": 186.7980194091797,
+            "finite_fraction": 1.0
+          },
+          "test_input": {
+            "abs_q50": 0.8908832371234894,
+            "abs_q90": 1.8524341464042664,
+            "abs_q99": 3.88112385749817,
+            "abs_q999": 15.199019645689814,
+            "abs_q9999": 66.55230260696477,
+            "abs_max": 112.70287322998047,
+            "finite_fraction": 1.0
+          }
+        }
+      }
+    }
+  }
+}

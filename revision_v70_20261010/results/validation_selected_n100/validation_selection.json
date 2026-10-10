@@ -1,0 +1,83 @@
+{
+  "100": {
+    "huber": {
+      "selected_variant": "huber_0.25",
+      "selection_rule": "highest mean validation classification accuracy across five seeds",
+      "validation_mean": 0.9687999963760376,
+      "validation_seeds": [
+        0.9739999771118164,
+        0.9639999866485596,
+        0.9620000123977661,
+        0.9760000109672546,
+        0.9679999947547913
+      ],
+      "heldout_test_mean": 0.9672000050544739,
+      "heldout_test_std": 0.006881854759218593,
+      "heldout_test_seeds": [
+        0.9660000205039978,
+        0.9580000042915344,
+        0.9620000123977661,
+        0.9739999771118164,
+        0.9760000109672546
+      ],
+      "all_candidate_validation_means": {
+        "huber_0.25": 0.9687999963760376,
+        "huber_0.5": 0.9607999920845032,
+        "huber_1.0": 0.9571999907493591,
+        "huber_2.0": 0.9496000051498413
+      }
+    },
+    "charbonnier": {
+      "selected_variant": "charbonnier_0.01",
+      "selection_rule": "highest mean validation classification accuracy across five seeds",
+      "validation_mean": 0.9672000050544739,
+      "validation_seeds": [
+        0.984000027179718,
+        0.9559999704360962,
+        0.9520000219345093,
+        0.9800000190734863,
+        0.9639999866485596
+      ],
+      "heldout_test_mean": 0.9688000082969666,
+      "heldout_test_std": 0.011356067329757026,
+      "heldout_test_seeds": [
+        0.984000027179718,
+        0.9539999961853027,
+        0.9620000123977661,
+        0.9800000190734863,
+        0.9639999866485596
+      ],
+      "all_candidate_validation_means": {
+        "charbonnier_0.001": 0.9671999931335449,
+        "charbonnier_0.01": 0.9672000050544739,
+        "charbonnier_0.1": 0.9552000045776368
+      }
+    },
+    "mcc": {
+      "selected_variant": "mcc_0.5",
+      "selection_rule": "highest mean validation classification accuracy across five seeds",
+      "validation_mean": 0.9604000091552735,
+      "validation_seeds": [
+        0.9520000219345093,
+        0.9660000205039978,
+        0.9480000138282776,
+        0.9679999947547913,
+        0.9679999947547913
+      ],
+      "heldout_test_mean": 0.9656000018119812,
+      "heldout_test_std": 0.009748858994469993,
+      "heldout_test_seeds": [
+        0.949999988079071,
+        0.9800000190734863,
+        0.9639999866485596,
+        0.9700000286102295,
+        0.9639999866485596
+      ],
+      "all_candidate_validation_means": {
+        "mcc_0.1": 0.949999988079071,
+        "mcc_0.25": 0.9592000126838685,
+        "mcc_0.5": 0.9604000091552735
+      }
+    }
+  }
+}

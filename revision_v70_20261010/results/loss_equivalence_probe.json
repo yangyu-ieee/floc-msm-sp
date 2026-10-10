@@ -1,0 +1,15 @@
+{
+  "runner_sha256": "880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104",
+  "device": "NVIDIA GeForce RTX 5060 Ti",
+  "input_identical": true,
+  "mask_identical": true,
+  "loss_l1": 0.24160844087600708,
+  "loss_floc_p1": 0.24160844087600708,
+  "loss_abs_difference": 0.0,
+  "initial_parameter_max_abs_difference": 0.0,
+  "gradient_max_abs_difference": 0.0,
+  "post_adam_parameter_max_abs_difference": 0.0,
+  "one_full_epoch_encoder_max_abs_difference": 0.0,
+  "one_epoch_trajectory_loss_abs_difference": 0.0,
+  "torch_deterministic_algorithms": true
+}

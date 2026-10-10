@@ -1,0 +1,45 @@
+{
+  "scope": "R1.3 residual quantile, score-share, and total-gradient aggregation audit; no retraining.",
+  "aggregation": "Compute each statistic per seed on 128000 coordinates, then average across five seeds; do not pool coordinates for quantiles.",
+  "n_records": 25,
+  "coordinates_per_seed": 128000,
+  "q99_seed_mean_by_loss": {
+    "mse": 0.7631616591215122,
+    "huber": 0.7636247056722631,
+    "floc_1.2": 0.8010673135519014,
+    "charbonnier": 0.814367491602896,
+    "l1": 0.81442888200283
+  },
+  "q999_seed_mean_by_loss": {
+    "mse": 1.0321736175775538,
+    "huber": 1.030838160133364,
+    "floc_1.2": 1.0429073305130017,
+    "charbonnier": 1.0430484798908246,
+    "l1": 1.0473356445550932
+  },
+  "across_loss_q99_range_rounded_3dp": [
+    0.763,
+    0.814
+  ],
+  "across_loss_q999_range_rounded_3dp": [
+    1.031,
+    1.047
+  ],
+  "top_0p1pct_squared_score_share_percent_seed_mean": {
+    "mse": 3.182195932283428,
+    "huber": 2.5219530696436268,
+    "floc_1.2": 0.27756665481315523,
+    "charbonnier": 0.11494986421490036,
+    "l1": 0.1
+  },
+  "heldout_parameter_gradient_norm_seed_mean": {
+    "mse": 0.030995645395184145,
+    "huber": 0.013995785908735434,
+    "floc_1.2": 0.05993910688715585,
+    "charbonnier": 0.06144124851426943,
+    "l1": 0.06813864163774185
+  },
+  "result_sha256": "bd86a2fc50861af2adc599c501bb214b8a65c6fe6b1c873c5aa6bf252dcdcee8",
+  "runner_sha256": "6e25c5435ae19d23297cea47057454b2d9534d5ff0963fc3d17fb2958d59e88c",
+  "main_sha256": "8fd8a8b343cf65d2dbca52fee9e997a89edd38b3a7262b7e7cf681bd8bd44119"
+}
