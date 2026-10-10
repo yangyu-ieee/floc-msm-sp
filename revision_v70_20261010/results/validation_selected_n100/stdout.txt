@@ -1,0 +1,44 @@
+FLOC-MSM Main Experiment
+==================================================
+
+scratch:
+  n=100: val=0.769 test=0.789
+
+mse:
+  n=100: val=0.951 test=0.953
+
+l1:
+  n=100: val=0.959 test=0.971
+
+floc_1.2:
+  n=100: val=0.958 test=0.966
+
+huber_0.25:
+  n=100: val=0.969 test=0.967
+
+huber_0.5:
+  n=100: val=0.961 test=0.962
+
+huber_1.0:
+  n=100: val=0.957 test=0.956
+
+huber_2.0:
+  n=100: val=0.950 test=0.953
+
+charbonnier_0.001:
+  n=100: val=0.967 test=0.969
+
+charbonnier_0.01:
+  n=100: val=0.967 test=0.969
+
+charbonnier_0.1:
+  n=100: val=0.955 test=0.961
+
+mcc_0.1:
+  n=100: val=0.950 test=0.960
+
+mcc_0.25:
+  n=100: val=0.959 test=0.964
+
+mcc_0.5:
+  n=100: val=0.960 test=0.966

@@ -1,13 +1,13 @@
-> [!WARNING]
-> **Superseded pre-revision release — do not use this repository to reproduce the revised manuscript.**
+> [!IMPORTANT]
+> **The root-level scripts below are the historical pre-revision release.** They are retained for provenance and must not be used to reproduce the revised manuscript.
 >
 > The original submission's synthetic Chambers–Mallows–Stuck sampler did not implement the stated symmetric alpha-stable law for the affected alpha=1.5 experiments. The original alpha=1.5 results and associated significance claims were withdrawn during revision. The scripts and results below are retained as a record of the initial submission only.
 >
-> For the revised manuscript, use the corrected revision-specific code, configurations, and audit archive supplied with the resubmission. This repository is not that release.
+> The corrected, versioned code and selected archived results for the revised manuscript are now provided in [`revision_v70_20261010/`](revision_v70_20261010/README.md). This is a public reproducibility snapshot, not a claim that every archived GPU experiment was independently rerun.
 
 # FLOC-MSM: Robust Masked Signal Modeling under Impulsive Noise
 
-Legacy reproducibility package for the original submission of “Robust Masked Signal Modeling under Impulsive Noise: A Fractional Lower-Order Perspective” to Signal Processing (Elsevier). The contents below document the pre-revision implementation only.
+The root-level files document the original submission of “Robust Masked Signal Modeling under Impulsive Noise: A Fractional Lower-Order Perspective” to *Signal Processing* (Elsevier). They are preserved as historical records. Use the versioned release above for the revised results.
 
 ## Requirements
 

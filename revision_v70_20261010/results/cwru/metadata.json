@@ -1,0 +1,138 @@
+{
+  "dataset": "CWRU Bearing Data Center",
+  "source": "npz",
+  "npz_root": "<CWRU_NPZ_ROOT>",
+  "channel": "DE",
+  "classes": [
+    "Normal",
+    "IR007",
+    "B007",
+    "OR007@6"
+  ],
+  "label_map": {
+    "Normal": 0,
+    "IR007": 1,
+    "B007": 2,
+    "OR007@6": 3
+  },
+  "train_loads": [
+    0,
+    1,
+    2
+  ],
+  "test_loads": [
+    3
+  ],
+  "seq_len": 1024,
+  "stride": 512,
+  "max_segments_per_file": 240,
+  "alpha": 1.0,
+  "noise_scale": 0.3,
+  "shots": [
+    10,
+    20,
+    50
+  ],
+  "seeds": 5,
+  "losses": [
+    "scratch",
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc"
+  ],
+  "pt_epochs": 12,
+  "ft_epochs": 25,
+  "scratch_epochs": 35,
+  "device": "cuda",
+  "script_sha256": "3a912290757a4d319f69147315085c387eb55b038e4185634fa07401d15af63f",
+  "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.11.0+cu128",
+  "numpy": "2.5.2",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "input_manifest": [
+    {
+      "path": "<CWRU_NPZ_ROOT>/1797_Normal.npz",
+      "sha256": "4cd7f673aced17ef1b1253159b32d6c3146ba76af1b6034b1e18c86aed6c0e26"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1772_Normal.npz",
+      "sha256": "ebb7cce9e15c260dacf2999c28551d0be43ce196f85dcd2227fd4cf3221df175"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1750_Normal.npz",
+      "sha256": "77830970288497a8f3dbf0c8a3d90d7142846bd7283735e3a795f85b49995a28"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1730_Normal.npz",
+      "sha256": "e71083ee7e4971575b3deb99325b2eee058d1010a69652e3f0347673c45092b6"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1797_IR_7_DE12.npz",
+      "sha256": "b1694c0ed4c77486c909a4fac8f512101cad21302358743486bc4edaa8e8cff3"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1772_IR_7_DE12.npz",
+      "sha256": "23b9d0110cabccee79d94f0b12942590540d8e66e66818b98a5c1470a7a654b7"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1750_IR_7_DE12.npz",
+      "sha256": "dd601c822e287065badf1963ab543404aac7156b986e0799afabd4dbea0aed5f"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1730_IR_7_DE12.npz",
+      "sha256": "807c5d48973c8c49dc58e27a4177f9e481e8f95f3d72ce5ebe2665aa01222dfe"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1797_B_7_DE12.npz",
+      "sha256": "b3f85480c32e6e3e858dec74ed0f2c7f5c698ab53937e99d621bae6c1414937f"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1772_B_7_DE12.npz",
+      "sha256": "7542b67fa52f17ac8b8720060c6ec63c46caa16ab5fbf64ffc59c763f5f0c109"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1750_B_7_DE12.npz",
+      "sha256": "ddfbdcc5065492ffcef2cc917996ae1384321fa59dea313b978cc192e7514096"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1730_B_7_DE12.npz",
+      "sha256": "52f3c0676df6da0f9127e50f90c446b61624220ef8d73f69099937eb8c70b2a2"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1797_OR@6_7_DE12.npz",
+      "sha256": "c44f3adcfd04026f21ccd081e43a3ba6b9631e92ad1940165d390b7be1909172"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1772_OR@6_7_DE12.npz",
+      "sha256": "c93827a28e533730c6fad84d2cb2dd00cf881df1c0d77871595d740aaa0d1a1e"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1750_OR@6_7_DE12.npz",
+      "sha256": "39890b0b01907e0fa15ddc1b2230fc5f0e08fb9d6fd9a777bc2af82324bca49b"
+    },
+    {
+      "path": "<CWRU_NPZ_ROOT>/1730_OR@6_7_DE12.npz",
+      "sha256": "77ba53cbcf7d51781b5c09d4a9dba1491acb07b9e399f051f489a36c12adf253"
+    }
+  ],
+  "train_shape": [
+    2850,
+    1024
+  ],
+  "test_shape": [
+    953,
+    1024
+  ],
+  "win_count": {
+    "scratch": 0,
+    "mse": 0,
+    "l1": 1,
+    "huber": 0,
+    "charbonnier": 1,
+    "floc": 1
+  },
+  "elapsed_sec": 347.46837425231934
+}

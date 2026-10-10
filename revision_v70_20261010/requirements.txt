@@ -1,0 +1,8 @@
+# Core environment recorded for the corrected alpha=1.5 main run (Python 3.14.5).
+# The UCR corrected-CMS run used a separate Python 3.12.13 / Torch 2.12.0+cu130
+# environment; its full dependency versions were not retained (see README).
+torch==2.11.0+cu128
+numpy==2.5.2
+scipy==1.17.1
+matplotlib==3.11.0
+requests==2.34.2

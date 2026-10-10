@@ -1,0 +1,30 @@
+{
+  "ECG200": {
+    "train_shape": [
+      100,
+      96
+    ],
+    "test_shape": [
+      100,
+      96
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9947780323403892,
+    "noisy_train_abs_q99": 3.998687505722046,
+    "noisy_test_abs_q99": 3.9549810886383057
+  },
+  "Wafer": {
+    "train_shape": [
+      1000,
+      152
+    ],
+    "test_shape": [
+      6164,
+      152
+    ],
+    "n_classes": 2,
+    "clean_train_global_rms": 0.9967050983697185,
+    "noisy_train_abs_q99": 4.092001438140869,
+    "noisy_test_abs_q99": 4.157339572906494
+  }
+}

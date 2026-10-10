@@ -1,0 +1,36 @@
+{
+  "experiment": "floc_msm_main",
+  "alpha": null,
+  "seq_len": 128,
+  "d_model": 64,
+  "n_heads": 4,
+  "n_layers": 4,
+  "pt_epochs": 20,
+  "pt_samples": 10000,
+  "mask_ratio": 0.5,
+  "n_seeds": 5,
+  "n_labeled": [
+    50,
+    200,
+    500
+  ],
+  "n_test": 500,
+  "ft_epochs": 30,
+  "scratch_epochs": 80,
+  "losses": [
+    "scratch",
+    "mse",
+    "l1",
+    "huber",
+    "charbonnier",
+    "floc_1.2"
+  ],
+  "seed": 20261007,
+  "device": "cuda",
+  "generator": "Student-t(df=1.5, scale parameter)",
+  "student_t_nu": 1.5,
+  "pretraining_noise_scale": 0.15,
+  "downstream_noise_scale": 0.3,
+  "normalization": "per-sequence max-abs after corruption",
+  "code_sha256": "c97a55dae882b43cbeec636f18172e4d54082fc340a24ec3f01830fc1f375cba"
+}

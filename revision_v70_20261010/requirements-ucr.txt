@@ -1,0 +1,3 @@
+# Additional dependency for code/ucr_all_losses_corrected.py.
+# Its exact version was not recorded in the historical UCR run metadata.
+aeon

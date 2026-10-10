@@ -1,0 +1,1218 @@
+{
+  "ECG200/shots=5/loss=scratch": {
+    "mean": 0.6120000004768371,
+    "std": 0.07194443259155386,
+    "seeds": [
+      0.5199999809265137,
+      0.7300000190734863,
+      0.5600000023841858,
+      0.6100000143051147,
+      0.6399999856948853
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=5/loss=mse": {
+    "mean": 0.6600000023841858,
+    "std": 0.07797436906829193,
+    "seeds": [
+      0.5899999737739563,
+      0.6700000166893005,
+      0.7900000214576721,
+      0.5699999928474426,
+      0.6800000071525574
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=5/loss=l1": {
+    "mean": 0.6879999876022339,
+    "std": 0.062417941614772994,
+    "seeds": [
+      0.699999988079071,
+      0.7099999785423279,
+      0.7799999713897705,
+      0.5899999737739563,
+      0.6600000262260437
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=5/loss=floc": {
+    "mean": 0.6840000033378602,
+    "std": 0.09499474523969144,
+    "seeds": [
+      0.7300000190734863,
+      0.7599999904632568,
+      0.7900000214576721,
+      0.5699999928474426,
+      0.5699999928474426
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=10/loss=scratch": {
+    "mean": 0.7020000100135804,
+    "std": 0.034871184273630486,
+    "seeds": [
+      0.7599999904632568,
+      0.7200000286102295,
+      0.6899999976158142,
+      0.6800000071525574,
+      0.6600000262260437
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=10/loss=mse": {
+    "mean": 0.7099999904632568,
+    "std": 0.06957010900349063,
+    "seeds": [
+      0.7699999809265137,
+      0.7699999809265137,
+      0.7099999785423279,
+      0.7200000286102295,
+      0.5799999833106995
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=10/loss=l1": {
+    "mean": 0.7159999966621399,
+    "std": 0.05122499112547714,
+    "seeds": [
+      0.6899999976158142,
+      0.7599999904632568,
+      0.7300000190734863,
+      0.7699999809265137,
+      0.6299999952316284
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG200/shots=10/loss=floc": {
+    "mean": 0.7099999904632568,
+    "std": 0.06841052822433989,
+    "seeds": [
+      0.6499999761581421,
+      0.800000011920929,
+      0.7099999785423279,
+      0.7699999809265137,
+      0.6200000047683716
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=5/loss=scratch": {
+    "mean": 0.6621777772903442,
+    "std": 0.09351151972390688,
+    "seeds": [
+      0.5213333368301392,
+      0.6611111164093018,
+      0.8137778043746948,
+      0.6779999732971191,
+      0.6366666555404663
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=5/loss=mse": {
+    "mean": 0.7275555729866028,
+    "std": 0.04353809595539527,
+    "seeds": [
+      0.6726666688919067,
+      0.7348889112472534,
+      0.8040000200271606,
+      0.7044444680213928,
+      0.7217777967453003
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=5/loss=l1": {
+    "mean": 0.7000444650650024,
+    "std": 0.0581280618237033,
+    "seeds": [
+      0.6420000195503235,
+      0.800000011920929,
+      0.7275555729866028,
+      0.6517778038978577,
+      0.6788889169692993
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=5/loss=floc": {
+    "mean": 0.7227555632591247,
+    "std": 0.056964113078630724,
+    "seeds": [
+      0.6806666851043701,
+      0.8346666693687439,
+      0.7131111025810242,
+      0.6962222456932068,
+      0.6891111135482788
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=10/loss=scratch": {
+    "mean": 0.6366222262382507,
+    "std": 0.07244762263306646,
+    "seeds": [
+      0.6042222380638123,
+      0.723111093044281,
+      0.6388888955116272,
+      0.6982222199440002,
+      0.518666684627533
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=10/loss=mse": {
+    "mean": 0.7495999813079834,
+    "std": 0.021067042964058022,
+    "seeds": [
+      0.7393333315849304,
+      0.7682222127914429,
+      0.7142221927642822,
+      0.7717777490615845,
+      0.754444420337677
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=10/loss=l1": {
+    "mean": 0.6982666850090027,
+    "std": 0.06528485530343472,
+    "seeds": [
+      0.7184444665908813,
+      0.7833333611488342,
+      0.6133333444595337,
+      0.7440000176429749,
+      0.6322222352027893
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ECG5000/shots=10/loss=floc": {
+    "mean": 0.7444444537162781,
+    "std": 0.01993421702520166,
+    "seeds": [
+      0.7506666779518127,
+      0.7488889098167419,
+      0.7162222266197205,
+      0.7753333449363708,
+      0.7311111092567444
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=5/loss=scratch": {
+    "mean": 0.7214146614074707,
+    "std": 0.09573148791620123,
+    "seeds": [
+      0.9057430028915405,
+      0.6938676238059998,
+      0.7130110263824463,
+      0.6492537260055542,
+      0.6451979279518127
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=5/loss=mse": {
+    "mean": 0.7731018900871277,
+    "std": 0.0824588111515751,
+    "seeds": [
+      0.9143413305282593,
+      0.7553536891937256,
+      0.6787800192832947,
+      0.7115509510040283,
+      0.8054834604263306
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=5/loss=l1": {
+    "mean": 0.8378974676132203,
+    "std": 0.06622062902031306,
+    "seeds": [
+      0.936729371547699,
+      0.77173912525177,
+      0.8072680234909058,
+      0.778390645980835,
+      0.8953601717948914
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=5/loss=floc": {
+    "mean": 0.8251460075378418,
+    "std": 0.0692677242054427,
+    "seeds": [
+      0.9253731369972229,
+      0.7719013690948486,
+      0.8606424331665039,
+      0.7271252274513245,
+      0.8406878709793091
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=10/loss=scratch": {
+    "mean": 0.7019467830657959,
+    "std": 0.09722551032212261,
+    "seeds": [
+      0.7874756455421448,
+      0.8097015023231506,
+      0.5764114260673523,
+      0.5963659882545471,
+      0.7397793531417847
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=10/loss=mse": {
+    "mean": 0.7879299283027649,
+    "std": 0.10749143066011639,
+    "seeds": [
+      0.8682673573493958,
+      0.9203439354896545,
+      0.8217067122459412,
+      0.6310837268829346,
+      0.6982479095458984
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=10/loss=l1": {
+    "mean": 0.7824140071868897,
+    "std": 0.08039591060746866,
+    "seeds": [
+      0.8570733070373535,
+      0.8663205504417419,
+      0.816190779209137,
+      0.6805645823478699,
+      0.691920816898346
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "Wafer/shots=10/loss=floc": {
+    "mean": 0.7995457410812378,
+    "std": 0.0730311167585545,
+    "seeds": [
+      0.8612913489341736,
+      0.8747566342353821,
+      0.835009753704071,
+      0.6901362538337708,
+      0.7365347146987915
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=5/loss=scratch": {
+    "mean": 0.6119999945163727,
+    "std": 0.07428473478374363,
+    "seeds": [
+      0.6133333444595337,
+      0.7066666483879089,
+      0.47999998927116394,
+      0.6133333444595337,
+      0.6466666460037231
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=5/loss=mse": {
+    "mean": 0.5919999957084656,
+    "std": 0.07640826676577787,
+    "seeds": [
+      0.6333333253860474,
+      0.6333333253860474,
+      0.4466666579246521,
+      0.6600000262260437,
+      0.5866666436195374
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=5/loss=l1": {
+    "mean": 0.5879999995231628,
+    "std": 0.08114733865473897,
+    "seeds": [
+      0.6733333468437195,
+      0.5933333039283752,
+      0.4466666579246521,
+      0.5666666626930237,
+      0.6600000262260437
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=5/loss=floc": {
+    "mean": 0.5879999995231628,
+    "std": 0.059538958901479436,
+    "seeds": [
+      0.5600000023841858,
+      0.6066666841506958,
+      0.4866666793823242,
+      0.6333333253860474,
+      0.653333306312561
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=10/loss=scratch": {
+    "mean": 0.6120000004768371,
+    "std": 0.05239169306895534,
+    "seeds": [
+      0.5933333039283752,
+      0.54666668176651,
+      0.5733333230018616,
+      0.6666666865348816,
+      0.6800000071525574
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=10/loss=mse": {
+    "mean": 0.6573333501815796,
+    "std": 0.0466857094558255,
+    "seeds": [
+      0.7200000286102295,
+      0.6066666841506958,
+      0.6000000238418579,
+      0.6866666674613953,
+      0.6733333468437195
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=10/loss=l1": {
+    "mean": 0.6253333330154419,
+    "std": 0.06469071813698482,
+    "seeds": [
+      0.7400000095367432,
+      0.5933333039283752,
+      0.6066666841506958,
+      0.54666668176651,
+      0.6399999856948853
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "GunPoint/shots=10/loss=floc": {
+    "mean": 0.6066666603088379,
+    "std": 0.055777327503214603,
+    "seeds": [
+      0.7066666483879089,
+      0.5933333039283752,
+      0.5666666626930237,
+      0.54666668176651,
+      0.6200000047683716
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=5/loss=scratch": {
+    "mean": 0.6784444570541381,
+    "std": 0.07671206162639753,
+    "seeds": [
+      0.6044444441795349,
+      0.6033333539962769,
+      0.6666666865348816,
+      0.7077777981758118,
+      0.8100000023841858
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=5/loss=mse": {
+    "mean": 0.7555555582046509,
+    "std": 0.04886363004324542,
+    "seeds": [
+      0.7811111211776733,
+      0.6933333277702332,
+      0.7111111283302307,
+      0.7633333206176758,
+      0.8288888931274414
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=5/loss=l1": {
+    "mean": 0.7244444489479065,
+    "std": 0.07565680429193956,
+    "seeds": [
+      0.7166666388511658,
+      0.5888888835906982,
+      0.7266666889190674,
+      0.7844444513320923,
+      0.8055555820465088
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=5/loss=floc": {
+    "mean": 0.7215555548667908,
+    "std": 0.07149755193877794,
+    "seeds": [
+      0.753333330154419,
+      0.5944444537162781,
+      0.695555567741394,
+      0.7688888907432556,
+      0.7955555319786072
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=10/loss=scratch": {
+    "mean": 0.7795555591583252,
+    "std": 0.030336392729281958,
+    "seeds": [
+      0.8088889122009277,
+      0.7255555391311646,
+      0.801111102104187,
+      0.7677778005599976,
+      0.7944444417953491
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=10/loss=mse": {
+    "mean": 0.7900000095367432,
+    "std": 0.049110590636164984,
+    "seeds": [
+      0.7200000286102295,
+      0.7611111402511597,
+      0.8177777528762817,
+      0.7866666913032532,
+      0.8644444346427917
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=10/loss=l1": {
+    "mean": 0.7966666698455811,
+    "std": 0.04153237304014333,
+    "seeds": [
+      0.7711111307144165,
+      0.75,
+      0.7688888907432556,
+      0.8433333039283752,
+      0.8500000238418579
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "CBF/shots=10/loss=floc": {
+    "mean": 0.7833333373069763,
+    "std": 0.025924872953240446,
+    "seeds": [
+      0.7699999809265137,
+      0.7688888907432556,
+      0.7522222399711609,
+      0.801111102104187,
+      0.8244444727897644
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=5/loss=scratch": {
+    "mean": 0.1544378697872162,
+    "std": 0.025538558360283455,
+    "seeds": [
+      0.13786981999874115,
+      0.12662722170352936,
+      0.13727810978889465,
+      0.18165680766105652,
+      0.18875738978385925
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=5/loss=mse": {
+    "mean": 0.34568047523498535,
+    "std": 0.025692746870477144,
+    "seeds": [
+      0.39053255319595337,
+      0.32011833786964417,
+      0.3556213080883026,
+      0.3384615480899811,
+      0.32366862893104553
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=5/loss=l1": {
+    "mean": 0.32757396101951597,
+    "std": 0.006178826442886128,
+    "seeds": [
+      0.3295857906341553,
+      0.3248520791530609,
+      0.3183431923389435,
+      0.3372780978679657,
+      0.3278106451034546
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=5/loss=floc": {
+    "mean": 0.3204733729362488,
+    "std": 0.013553263917855482,
+    "seeds": [
+      0.31301775574684143,
+      0.31242603063583374,
+      0.3449704051017761,
+      0.3071005940437317,
+      0.3248520791530609
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=10/loss=scratch": {
+    "mean": 0.304497042298317,
+    "std": 0.10888384017476038,
+    "seeds": [
+      0.41479289531707764,
+      0.20769231021404266,
+      0.32307693362236023,
+      0.42426034808158875,
+      0.1526627242565155
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=10/loss=mse": {
+    "mean": 0.43905324935913087,
+    "std": 0.06737251827680973,
+    "seeds": [
+      0.4982248544692993,
+      0.3485206961631775,
+      0.5331360697746277,
+      0.417159765958786,
+      0.3982248604297638
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=10/loss=l1": {
+    "mean": 0.46508875489234924,
+    "std": 0.05523344515674401,
+    "seeds": [
+      0.4994082748889923,
+      0.4177514910697937,
+      0.557988166809082,
+      0.4278106391429901,
+      0.42248520255088806
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "FaceAll/shots=10/loss=floc": {
+    "mean": 0.42082840800285337,
+    "std": 0.044791611346963175,
+    "seeds": [
+      0.47573965787887573,
+      0.34970414638519287,
+      0.4615384638309479,
+      0.4082840383052826,
+      0.4088757336139679
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=5/loss=scratch": {
+    "mean": 0.2240000009536743,
+    "std": 0.032334254656876095,
+    "seeds": [
+      0.18559999763965607,
+      0.2800000011920929,
+      0.2303999960422516,
+      0.2240000069141388,
+      0.20000000298023224
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=5/loss=mse": {
+    "mean": 0.3020799994468689,
+    "std": 0.02391237151072962,
+    "seeds": [
+      0.29120001196861267,
+      0.3328000009059906,
+      0.2655999958515167,
+      0.29760000109672546,
+      0.323199987411499
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=5/loss=l1": {
+    "mean": 0.31136000752449033,
+    "std": 0.02569183283829998,
+    "seeds": [
+      0.3215999901294708,
+      0.3424000144004822,
+      0.2896000146865845,
+      0.2736000120639801,
+      0.3296000063419342
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=5/loss=floc": {
+    "mean": 0.30527999997138977,
+    "std": 0.01939632629784804,
+    "seeds": [
+      0.29760000109672546,
+      0.3343999981880188,
+      0.2752000093460083,
+      0.31360000371932983,
+      0.30559998750686646
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=10/loss=scratch": {
+    "mean": 0.2912000060081482,
+    "std": 0.029450434069713535,
+    "seeds": [
+      0.29440000653266907,
+      0.3264000117778778,
+      0.31520000100135803,
+      0.24320000410079956,
+      0.2768000066280365
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=10/loss=mse": {
+    "mean": 0.37664000391960145,
+    "std": 0.02020312426723909,
+    "seeds": [
+      0.3856000006198883,
+      0.4032000005245209,
+      0.3424000144004822,
+      0.36959999799728394,
+      0.3824000060558319
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=10/loss=l1": {
+    "mean": 0.39199999570846555,
+    "std": 0.022124015745868017,
+    "seeds": [
+      0.3903999924659729,
+      0.42399999499320984,
+      0.35519999265670776,
+      0.3903999924659729,
+      0.4000000059604645
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "SwedishLeaf/shots=10/loss=floc": {
+    "mean": 0.39168000817298887,
+    "std": 0.02808717486147878,
+    "seeds": [
+      0.3952000141143799,
+      0.4336000084877014,
+      0.36160001158714294,
+      0.36000001430511475,
+      0.40799999237060547
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=5/loss=scratch": {
+    "mean": 0.31588541269302367,
+    "std": 0.03605317244624868,
+    "seeds": [
+      0.3072916567325592,
+      0.2549479305744171,
+      0.32239583134651184,
+      0.3658854067325592,
+      0.32890623807907104
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=5/loss=mse": {
+    "mean": 0.33708332777023314,
+    "std": 0.021062933403692512,
+    "seeds": [
+      0.35078126192092896,
+      0.2958333194255829,
+      0.3427083194255829,
+      0.35338541865348816,
+      0.3427083194255829
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=5/loss=l1": {
+    "mean": 0.32447916865348814,
+    "std": 0.031510637216217934,
+    "seeds": [
+      0.3213541805744171,
+      0.2723958194255829,
+      0.33411458134651184,
+      0.32369792461395264,
+      0.3708333373069763
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=5/loss=floc": {
+    "mean": 0.34359375238418577,
+    "std": 0.03688022786037524,
+    "seeds": [
+      0.32890623807907104,
+      0.3122395873069763,
+      0.3046875,
+      0.37057292461395264,
+      0.40156251192092896
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=10/loss=scratch": {
+    "mean": 0.32531250417232516,
+    "std": 0.052982699459408984,
+    "seeds": [
+      0.3125,
+      0.2486979216337204,
+      0.3294270932674408,
+      0.3213541805744171,
+      0.41458332538604736
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=10/loss=mse": {
+    "mean": 0.3390625,
+    "std": 0.014353654852096756,
+    "seeds": [
+      0.3255208432674408,
+      0.32369792461395264,
+      0.34036457538604736,
+      0.3421874940395355,
+      0.3635416626930237
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=10/loss=l1": {
+    "mean": 0.35,
+    "std": 0.011240827638859523,
+    "seeds": [
+      0.3356770873069763,
+      0.3580729067325592,
+      0.3658854067325592,
+      0.3395833373069763,
+      0.35078126192092896
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  },
+  "ChlorineConcentration/shots=10/loss=floc": {
+    "mean": 0.34067708253860474,
+    "std": 0.01730812555862195,
+    "seeds": [
+      0.3200520873069763,
+      0.3330729305744171,
+      0.3348958194255829,
+      0.37187498807907104,
+      0.3434895873069763
+    ],
+    "seed_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "std_scope": "complete pipeline replicate (noise mixing, pretraining, few-shot sampling, fine-tuning)"
+  }
+}
