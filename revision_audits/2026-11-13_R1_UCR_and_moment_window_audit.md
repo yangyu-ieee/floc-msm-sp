@@ -123,6 +123,47 @@ The normalized synthetic inputs satisfy `||y||_infinity<1`, and a continuous fin
 
 The separate Supplementary Note S12 source was **not** available as a distinct file in the frozen GitHub `revision_v70_20261010` tree, so this independently checks the published **statement**, not the unseen exact typography of that supplementary proof. If a next-round proof audit is required, obtain that source rather than asserting verification without it. **Disposition: keep Proposition 1/Corollaries unchanged.**
 
+## G. New UCR cross-dataset evidence audit: 10 clusters, multiplicity, and aggregation estimands
+
+**Follow-up audit 2026-11-14.** This uses only the frozen `results/ucr_corrected/{config.json,results.json,dataset_diagnostics.json,summary.json}` and the `code/ucr_all_losses_corrected.py` runner. The assembled clean R1 §4.5 (PDF page 85) already accurately reports the equal-weight average across 20 dataset–shot conditions, **not** statistical significance across independent datasets. The purpose here is to quantify *what those scores can and cannot support*. No rerun, retraining, change of test results or update to R1.
+
+### Cluster the 5-shot and 10-shot conditions by originating dataset
+
+The two shot budgets for a dataset share its official test set, its one fixed CMS contamination realization, and the same loss-specific pretrained checkpoint. The 5 fine-tuning seeds also reuse those same test examples. Hence this archive contains **10 dataset-level units**, not 20 independent datasets or 100 independent model/pretraining replications.
+
+For each dataset and loss, first average its archived five-seed accuracy at 5 shots and at 10 shots. Form the paired difference `d_dataset = 0.5*(acc_5shot,floc+acc_10shot,floc) - 0.5*(acc_5shot,baseline+acc_10shot,baseline)`. Across the **10** dataset-level paired differences, exhaustively enumerate all **1024** sign assignments to the absolute mean difference. The recorded per-seed accuracies were independently converted to **integer numbers correct out of the actual official test-set size** for each dataset (100–6164 examples), rather than rounding percentages with a uniform denominator.
+
+| p=1.2 versus | Dataset-equal average difference (pp) | Positive / negative datasets | Two-sided signflip extreme allocations / 1024 | Raw signflip p | Holm p across four baseline comparisons |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **MSE** | **+1.1102** | 7 / 3 | 60 / 1024 | **0.05859375** | **0.17578125** |
+| **L1** | **+0.0098** | 5 / 5 | 1012 / 1024 | **0.98828125** | **1.00000000** |
+| **Huber** | **+0.9607** | 8 / 2 | 36 / 1024 | **0.03515625** | **0.14062500** |
+| **Charbonnier** | **−0.1694** | 5 / 5 | 696 / 1024 | **0.67968750** | **1.00000000** |
+
+The apparently nominal `p=.0352` p=1.2–Huber result fails the natural four-baseline Holm correction, and the p=1.2–MSE result is not below .05 even without adjustment. **No** p=1.2 baseline contrast achieves Holm p<.05. The latter conclusion is about this analytic sensitivity family, **not** a pre-registered experiment or a proof of equivalent performances.
+
+**Null model is conditional.** Exhaustive sign flips are arithmetically exact enumerations, but formal exact inference requires distributional sign symmetry/exchangeability of the paired dataset effects under the null. The ten UCR datasets were selected for this study rather than randomly sampled from a specified task population; differences have heterogeneous scales and correlated shot conditions. Without those additional design assumptions, the p values are *exploratory stability diagnostics* and do not license broad population-level Type-I error claims.
+
+A leave-one-dataset-out audit of the p=1.2–MSE **mean difference** gives a uniformly positive range of **+0.8286 to +1.3891 pp**; its unadjusted nine-cluster signflip p can range from **0.015625** (exclude ECG200) to **0.1171875** (exclude Wafer/GunPoint/CBF). This emphasizes that a marginal p-value threshold is sensitive to which benchmark datasets are present. **Do not select or exclude datasets retrospectively based on achieving a desired p value.**
+
+### Equal-dataset versus test-size weighted macro accuracy
+
+The R1's published summary estimates **equal-dataset, equal-shot mean accuracy**. An alternate, fully descriptive `sum(test_size_dataset*dataset_mean_accuracy)/sum(test_size_dataset)` changes the estimand, upweighting datasets with large official test sets. The sum of the ten official test-set sizes is **20,318** (test datasets range from 100 to 6164 examples). This is *not* 20,318 independent replicated experimental units; the same records recur across two shot conditions and five fine-tuning seeds.
+
+| Loss | R1 dataset-equal mean accuracy (%) | Alternative test-size weighted mean (%) |
+| --- | ---: | ---: |
+| MSE | 55.9118 | 59.5541 |
+| L1 | 57.0122 | **61.4367** |
+| Huber | 56.0613 | 59.4748 |
+| Charbonnier | **57.1914** | 61.3658 |
+| p=1.2 | 57.0220 | 61.0055 |
+
+Under the published **equal-dataset** objective, Charbonnier has the highest mean. Under the **test-size-weighted** objective, L1 has the highest mean. Neither choice is universally superior; they answer different evaluation questions. Do not silently replace R1's declared equal-dataset mean with a test-weighted pooled score, and do not use a large test set to claim more *independent study tasks*.
+
+**Interpretation:** UCR supports heterogeneity and the lack of a universal loss winner. p=1.2 has a positive descriptive difference versus MSE but essentially no average advantage over L1 and no robust dataset-cluster significance against the four baseline families. The manuscript already reports mixed rankings and makes no external significance claim; **no result, correction, or further GPU trial is required**.
+
+A new standard-library verification script, `revision_audits/audit_ucr_dataset_cluster_inference.py`, reads the untouched frozen data, guards the source's train/test splitting and downstream seed structure, reconstructs all per-seed counts, prints the two distinct aggregation estimands, and checks exact 1024-sign enumerations plus the Holm values. The cross-dataset arithmetic and Holm results were **independently recomputed directly against the retrieved GitHub JSON in JavaScript**; the new Python script was committed but **not executed in a full local clone**.
+
 ## Disposition
 
 - No new numerical error asserted.
