@@ -93,3 +93,21 @@ Avoid the word "preregistered" or a global familywise-error-control claim unless
 - Medium priority: clarify that α=1 Holm tests correct only four p=1.2–MSE contrasts.
 - Low priority: revisit sensitivity text once its provenance is checked.
 - Neither this note nor its companion verifier re-trains a model, and neither changes the R1 PDF or the frozen v70 results.
+
+
+## Finding D. Masking-sensitivity replication scope is now source-confirmed; missing random-arm source is already disclosed
+
+We further inspected \`code/provenance/mask_strategy_contiguous_block_v2_runner.py\`,
+\`results/masking/random_token_exact/config.json\`,
+\`results/masking/contiguous_block_v2/config.json\`,
+and the **frozen v70 README**.
+
+- The contiguous-block runner uses the *same* \`eval_downstream\` implementation as the canonical main runner: for each budget and seed it regenerates \`gen_cls(n_train)\` followed by \`gen_cls(n_test)\`, after resetting NumPy and Torch seeds. Thus the R1 masking paragraph's wording “the SD captures fine-tuning, not pretraining, variability” is **incomplete**: it includes the newly generated downstream training/test data and noise.
+- Random-token config records \`code_sha256=5b0315ff29b8eaff269f3902c24a94e55741bb265ead2a6a44705b43aea2f803\`; contiguous-block config records \`880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104\`. These are **different executed script digests**.
+- The frozen \`revision_v70_20261010/README.md\` explicitly says the historical exact-count random-token masking runner **was not recovered**; its archived configuration/output are not a fully rerunnable source release. Therefore the provenance gap was already disclosed, not newly discovered in this audit.
+- Archive results remain suitable for describing which group has a higher mean. Without source equality/diff validation of the missing random-token runner, the observed difference must **not** be asserted as a clean causal mask-topology-only effect.
+
+Proposed precision sentence for next editable Section 4.4:
+> In the archived exact-count masking comparison, the random-token runs had higher mean accuracy in seven of eight loss–budget cells, with one tie. These are descriptive between-run differences conditional on the recorded protocols; the random-token arm's original executable source was not recovered in the public archive, so exact source equivalence cannot be independently verified. Each arm's downstream seeds also regenerate synthetic training/test examples, making its reported SD conditional on the pretrained encoder but not restricted to fine-tuning optimization variability.
+
+This addition **does not** allege that the different SHA values correspond to a material algorithm change. The difference merely prevents verification of strict source-equivalence without the missing runner.
