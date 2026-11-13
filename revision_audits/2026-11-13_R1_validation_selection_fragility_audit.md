@@ -56,6 +56,38 @@ Suggested Supplementary Table S12 note:
 
 Do not extend this wording to every baseline: MSE, L1, and fixed p=1.2 have no comparable grid search in this audit. The fixed-parameter core Table 1 and validation-selected Table 3 are separate, with different masking protocols; they must not be pooled.
 
+## 3A. Retrospective evaluation ranking and independent p=1.2 comparator (additional audit)
+
+This is a strictly **post-hoc consistency assessment** of the existing held-out test outcomes, not a change to the selection rule. The actual validation-only selected parameters above are always frozen **before** looking at these tests. The code resets NumPy/Torch to each same downstream seed for the candidates and fixed p=1.2, and `eval_downstream()` draws `Xtr,ytr`, `Xval,yval`, and `Xte,yte` **sequentially** from the same generator with no training on validation or test arrays. In particular, candidate test sets and validation sets are matched **across loss alternatives** at a given seed and label budget, but are different realizations from one another.
+
+Exactly 12 loss-family × budget selections are recorded. Reconstructing all candidate accuracies as integer correct-prediction counts out of 500 per seed (five seeds per budget) gives:
+
+- **9/12** validation-selected variants are **unique test-mean winners** within their own loss family; at `n=100` Charbonnier `epsilon=.01` **ties** `epsilon=.001` in held-out mean, giving a total of **10/12 selections at or tied for the family’s retrospective best test mean**.
+- The **two exceptions** both occur at `n=500`. Charbonnier selects `epsilon=.01` by a 1/2500 validation-correct advantage over `epsilon=.001`, but its observed test mean is **97.96%** versus **98.52%** (14 fewer correct/2500, −0.56 pp). MCC selects `sigma=.25` by 1/2500 over `sigma=.1`, but test mean is **97.64%** versus **98.24%** (15 fewer correct/2500, −0.60 pp).
+- The mean hindsight test gap to the best variant in each family × budget is **0.0967 pp** across these 12 conditions; 10 are zero. This quantity is **retrospective and optimistic by definition for the hindsight oracle**, not a valid alternative procedure and not an estimate of generalization regret in new datasets.
+- Selected validation-minus-test accuracy, averaged equally over the 12 archived cells, is **−0.1767 pp**. Thus this finite archive does **not** display uniform positive validation-to-test optimism for the chosen variants. This does not establish absence of tuning-induced selection bias in general; the 12 cells share seeds, data-generating mechanisms and repeated pipelines.
+
+### Fixed p=1.2 against validation-selected baselines, within the same Bernoulli-mask protocol
+
+The prior §2 examined **only within-family tuning gaps**. This additional calculation compares the **precommitted fixed p=1.2 checkpoint** to each *validation-chosen* Huber/Charbonnier/MCC checkpoint using the same seed-specific held-out test realizations, not the exact-count-mask primary Table 1.
+
+Each cell is five-seed mean accuracy difference in **percentage points**:
+
+| Total labels | p=1.2 − selected Huber | p=1.2 − selected Charbonnier | p=1.2 − selected MCC |
+| ---: | ---: | ---: | ---: |
+| 50 | +0.40 | −0.72 | +0.68 |
+| 100 | −0.16 | −0.32 | 0.00 |
+| 200 | +0.20 | −0.84 | −0.64 |
+| 500 | −0.24 | +0.16 | +0.48 |
+
+The fixed-p method wins **5/12**, loses **6/12**, and ties **1/12** in mean, without any pooled cross-budget significance inference. Enumerating the 32 integer-correct-count sign flips per five-seed contrast yields two-sided p-values **no smaller than 0.125** across the 12 cells. These are exploratory, post-selection conditional contrasts; they do **not** prove formal equivalence, and the small seed count limits inference.
+
+Crucially, the validation-selected candidates received **within-family hyperparameter search**, while fixed p=1.2 did not receive a matched p grid search within this specific run. The comparison answers whether one chosen fixed p beats independently selected robust alternatives under **this one Bernoulli-mask protocol**, not what an optimally tuned p-moment family can achieve.
+
+**Implication:** Test/validation isolation appears correctly coded; near-tie selection can change test ordering by around half a point; there is no evidence from this audit that p=1.2 universally dominates validation-selected robust baselines. The clean R1 Table 3 already calls this a separate sensitivity protocol, so there is no need to revise or reselect its reported test means, and no necessity for GPU reruns.
+
+The existing `revision_audits/audit_validation_selection_ties.py` checker has been extended *in place* with the retrospective test rank, paired p=1.2 test contrasts and 12-cell summary. All numbers were independently recomputed from the frozen GitHub JSON via integer counts; the updated Python checker itself has **not been executed in a full repository checkout**.
+
 ## 4. Verification and disposition
 
 Data audit: independent recomputation of per-seed integer validation correct counts from all 12 family/budget conditions on the live archived GitHub data. The selected variants match the stored runner rule. No training was performed and no experimental result was modified.
