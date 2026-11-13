@@ -86,6 +86,25 @@ Additional independent Welch comparisons of p=1.2 against L1 and Charbonnier at 
 
 This is a provenance/statistical-source warning, **not a numerical error in the current R1 Holm-adjusted claim**. The same ten SSL runs recur across budgets, so four budget effects are related; Holm controls familywise error under arbitrary dependence when the marginal p-values are valid, but the results do not independently replicate across four unrelated datasets.
 
+## E. Exhaustive independent-sample permutation sensitivity — Welch/Holm finding survives
+
+**Follow-up 2026-11-13, no new experiment.** Reused the same Cauchy ten-run-per-objective accuracies and enumerated every one of `choose(20,10)=184,756` reallocations of the two groups of ten, for each pairwise loss contrast and budget. Each archived accuracy was first converted to an **integer correct-prediction count out of 500** (tolerance checked), so permutation ties are exact, not distorted by float32 accuracy rounding. The statistic was the **absolute difference in the two 10-run sums** of correct counts, equivalent to absolute mean accuracy difference because group sizes are equal.
+
+| Total labels | p=1.2 minus MSE (pp) | Extreme allocations / 184,756 | Two-sided exact permutation p | Holm over four MSE contrasts | Holm over all 12 contrasts |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 50 | +14.92 | **2** | **0.0000108251** | **0.0000433004** | **0.0001299011** |
+| 100 | +12.64 | **4** | **0.0000216502** | **0.0000433004** | **0.0002165018** |
+| 200 | +13.84 | **2** | **0.0000108251** | **0.0000433004** | **0.0001299011** |
+| 500 | +5.72 | **16** | **0.0000866007** | **0.0000866007** | **0.0007794064** |
+
+The **12-contrast** exploratory family comprises p=1.2 versus **MSE, L1, and Charbonnier**, each at four budgets. All eight p=1.2 contrasts with L1 and Charbonnier have permutation p-values > 0.05 (raw), and all their 12-family Holm-adjusted p-values are 1.0. In contrast, the four MSE gains retain Holm-adjusted p < 0.001 even in the wider 12-comparison family. This provides a stronger **statistical-sensitivity check** against reliance on Gaussian approximations and a narrow four-budget correction; it is not new confirmatory data.
+
+**Exact-null scope matters.** An ordinary unstudentized group-label permutation p-value is finite-enumeration exact under the null of **exchangeable, identically distributed independent observations across both objective arms**. This is a *distributional* null, not generally a finite-sample exact test of *equal means* under arbitrary heteroskedasticity; unlike Welch, it does not justify ignoring variance differences. The independently generated synthetic pipeline seed streams make this a reasonable supplementary sensitivity analysis, but the original run did not randomize loss labels onto a common pool of deterministic outcomes. Both tests require substantive sampling assumptions, and the results characterize this fixed protocol only.
+
+**Hypothesis-selection scope also matters.** Neither four-budget nor 12-contrast Holm correction accounts for all earlier model, p, noise-regime and budget exploration that led to the targeted Cauchy comparison. Therefore the correct claim is strong *within-protocol exploratory evidence* of p=1.2's advantage over MSE, **not** a preregistered α-dependent optimal-loss theorem, not a universal winner, and not evidence that p=1.2 beats L1 or Charbonnier.
+
+The updated `revision_audits/audit_cauchy_welch_holm_and_legacy_summary.py` implements this exhaustive permutation test alongside the existing corrected Welch and historic paired-summary checks. The exact enumeration and multiplicity values above were independently computed directly on live GitHub raw-data arrays using a separate JavaScript enumeration before committing this update. The new Python extension has **not yet been executed from a full local checkout**. No frozen result was changed.
+
 ## Disposition
 
 - No new numerical error asserted.
