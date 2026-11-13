@@ -77,6 +77,51 @@ Suggested concise English wording, if the reviewer asks:
 
 One scientifically precise alternative future design would choose p using an **independent, scale-calibrated validation objective** or an explicitly standardized residual criterion, with repeated SSL pretraining. **This is a future-work boundary, not a request for new R1 experiments.**
 
+## 5A. New theory-scope audit: adaptive-exponent gradient needs a stricter moment window
+
+This result is a direct mathematical consequence of classical symmetric α-stable power-law tails, **not** a new theorem of our paper. It is a boundary check between R1 Proposition 1/Corollary 2 and the exploratory learnable-p experiment; the former holds p **fixed** and differentiates the reconstruction residual with respect to **network parameters**, whereas the latter differentiates with respect to the **exponent parameter**.
+
+Take one non-degenerate symmetric SαS residual `R`, with `0<alpha<2`, and let `p=p(u)>0`, with finite scalar `u` and `0<|p'(u)|<infinity` (true for the interior of the experiment's sigmoid parameterization).
+
+For the raw loss `ell(u,R)=|R|^{p(u)}`,
+
+`d ell / du = p'(u) |R|^{p(u)} log|R|`, for `R!=0`.
+
+For any `q>0`, since `p'(u)` is a fixed finite nonzero factor and a symmetric α-stable density has tails asymptotic to a positive constant times `|r|^(-alpha-1)`, the integrability at infinity is equivalent to
+
+`integral_1^infinity r^{p*q-alpha-1} (log r)^q dr < infinity`.
+
+This integral converges **if and only if `q*p < alpha`**. At equality, `r^(-1) (log r)^q` diverges. Near zero, the SαS density is bounded and `r^{pq}|log r|^q` is integrable for `pq>0`, so it adds no extra restriction. Therefore
+
+`E |d ell/du|^q < infinity  <=>  q*p(u) < alpha`.
+
+Compare the fixed-p **residual score** from R1 Proposition 1:
+
+`E |d ell/dR|^q < infinity  <=>  q*(p-1) < alpha`, for `p>1`.
+
+These conditions are distinct. A fixed-p neural-network **parameter gradient** also requires the finite-N, bounded-Jacobian assumptions of R1 Corollary 2 and receives only a **sufficient** moment condition because Jacobian cancellation or vanishing can preserve moments even when residual-score moments diverge.
+
+### Explicit boundary cases
+
+| Hypothetical SαS tail alpha | p | Fixed-p score q=2: 2(p−1)<alpha | Adaptive exponent q=1: p<alpha | Adaptive exponent q=2: 2p<alpha |
+| ---: | ---: | --- | --- | --- |
+| 1.5 | 1.5 | **finite** (1<1.5) | **infinite** at threshold (1.5=1.5) | **infinite** (3>1.5) |
+| 1.5 | 1.2 | **finite** (0.4<1.5) | **finite** (1.2<1.5) | **infinite** (2.4>1.5) |
+| 1.0 | 1.2 | **finite** (0.4<1.0) | **infinite** (1.2>1.0) | **infinite** (2.4>1.0) |
+
+Thus at the actual nominal `alpha=1.5` and initial learnable `p=1.5`, the idealized exponent-gradient **first absolute moment** already diverges, while the **fixed-p residual-score second moment** remains finite. No inference of actual empirical instability follows from this hypothetical example.
+
+### Why this does not invalidate the submitted study
+
+- The *actual* input sequence is max-abs-normalized: `||y||_infinity < 1` whenever the unnormalized sample values are finite. A fixed finite-parameter, continuous encoder/decoder applied to the bounded input domain and finitely many token-mask patterns has **bounded** outputs and hence bounded residual coordinates. Thus the actual fixed-model residual cannot be a non-degenerate SαS variable, and its positive moments are finite. Finite trained weights and usual fixed finite-parameter differentiation also do not permit concluding any population gradient divergence from the idealized stable law.
+- The submitted R1 Proposition 1 / Corollary 2 already carefully states the **fixed-p** idealized-residual scope; it **does not claim** that an adaptive-p exponent gradient obeys `q(p−1)<alpha`.
+- The scale dependence from §2 is an *additional* reason why unregularized exponent minimization does not identify a tail-optimal exponent: even when moments are finite, `log|R|` flips the descent direction across unit magnitude.
+- The archived `p_trajectory_floc_learnable.npy` is missing; a theoretical condition must **not** be used to invent a learned exponent or an empirical divergence event.
+
+**Verdict:** no correction required for R1's current fixed-p theorem. If discussing adaptive-p future work, explicitly distinguish exponent-gradient (`q*p<alpha`) from residual-score (`q*(p−1)<alpha`) conditions **under the idealized SαS assumption**. Do not promote this classical moment-tail deduction into an independent novelty or GPU experiment.
+
+Literature provenance: J. P. Nolan, *Stable Distributions: Models for Heavy Tailed Data* (2020), stable-tail and moments section; accessible secondary verification: [Álvarez-Esteban et al., symmetric SαS tails, TEST (2023)](https://link.springer.com/article/10.1007/s11749-023-00894-7) and the [stabledist manual's tail-asymptotic formula](https://search.r-project.org/CRAN/refmans/stabledist/help/StableDistribution.html).
+
 ## 6. Audit file and disposition
 
 The no-GPU companion script `revision_audits/audit_learnable_p_scale_and_provenance.py` performs source-hash and loss-gradient checks, requires that the missing p trajectory remain absent from the frozen snapshot, reconstructs all four learnable-vs-fixed mean contrasts, and enumerates finite-sample five-seed paired sign flips using integer test-correct counts.
