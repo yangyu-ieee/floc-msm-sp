@@ -22,7 +22,7 @@ BUDGETS = ("50", "100", "200", "500")
 
 
 def exact_paired_signflip(a: list[float], b: list[float]) -> float:
-    """Exact two-sided sign-flip p, enumerating all 2**n signed sums."""
+    """Enumerated two-sided sign-flip statistic; formal exactness assumes sign symmetry."""
     diffs = [x - y for x, y in zip(a, b)]
     assert len(diffs) == len(a) == len(b) == 5
     observed = abs(sum(diffs))
