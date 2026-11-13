@@ -105,6 +105,24 @@ The **12-contrast** exploratory family comprises p=1.2 versus **MSE, L1, and Cha
 
 The updated `revision_audits/audit_cauchy_welch_holm_and_legacy_summary.py` implements this exhaustive permutation test alongside the existing corrected Welch and historic paired-summary checks. The exact enumeration and multiplicity values above were independently computed directly on live GitHub raw-data arrays using a separate JavaScript enumeration before committing this update. The new Python extension has **not yet been executed from a full local checkout**. No frozen result was changed.
 
+## F. Mathematical closure of R1 Proposition 1 and Corollary 2, all q>0
+
+Checked the **retained (clean)** R1 §3.2 statement directly in the assembled manuscript, pages 72–74 (the redlined original appears on earlier pages). There is **no mathematical counterexample** to the current bounded-Jacobian Corollary 2 as stated; it is **sufficient only** and assumes p fixed, finitely many coordinates, fixed θ, marginal non-degenerate SαS residuals and a **uniform a.s.** bound `||J_i||<=B`. It expressly does not require independence among residual coordinates.
+
+For every `q>0` its needed inequality follows without using Minkowski (which would be invalid at `q<1`). With `v_i=psi_p(R_i) J_i`, use triangle inequality followed by power subadditivity for `0<q<=1` or Jensen for `q>=1`:
+
+`||N^(-1) sum_i v_i||^q <= B^q N^(-q) N^{max(q-1,0)} sum_i |psi_p(R_i)|^q.`
+
+Each expectation is finite when `q(p-1)<alpha`; finite N then yields `E||grad_theta L_p||^q<infinity` for all positive q as claimed, with no cross-coordinate independence assumption. At `q=1` both branches agree.
+
+**No converse for summed parameter gradients.** If `r_theta(Z)=Z+theta^2` with `Z` SαS and evaluated at `theta=0`, then `J=2theta=0` and the parameter-gradient moment is zero even when the residual-score moment diverges. This simple example explains why R1 Corollary 2 correctly says **whenever** and does not say **if and only if**. Likewise its pointwise ratio relative to MSE is defined only where both `r!=0` and the common `J!=0`.
+
+**Separate adaptive-p derivative:** R1's fixed-p argument is **not** applicable to `d|R|^p/du` when `p=p(u)`. That derivative is `p'(u)|R|^p log|R|`; for one SαS residual with finite interior `u`, its absolute q-moment is finite **iff `q*p<alpha`**, a strictly stronger restriction. Derivation, examples, provenance and actual-normalized-data caveat are in `revision_audits/2026-11-13_R1_learnable_p_objective_scale_and_trace_audit.md`. This is classical tail calculus, not a novel theorem for the paper.
+
+The normalized synthetic inputs satisfy `||y||_infinity<1`, and a continuous finite-parameter model over compact input domains with finitely many mask patterns has bounded residuals. Thus the paper's **hypothetical stable residual** assumption does **not** describe its actual normalised network residual distribution; §3.2 and Discussion already make this distinction. **Do not claim actual network gradient divergence** or use nominal injected alpha alone to infer a residual law.
+
+The separate Supplementary Note S12 source was **not** available as a distinct file in the frozen GitHub `revision_v70_20261010` tree, so this independently checks the published **statement**, not the unseen exact typography of that supplementary proof. If a next-round proof audit is required, obtain that source rather than asserting verification without it. **Disposition: keep Proposition 1/Corollaries unchanged.**
+
 ## Disposition
 
 - No new numerical error asserted.
