@@ -117,6 +117,41 @@ def audit() -> None:
         print(f"n={budget}: learnable-p minus fixed p=1.2 "
               f"= {delta_pp:+.2f} pp, signflip p={p_value:.4f}, "
               f"count diffs={diffs}")
+    # Pure-math checks under the *hypothetical non-degenerate* S_alpha S
+    # residual R, using the classical alpha-stable tail exponent:
+    #   score = p*sgn(R)*|R|^(p-1),  q-moment iff q*(p-1)<alpha
+    #   exponent grad = p'(u)*|R|^p*log|R|, q-moment iff q*p<alpha
+    # The latter condition concerns ONE scalar residual/exponent gradient,
+    # not a necessity theorem for cancellations among sample gradients.
+    def score_qmoment_finite(alpha, exponent, q):
+        assert 0 < alpha < 2 and exponent > 1 and q > 0
+        return q*(exponent-1) < alpha
+
+    def exponent_qmoment_finite(alpha, exponent, q):
+        assert 0 < alpha < 2 and exponent > 0 and q > 0
+        return q*exponent < alpha
+
+    assert score_qmoment_finite(1.5, 1.5, 2)
+    assert not exponent_qmoment_finite(1.5, 1.5, 1)
+    assert not exponent_qmoment_finite(1.5, 1.5, 2)
+    assert score_qmoment_finite(1.5, 1.2, 2)
+    assert exponent_qmoment_finite(1.5, 1.2, 1)
+    assert not exponent_qmoment_finite(1.5, 1.2, 2)
+    assert score_qmoment_finite(1.0, 1.2, 2)
+    assert not exponent_qmoment_finite(1.0, 1.2, 1)
+
+    # For finite 0<|p'(u)| and the alpha-stable tail, the q-th moment's
+    # integrability reduces at infinity to integral t^beta (log t)^q dt.
+    # beta=p*q-alpha-1: it converges precisely when beta<-1.
+    for alpha, exponent, q in ((1.5,1.5,1),(1.5,1.2,2),
+                                (1.5,1.2,1),(1.0,1.2,2)):
+        beta=exponent*q-alpha-1
+        assert (beta < -1) == exponent_qmoment_finite(alpha,exponent,q)
+    print("PASS idealized stable-law window: fixed-p residual-score q(p-1)<alpha")
+    print("     differs from scalar learnable-exponent gradient q*p<alpha.")
+    print("IMPORTANT: actual max-abs normalized residuals are bounded for")
+    print("     fixed finite network parameters. No divergence is asserted.")
+
     print("PASS: all four budget means lower than fixed p=1.2.")
     print("These seed comparisons are conditional on one pretrained encoder")
     print("per loss and do not evaluate independently learned p trajectories.")
