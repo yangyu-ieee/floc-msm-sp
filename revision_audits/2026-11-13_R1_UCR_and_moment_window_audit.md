@@ -61,6 +61,31 @@ Suggested theoretical clarification if future editing is permitted:
 
 The `targeted_alpha10_fullseed.py` script re-generates data and retrains encoders separately for ten loss-specific runs, explicitly using `LOSS_SEED_OFFSET`; accordingly those runs are **not matched pairs in the sense of common random streams**. The R1 corrective Welch comparisons are appropriate to this experiment's independent-stream description. Its clipping and masking choices also differ from the main fixed-count/encoder-only clipped benchmark (Bernoulli token masks and clip over full pretraining parameter list in this targeted script); the two studies should not be presented as a directly matched comparison across α.
 
+## D. Independent Cauchy Welch/Holm replication: valid R1 p-values, obsolete paired statistics in the frozen summary
+
+This subsequent audit (2026-11-13) verified the strongest numerical inferential claim of the present clean R1 §4.5 against all 10 per-loss pipeline seeds in `results/cauchy_level/results.json`. The Cauchy generator at **exactly** α=1 produces `tan(U)` despite the historical general-α CMS formula, so the frozen α=1 results are not invalidated by that historical expression.
+
+**Crucial provenance distinction:** `code/alpha1_training_dynamics/targeted_alpha10_fullseed.py` gives each loss distinct seed offsets for **both** new pretraining data/checkpoints and new downstream training/test realizations. The seed index is only a grouping label; the loss experiments are not common-random-number **pairs**. Nonetheless the original runner's `summarize()` calls `paired()`, which uses `scipy.stats.ttest_rel` to write `results/cauchy_level/summary.json`'s `best_floc_vs_mse` p-values. **Those historic paired p-values are inappropriate for interpreting these loss-specific independent-stream experiments.**
+
+The separate **frozen** `code/audit_cauchy_unpaired_welch.py` correctly recomputes `scipy.stats.ttest_ind(..., equal_var=False)` from the raw archived accuracies and applies Holm over the four budget-wise p=1.2-versus-MSE comparisons. The clean submitted R1 refers explicitly to this corrected Welch inference, not to the old paired tests.
+
+An independent fresh SciPy computation of each contrast from the ten archived accuracy values (recovered also as correct counts out of 500) produced:
+
+| Total labeled | p=1.2 minus MSE mean (pp) | Welch two-sided raw p | Holm-adjusted p | Unadjusted 95% Welch CI for mean difference (pp) |
+| ---: | ---: | ---: | ---: | --- |
+| 50 | +14.92 | 1.0909×10⁻⁵ | 2.1818×10⁻⁵ | [9.94, 19.90] |
+| 100 | +12.64 | 4.4102×10⁻⁷ | 1.3231×10⁻⁶ | [9.40, 15.88] |
+| 200 | +13.84 | 2.6161×10⁻⁸ | 1.0465×10⁻⁷ | [10.87, 16.81] |
+| 500 | +5.72 | 2.4720×10⁻⁵ | 2.4720×10⁻⁵ | [3.60, 7.84] |
+
+**Every corrected Holm p < 0.001, as the clean R1 asserts.** The listed 95% CIs are *unadjusted* and are NOT simultaneous/multiplicity-corrected intervals. The comparison describes the joint synthetic data-generator-and-training pipelines under independent loss-specific random streams; it does not hold the same 500 test observations fixed across losses.
+
+Additional independent Welch comparisons of p=1.2 against L1 and Charbonnier at all four budgets yield unadjusted p-values > 0.05, so these ten-run data do not establish superiority over those robust alternatives. Failure to reject is not an equivalence demonstration.
+
+**Operational fix:** never use `results/cauchy_level/summary.json`'s old `paired()` p-values or regenerate that summary as though they were valid matched comparisons. Leave the frozen file intact. Cite the corrected four-comparison audit or use `revision_audits/audit_cauchy_welch_holm_and_legacy_summary.py` with SciPy to recompute the correct numbers.
+
+This is a provenance/statistical-source warning, **not a numerical error in the current R1 Holm-adjusted claim**. The same ten SSL runs recur across budgets, so four budget effects are related; Holm controls familywise error under arbitrary dependence when the marginal p-values are valid, but the results do not independently replicate across four unrelated datasets.
+
 ## Disposition
 
 - No new numerical error asserted.
