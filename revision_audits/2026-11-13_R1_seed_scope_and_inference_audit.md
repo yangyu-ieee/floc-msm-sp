@@ -85,6 +85,56 @@ Suggested addendum for Section 4.5 (unmarked R1 PDF page 85):
 
 Avoid the word "preregistered" or a global familywise-error-control claim unless contemporaneous preregistration evidence exists. The program explicitly tracks these as *targeted* comparisons.
 
+## Finding E. Two same-source primary archives differ numerically; R1 Table 1 has a uniquely identified source
+
+**Additional provenance audit (2026-11-13).** The frozen release contains **two distinct** α=1.5 main-series result archives:
+
+1. `results/main_alpha15/` — the earlier, broader run containing nine loss identifiers (including scratch and learnable p).
+2. `results/main_table_reconciliation_20261009/` — the four-loss core run with `mse,l1,huber,floc_1.2`, expressly **superseding the former for manuscript Table 1**. This authority is stated both in the frozen README and in the reconciliation `run_metadata.json` `notes` field. The unmarked submitted R1 Table 1 (assembled PDF page 78) matches **this second run**, to its printed one-decimal accuracy/SD precision.
+
+Both configuration files identify the **same main source SHA-256** `880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104`, master seed `20261007`, α=1.5, 20 pretraining epochs, five downstream seeds, 500 test examples, and exact-count 16-of-32 random-token masks. Both run metadata files mark `deterministic_algorithms=true` and record the same PyTorch `2.11.0+cu128`, NumPy `2.5.2` and GPU `RTX 5060 Ti`. The reconciliation wrapper additionally records CuDNN deterministic=true and benchmark=false; the earlier run metadata does not record those backend flags. Importantly, loss-list lengths/order differ (nine versus four). **The fact that two metadata records call a run deterministic is not proof that they produced bitwise-identical numerical trajectories under fully identical execution conditions.**
+
+Despite common source hash and seed, all **16** overlapping loss–budget means differ:
+
+| Loss | 50 labels: reconciliation minus earlier (pp) | 100 (pp) | 200 (pp) | 500 (pp) |
+| --- | ---: | ---: | ---: | ---: |
+| MSE | −0.64 | −0.44 | −0.12 | −0.28 |
+| L1 | +0.64 | +0.52 | −0.08 | +0.32 |
+| Huber δ=1 | **−1.24** | −0.92 | −0.08 | −0.64 |
+| p=1.2 | −0.32 | +0.12 | +0.28 | +0.36 |
+
+All 16 entries were reconciled from **integer correct-prediction counts** in 5×500 test evaluations, not potentially deceptive rounded mean values. Even pretraining epoch-20 mean objectives differ: MSE **0.03868864** (earlier) versus **0.03885275** (reconciliation), and p=1.2 **0.09849574** versus **0.09851298**. The runs are **not numerically identical GPU executions**, despite the same recorded base source digest.
+
+The substantive p=1.2–MSE mean gain is positive at all four budgets in **both** archives:
+
+| Labels | Earlier gain (pp) | R1 Table 1 reconciliation gain (pp) |
+| ---: | ---: | ---: |
+| 50 | +0.12 | **+0.44** |
+| 100 | +0.96 | **+1.52** |
+| 200 | +0.84 | **+1.24** |
+| 500 | +0.80 | **+1.44** |
+
+The top robust-loss ordering is not identical in every cell. In particular p=1.2 versus L1 at 200 labels is **−0.20 pp** in the earlier run but **+0.16 pp** in the reconciliation. This demonstrates **run-conditional ranking fragility**, not statistical significance or a reproducibility failure attributable to a specific cause. There are only two archived runs with different loss lists; they do **not** estimate an independent-pretraining distribution or isolate CuDNN, GPU determinism, order effects or software provenance as the reason for the differences.
+
+**Conclusion for the paper:** R1's Table 1 and its +0.4–1.5 pp effect-range wording reproduce the designated reconciliation archive. Therefore **no internal manuscript–Table 1 numeric contradiction** was found. For any quantitative reproduction, the preferred provenance target is **`main_table_reconciliation_20261009`**, not a silently merged selection of whichever numbers appear better in the earlier `main_alpha15`.
+
+### Current-path defect in the historical executed wrapper
+
+At the release's present tree location, `code/provenance/run_main_table_reconciliation_executed_20261009.py` contains:
+
+```python
+root = Path(__file__).resolve().parents[1]
+runner = Path(__file__).with_name("floc_msm_main_corrected.py")
+```
+
+From its **currently archived** `code/provenance` directory, this constructs the nonexistent `code/provenance/floc_msm_main_corrected.py` and an output root under `code/results/` rather than `revision_v70_20261010/results/`. The archived copy therefore **cannot be rerun in place**. This is a path/packaging defect after archival relocation, **not** evidence that the historically executed wrapper failed when run at its then-current location. It does not change any saved numerical outputs or falsify the run metadata.
+
+The **actual usable source entrypoint** is `code/run_main_table_reconciliation.py`, located adjacent to `code/floc_msm_main_corrected.py`; its sibling path resolves correctly. It supports `--output-dir`. To keep frozen v70 unchanged in future reproduction work, **explicitly choose a new absolute output directory outside the frozen tree**; note that the entrypoint's no-argument default creates a new `results/reproduction` subdirectory *inside* the frozen release. Do **not** edit either frozen wrapper to conceal this packaging history.
+
+The existing standard-library `revision_audits/audit_main_seed_scope_and_signflip.py` now also checks all 16 archived numeric differences, source hashes, explicit supersession and existence of the usable vs nonexistent current runner paths, without importing Torch or rerunning any model. Its new source checks have been independently verified against live GitHub files, but the augmented Python script has **not yet run from a full local checkout**.
+
+**Disposition:** one definite archived-wrapper path defect; one reproducibility/variance caveat; **no** evidence of numerical misreporting in R1 Table 1 and **no** justification for replacing published values or starting a new GPU sweep just to re-rank ties.
+
 ## Audit disposition and prioritization
 
 - Main numerical accuracy figures remain unchanged; within-budget main comparisons are matched and valid as descriptive evidence.
