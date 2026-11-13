@@ -79,7 +79,7 @@ def audit_mask_ratio_endpoints():
         # Four positions have 1-token coverage, 124 have 2-token coverage.
         # Independent token masking gives E(hidden)=4*q + 124*q*q.
         concealed = 4*q + 124*q*q
-        assert abs(concealed - {".25":8.75,".75":72.75}[str(q)]) < 1e-12
+        assert abs(concealed - {0.25:8.75,0.75:72.75}[q]) < 1e-12
         print(f"Bernoulli q={q:.2f}: mean masked tokens={32*q:g}/32, "
               f"E[directly fully concealed raw coordinates]={concealed:g}/128 "
               f"({concealed/128:.4%})")
