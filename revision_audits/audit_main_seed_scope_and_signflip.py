@@ -10,6 +10,7 @@ They detect a future protocol change; they do not produce new empirical results.
 from __future__ import annotations
 
 import ast
+import hashlib
 import itertools
 import json
 from math import isclose
@@ -83,6 +84,100 @@ def numerical_evidence() -> None:
     print("PASS: exact finite-sample sign-flip enumeration from frozen v70 per-seed data.")
 
 
+def audit_two_archived_main_runs() -> None:
+    """Different frozen run outputs are not the same 'Table 1' evidence.
+
+    This source/JSON-only check verifies explicit supersession, common
+    runner hash, pretrain trajectory differences, and the historical
+    provenance wrapper's broken *current archived path* after relocation.
+    It cannot determine why the archived GPU runs differ.
+    """
+    parent = BASE / "results"
+    canonical = json.loads((parent /
+        "main_table_reconciliation_20261009/results.json").read_text(encoding="utf-8"))
+    earlier = json.loads((parent / "main_alpha15/results.json").read_text(encoding="utf-8"))
+    canonical_cfg = json.loads((parent /
+        "main_table_reconciliation_20261009/config.json").read_text(encoding="utf-8"))
+    earlier_cfg = json.loads((parent /
+        "main_alpha15/config.json").read_text(encoding="utf-8"))
+    canonical_meta = json.loads((parent /
+        "main_table_reconciliation_20261009/run_metadata.json").read_text(encoding="utf-8"))
+    earlier_meta = json.loads((parent /
+        "main_alpha15/run_metadata.json").read_text(encoding="utf-8"))
+    sha = hashlib.sha256(SRC.read_bytes()).hexdigest()
+    assert sha == canonical_cfg["code_sha256"] == earlier_cfg["code_sha256"]
+    assert sha == canonical_meta["runner_script_sha256"] == earlier_meta["script_sha256"]
+    assert canonical_meta["deterministic_algorithms"] is True
+    assert earlier_meta["deterministic_algorithms"] is True
+    assert "superseded for manuscript Table 1" in canonical_meta["notes"]
+    assert canonical_cfg["seed"] == earlier_cfg["seed"] == 20261007
+    assert canonical_cfg["n_labeled"] == earlier_cfg["n_labeled"]
+    assert canonical_cfg["mask_strategy"] == earlier_cfg["mask_strategy"] == "random_token"
+    assert canonical_cfg["mask_count_rule"] == earlier_cfg["mask_count_rule"]
+    assert canonical_cfg["losses"] == ["mse", "l1", "huber", "floc_1.2"]
+    assert len(earlier_cfg["losses"]) > len(canonical_cfg["losses"])
+
+    # The wrapper archived *under code/provenance/* used a sibling
+    # lookup that would have worked while the script lived under code/.
+    # But at its CURRENT archived path the sibling is absent.
+    moved_wrapper = BASE / "code/provenance/run_main_table_reconciliation_executed_20261009.py"
+    wrapper_src = moved_wrapper.read_text(encoding="utf-8")
+    assert 'runner = Path(__file__).with_name("floc_msm_main_corrected.py")' in wrapper_src
+    wrong_path = moved_wrapper.with_name("floc_msm_main_corrected.py")
+    assert not wrong_path.is_file()
+    assert SRC.is_file()
+    # The canonical portable entrypoint has the correct sibling location:
+    runnable = BASE / "code/run_main_table_reconciliation.py"
+    runnable_src = runnable.read_text(encoding="utf-8")
+    assert 'runner = Path(__file__).with_name("floc_msm_main_corrected.py")' in runnable_src
+    assert runnable.with_name("floc_msm_main_corrected.py") == SRC
+    assert canonical_meta["wrapper_script"].startswith("code/provenance/")
+
+    expected_new_minus_old_pp = {
+        "mse": [-.64, -.44, -.12, -.28],
+        "l1": [+.64, +.52, -.08, +.32],
+        "huber": [-1.24, -.92, -.08, -.64],
+        "floc_1.2": [-.32, +.12, +.28, +.36],
+    }
+    for loss, shifts in expected_new_minus_old_pp.items():
+        for n, expected_shift in zip(BUDGETS, shifts):
+            old = earlier[loss][n]["seeds"]
+            new = canonical[loss][n]["seeds"]
+            assert len(old) == len(new) == 5
+            old_count = sum(round(v*500) for v in old)
+            new_count = sum(round(v*500) for v in new)
+            assert isclose(100*(new_count-old_count)/2500,
+                           expected_shift, abs_tol=1e-8)
+            assert old_count != new_count
+            print(f"{loss:>10}, n={n}: previous={old_count/25:.2f}%, "
+                  f"Table1={new_count/25:.2f}%, shift={expected_shift:+.2f}pp")
+
+    for loss in ("mse", "floc_1.2"):
+        old_curve = json.loads((parent /
+            f"main_alpha15/pretraining_trajectory_{loss}.json").read_text(encoding="utf-8"))
+        new_curve = json.loads((parent /
+            f"main_table_reconciliation_20261009/pretraining_trajectory_{loss}.json").read_text(encoding="utf-8"))
+        assert len(old_curve) == len(new_curve) == 20
+        assert not isclose(old_curve[-1]["mean_train_loss"],
+                           new_curve[-1]["mean_train_loss"],
+                           abs_tol=1e-12)
+    for n in BUDGETS:
+        old_diff = (earlier["floc_1.2"][n]["mean"] - earlier["mse"][n]["mean"])*100
+        new_diff = (canonical["floc_1.2"][n]["mean"] - canonical["mse"][n]["mean"])*100
+        assert old_diff > 0 and new_diff > 0
+    print("PASS: shared source SHA and seeds but 16 non-identical run cells;")
+    print("      Table 1 must cite the explicitly superseding reconciliation run.")
+    print("      Across runs, p=1.2 exceeds MSE in mean at all four budgets")
+    print("      but the contrast magnitude is not the same across the archives.")
+    print("SOURCE-PATH CAVEAT: the moved historical executed-wrapper fails at")
+    print("      code/provenance/; use code/run_main_table_reconciliation.py")
+    print("      from an authorized clone with explicit separate output folder.")
+    print("No source modification or GPU rerun performed.")
+
+
+
+
 if __name__ == "__main__":
     source_evidence()
     numerical_evidence()
+    audit_two_archived_main_runs()
