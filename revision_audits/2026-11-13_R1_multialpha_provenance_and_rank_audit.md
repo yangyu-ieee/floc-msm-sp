@@ -66,6 +66,22 @@ which equals the correct symmetric Cauchy draw. Thus the originally corrected al
 
 For any future non-Cauchy target, use `stable_noise.from_cms_variates` with a newly documented source version and independent rerun, never silently reinterpret the existing archive. Leave the frozen runner unchanged for traceability.
 
+## Maintenance addendum: historical alpha=2 was a Gaussian-jitter-only control, not matched-scale Gaussian injection
+
+A newly checked detail affects **historical/superseded** Gaussian-control language, not the frozen corrected multi-alpha R1 result.
+
+The original root-level `floc_tsp_loss_compare_fixed.py` (whose SHA256 is verified above) contains `if alpha<2.0:` **twice**: once in `gen_unlabeled` and once in `gen_cls`. Both branches add the **nominal** stable-noise draws only inside that condition, using coefficients 0.15 for pretraining and 0.30 for downstream train/test. At **alpha=2.0**, the nominal branch is never entered. Nevertheless, each signal still receives the always-on *independent Gaussian jitter* with SD **0.02** for pretraining or **0.05** for train/test, followed by per-sequence max-absolute normalization.
+
+Accordingly the alpha=2.0 condition is **not noise-free**; it is *Gaussian jitter only*, with **no matched-scale α=2 symmetric stable injection**. For the symmetric characteristic-function convention `exp(-|gamma*t|^2)`, a proper alpha=2 endpoint would require a Gaussian component with SD `sqrt(2)*gamma` (before any independent jitter). The `code/stable_noise.py` helper implements precisely this `gaussian_symmetric` convention, but it is **not called** by the historical alpha=2 branch.
+
+The root-level historical `tsp_loss_compare_summary.json` lists `a=2.0/n=50,100,200,500` as all having top and second means `1.000`; those saturated values describe the **jitter-only** condition. They **cannot** establish that all losses saturate under Gaussian noise at the nominal experimental corruption scales `gamma=0.15/0.30`. This remains true even though the historical summary describes the sweep as a 'corrected' experiment: that descriptor referred to passing the same alpha into the downstream generator, not to a valid Gaussian endpoint.
+
+Importantly, the subsequent corrected wrapper `code/provenance/run_corrected_multialpha_sweep.py` **explicitly removes α=2**, using only `[1.5,1.0]`; its archived `run_metadata.json` confirms this. The **current unmarked R1 Section 4.1** only presents α=1.5 and α=1.0 as the heavy-tail experiments. The old sentence *'A Gaussian condition (α = 2.0) is also generated, but all methods saturate...'* survives on the **deleted/redline portion** of the assembled 94-page revision PDF, but is **not part of the retained new Section 4.1**. Do not mistake the struck/deleted old material in the revision PDF for a current R1 claim.
+
+**Required classification:** verified bug in the **historical Gaussian-control label/protocol**, **not** a new bug in the corrected α=1.5/1.0 R1 experiments. Do not reintroduce the saturation claim in a clean typeset manuscript, rebuttal or future publication. If a true α=2 matched-scale control is required later, it needs new, explicitly Gaussian-corrupted training/test data and independently run models, not reuse of the archived 100% numbers. No such new experiment is required by the current R1 core conclusions.
+
+The existing portable checker `revision_audits/verify_and_rerun_multialpha.py` now includes `audit_historical_alpha2_branch()`, which checks the two guards, jitter levels, historical summary and the corrected-run exclusion. This is source/JSON verification; no Gaussian GPU experiment has been rerun.
+
 ## Recommended future paper edit (Section 4.5, no additional numerical work)
 
 > The corrected multi-alpha sweep uses alpha-specific synthetic pretraining, labeled training and test corruption. Unlike the primary core comparison, the sweep does not restart the same pretraining initialization and minibatch-shuffle random streams for each loss. It therefore provides descriptive rankings conditional on separately trained encoders rather than a strictly common-random-number comparison of objectives. Some highest-mean margins are very small (0.08 percentage points at alpha=1.5 for 100 and 500 labels), so they do not identify an alpha-dependent optimal loss. The independent ten-run Cauchy experiment is distinct and is evaluated with Welch tests because the loss-specific runs are not paired.
