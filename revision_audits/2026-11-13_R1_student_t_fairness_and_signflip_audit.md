@@ -26,7 +26,7 @@ By contrast, the Student-t runner masks *each token independently with probabili
 
 Also, both generators interleave clean waveform/jitter random draws with noise draws in the same NumPy stream; the Student-t sampling routine and CMS routine consume different random values. Even if the initial RNG seed is equal, **the unlabeled clean waveform mixtures and the Gaussian jitter realized after the first corruption are not kept fixed across the two runners**. The labeled classification templates remain fixed by class, but jitter and noise realizations are likewise not matched cross-distribution. Thus the Student-t experiment is **not** a controlled one-factor replacement of SαS by Student-t. Do not compare their accuracy gaps as causal differences attributable only to noise family.
 
-Across labeled budgets, the generator creates a training set before test data using one reset NumPy stream. For each seed, the smaller labeled training sets are prefix-nested by construction, but the budget-dependent RNG consumption makes the generated test sets differ; no nested/fixed-test learning-curve interpretation follows.
+Across labeled budgets, the generator creates a training set before test data using one reset NumPy stream. For each seed, the smaller labeled training sets are prefix-nested by construction, but budget-dependent RNG consumption changes the generated test sets. In addition, **500 labels receive 50 fine-tuning epochs, whereas 50 and 200 labels receive 30 epochs**. Thus the comparison is not a label-budget-only ablation with fixed test data and optimization duration.
 
 ### 3. Recomputed Student-t mean accuracies and p=1.2 vs MSE seed differences
 
