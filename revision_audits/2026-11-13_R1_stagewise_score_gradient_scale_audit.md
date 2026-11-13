@@ -75,7 +75,7 @@ For the **five p=1.2 checkpoints** in `results/diagnostics/actual_residuals/resu
 | `|r|` q90 | 0.309227–0.325132 | **1.474–1.534×** |
 | `|r|` q99 | 0.788583–0.817338 | **0.705–0.726×** |
 
-The **five-run mean ratios evaluated at each run's quantile** are 4.802× at q50, 1.513× at q90, and approximately 0.715× at q99. They are not ratios of mean network gradients.
+The **five-run mean ratios evaluated at each run's quantile** are 4.802× at q50, 1.513× at q90, and approximately 0.717× at q99. They are not ratios of mean network gradients.
 
 Every p=1.2 run has `q90<0.52807<q99`. On each run's **held-out** residual coordinates, at least approximately 90% are therefore in the region where the p=1.2 score exceeds MSE's score at the same nonzero residual, while an upper-tail fraction (bounded roughly between 1% and 10% by the two quantiles) is in the attenuated region. The scores still vanish as `r->0` for `p>1`; the ratio diverges only because MSE's score vanishes *faster*.
 
