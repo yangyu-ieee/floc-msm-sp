@@ -66,7 +66,7 @@ The unmarked R1 Section 4.3 already states the appropriate descriptive scope and
 
 If another revision is invited, one optional compact sentence can make the repeat-measure design and fixed-measurement control explicit:
 
-> The 60 local slices comprise five random directions for each of 12 independently trained loss–seed checkpoints; a fixed set of 128 validation sequences and one fixed mask are reused at every displacement, with dropout disabled. All sampled slices increased monotonically away from the center at both ±5% and ±10% relative global-L2 perturbation radii. The ratios of symmetric losses at these two finite radii are close to quadratic scaling, but do not estimate Hessian spectra or establish local convexity.
+> The 60 local slices comprise five random directions for each of 12 separately trained loss–seed checkpoints; a fixed set of 128 validation sequences and one fixed mask are reused at every displacement, with dropout disabled. All sampled slices increased monotonically away from the center at both ±5% and ±10% relative global-L2 perturbation radii. The ratios of symmetric losses at these two finite radii are close to quadratic scaling, but do not estimate Hessian spectra or establish local convexity.
 
 For strict statistical language, avoid implying the 12 matched-loss/seed checkpoints are fully independent across different losses: the loss comparisons share the same seed-specific pretraining/validation examples and experiment design.
 
