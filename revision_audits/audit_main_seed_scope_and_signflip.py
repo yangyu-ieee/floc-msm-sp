@@ -52,9 +52,15 @@ def source_evidence() -> None:
     assert "for loss_type in CONFIG['losses']:" in source
     assert "for n_labeled in CONFIG['n_labeled']:" in source
     assert "cls=i%5" in source
+    assert "for i in range(n):" in source
+    assert "sig+=0.05*np.random.randn(seq_len)" in source
+    assert "X/=(np.abs(X).max(axis=1,keepdims=True)+1e-8)" in source
+    assert "CONFIG['ft_epochs'] if n_labeled<=200 else max(CONFIG['ft_epochs'],50)" in source
     print("PASS: each budget/seed resets RNGs, then generates training followed by test data.")
     print("  Within a budget/seed, different losses have common synthetic data draws.")
-    print("  Across budgets, n_train changes the RNG consumption before n_test is drawn.")
+    print("  Across budgets, the SAME seed creates prefix-nested training draws,")
+    print("  but n_train changes RNG consumption before the 500-sample test draw.")
+    print("  500 labels receives 50 fine-tuning epochs; <=200 labels receive 30.")
     print("  Five-seed SD includes test noise/data realization plus training and fine-tuning")
     print("  variability, but not independent pretraining checkpoints.")
 
