@@ -119,3 +119,9 @@ The five-pair sign-flip procedure enumerates all 2^5 sign configurations, and th
 The reconstructed two-sided p values should not be described as a formal equivalence test, nor should the absence of p < 0.05 be taken as evidence that losses are equivalent. In any prospective revision, use wording such as "exhaustive sign-flip diagnostic" when the exchangeability assumption has not been established.
 
 This note supersedes any more categorical characterization of the five-seed sign-flip calculations elsewhere in the audit set; it changes neither the data nor the computed p values.
+
+## Maintenance verification: a floating-point pseudo-win in masking comparisons
+
+An independent reaggregation of the archived masking arrays initially found eight strictly positive random-minus-block mean differences when using **bitwise floating-point `>`**. The eighth difference (p=1.2, 200 labels) is only `0.00000119209` **percentage points** (mean accuracy difference `1.19209e-8`) and arises from finite-precision float32 accuracy aggregation. It is far below the accuracy reporting resolution. With an explicit tolerance of `1e-7` in fractional accuracy (0.00001 percentage points), the correct descriptive summary remains **seven higher random-token means, one numerical tie, zero block wins**. No archived accuracies or paper percentages change.
+
+The companion `audit_main_seed_and_mask_geometry.py` script now asserts the 7/1/0 grouping using that tolerance. Rigid float equality should not be used for these summaries.
