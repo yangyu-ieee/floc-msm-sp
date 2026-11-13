@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import math
+from itertools import product
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parents[1] / "revision_v70_20261010"
@@ -29,6 +30,16 @@ def load(path: Path):
 
 def mean(vals):
     return sum(vals) / len(vals)
+
+
+def exhaustive_signflip(differences):
+    """Two-sided paired sum over all 2^n sign allocations, under sign symmetry."""
+    observed = abs(sum(differences))
+    extreme = sum(
+        abs(sum(x*y for x,y in zip(differences, signs))) >= observed - 1e-9
+        for signs in product((-1, 1), repeat=len(differences))
+    )
+    return extreme, 2 ** len(differences), extreme / (2 ** len(differences))
 
 
 def check_cwru():
@@ -159,6 +170,91 @@ def check_noisex():
     print("  sample-rate or physical-sensor calibration is implemented.")
     print("  Test labels inform class-label vocabulary mapping only; TEST features")
     print("  are not passed into the SSL pretraining dataset.")
+
+    # Data-set is the defensible top-level unit for cross-task summaries.
+    # 5-shot and 10-shot outcomes re-use source datasets; five seeds are
+    # matched full-pipeline replicates WITHIN each dataset/shot condition.
+    # Do NOT treat 16 cells or 80 replicates as 80 independent datasets.
+    rows = []
+    strict_majority = 0
+    zero_strict = []
+    distributions = {k: 0 for k in range(6)}
+    unique_leaders = 0
+    for ds in datasets:
+        n_test = int(meta["datasets"][ds]["test_shape"][0])
+        record = {"ds": ds, "n_test": n_test}
+        for loss in LOSS_NOISEX:
+            all_counts = []
+            for shot in (5, 10):
+                cell = f"{ds}/shots={shot}/loss={loss}"
+                vals = data[cell]["seeds"]
+                assert data[cell]["seed_ids"] == [0, 1, 2, 3, 4]
+                counts = [round(v*n_test) for v in vals]
+                assert all(abs(v-c/n_test) < 1e-7 for v,c in zip(vals,counts))
+                all_counts.extend(counts)
+            record[loss] = 100 * sum(all_counts) / (10*n_test)
+        rows.append(record)
+
+        for shot in (5, 10):
+            by_loss = {
+                loss: [round(v*n_test) for v in
+                       data[f"{ds}/shots={shot}/loss={loss}"]["seeds"]]
+                for loss in LOSS_NOISEX
+            }
+            totals = {loss: sum(v) for loss,v in by_loss.items()}
+            best_total = max(totals.values())
+            mean_winners = [loss for loss in LOSS_NOISEX
+                            if totals[loss] == best_total]
+            assert len(mean_winners) == 1, (ds, shot, mean_winners)
+            unique_leaders += 1
+            leader = mean_winners[0]
+            strict = sum(
+                all(by_loss[leader][i] > by_loss[other][i]
+                    for other in LOSS_NOISEX if other != leader)
+                for i in range(5)
+            )
+            distributions[strict] += 1
+            strict_majority += strict >= 3
+            if strict == 0:
+                zero_strict.append((ds, shot))
+            if ds == "ECG200" and shot == 5:
+                assert leader == "l1" and strict == 0
+                assert totals["l1"] == 344 and totals["floc"] == 342
+            if ds == "FaceAll" and shot == 10:
+                assert leader == "l1" and strict == 5
+
+    assert unique_leaders == 16
+    assert strict_majority == 7
+    assert zero_strict == [("ECG200",5)]
+    assert distributions == {0: 1, 1: 5, 2: 3, 3: 5, 4: 1, 5: 1}
+    print("NOISEX mean-winner stability across five full-pipeline seeds:")
+    print("  Only 7/16 condition-average winners strictly win >=3/5 seeds.")
+    print("  ECG200/5-shot mean winner L1 wins ZERO of its individual seeds;")
+    print("  FaceAll/10-shot L1 strictly wins all five full-pipeline seeds.")
+
+    # Each dataset effect is first averaged across its two shot budgets;
+    # 8 datasets, exhaustive 2^8 sign changes. P-values are exploratory:
+    # source tasks are selected, not randomly sampled; formal exactness
+    # would require paired-effect sign exchangeability under the null.
+    expected = {
+        "mse": (-0.2168492530460444, 4, 4, 192),
+        "l1": (-0.12243129705377243, 3, 5, 202),
+        "scratch": (+6.090535257026891, 7, 1, 4),
+    }
+    for baseline, (exp_mean, exp_wins, exp_losses, exp_ext) in expected.items():
+        effects = [z["floc"]-z[baseline] for z in rows]
+        extremal, total, pvalue = exhaustive_signflip(effects)
+        assert total == 256 and extremal == exp_ext
+        assert math.isclose(mean(effects), exp_mean, abs_tol=1e-9)
+        assert (sum(e > 1e-9 for e in effects),
+                sum(e < -1e-9 for e in effects)) == (exp_wins, exp_losses)
+        print(f"  p=1.2 minus {baseline:>7}: {mean(effects):+.4f} pp,"
+              f" datasets +/- {exp_wins}/{exp_losses}, "
+              f"signflip {extremal}/256={pvalue:.6f}")
+    print("  Exploratory Holm over two robust comparator tests (MSE/L1):")
+    print("  both adjusted p=1.0. Scratch comparison is not included: ")
+    print("  scratch gets 80 supervised epochs, pretrained methods 50.")
+    print("  Sign-flip enumeration is NOT population-level statistical proof.")
 
 
 if __name__ == "__main__":
