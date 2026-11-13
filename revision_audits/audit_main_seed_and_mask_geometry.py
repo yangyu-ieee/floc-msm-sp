@@ -81,6 +81,26 @@ def main():
     assert len(block_counts) == 17 and block_counts.count(60) == 15 and block_counts.count(62) == 2
     assert abs(block_mean - 1024 / 17) < 1e-10
 
+    # Mean accuracy is built from float32 per-seed accuracies. Equality at the
+    # printed percentage-point resolution must not use bitwise float equality:
+    # p=1.2 / 200 has a 1.19e-8 *fractional-accuracy* discrepancy.
+    mr = json.loads((ROOT / "revision_v70_20261010/results/masking/random_token_exact/results.json").read_text(encoding="utf-8"))
+    mb = json.loads((ROOT / "revision_v70_20261010/results/masking/contiguous_block_v2/results.json").read_text(encoding="utf-8"))
+    comparison_tolerance = 1e-7  # accuracy fraction, 0.00001 percentage points
+    wins, ties, block_wins = 0, 0, 0
+    for loss in ("mse", "l1", "charbonnier", "floc_1.2"):
+        for budget in ("100", "200"):
+            diff = mr[loss][budget]["mean"] - mb[loss][budget]["mean"]
+            if diff > comparison_tolerance:
+                wins += 1
+            elif diff < -comparison_tolerance:
+                block_wins += 1
+            else:
+                ties += 1
+    assert (wins, ties, block_wins) == (7, 1, 0), (wins, ties, block_wins)
+    assert abs(mr["floc_1.2"]["200"]["mean"] - mb["floc_1.2"]["200"]["mean"]) < comparison_tolerance
+    print(f"  masking accuracy comparison (float-tolerant): random {wins} wins, {ties} tie, block {block_wins} wins")
+
     print("\nTokenizer: Conv1d(input=128,kernel=8,stride=4,padding=2), 32 tokens")
     print("  raw positions covered by one token: 4; by two tokens: 124")
     print(f"  exact-16 random-token masking: E[fully hidden] = {random_hidden:.4f}/128 = {random_hidden/128:.4%}")
