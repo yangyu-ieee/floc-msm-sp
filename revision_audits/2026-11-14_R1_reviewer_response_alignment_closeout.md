@@ -77,3 +77,21 @@ Keep the subsequent correct remarks on seven sampler tests and corrected Cauchy 
 - **Open**: verify every Supplementary Note/Table/Figure locator against the actual **final submitted supplementary artifact**, not merely a historical script's anticipated labels. Also verify editor submission portal status and author approval separately.
 
 **Final disposition:** The primary manuscript results checked here are internally supported; the **reviewer-response drafts are not synchronized with those results** and should not be filed as-is. This is a higher-priority delivery defect than additional post-hoc experiment discovery. No further GPU computation is required for these corrections.
+
+## Implementation closeout: full candidate created, legacy drafts preserved
+
+**Candidate file:** `revision_audits/2026-11-14_R1_response_to_reviewers_reconciled_CANDIDATE.md` (created 2026-11-14 from the shorter `RESPONSE_TO_REVIEWERS_DRAFT(1).md` Library version; separately committed as `4043416`).
+
+**Completed in this new candidate, not in the original Library drafts:**
+- Replaced all outdated corrected-CMS primary MSE/p=1.2 figures, four absolute effects, and the incorrect 3/4 L1 win claim with the designated Table 1 values and 2/4–2/4 budget split.
+- Replaced both the R1.1 historical `0.1–1.0` claim and the R3.3 incorrect `8/8, 0.04–1.68` masking claim with `0.4–1.5` primary effect range and `7/8 plus a displayed tie, 0.00–1.60` masking range.
+- Updated all **11** main-manuscript `**Location:**` lines to printed pages of the verified **23-page** clean R1.
+- Updated the authors' references to the pointwise reconstruction objective to FLOM-based `p`-moment-loss wording; **all verbatim reviewer quote lines remain byte-for-byte identical** to the source draft. The FLOS/FLOC literature reference remains FLOC because that is mathematically a *covariance* discussion.
+- Corrected R3.2's false attribution of the residual-tail-index statement to the Conclusion: it is in §4.3, with more general limitations in Discussion/Conclusion.
+- Corrected the response's inaccurate description of Figure 1's label-budget annotation: the actual diagram says only `few-label`; the 50–500 total-label budgets appear in the main protocol, not in the diagram itself. The response now distinguishes those from per-class external shot budgets.
+- Preserved reviewer 1 and reviewer 3 numbering, all original quoted comments, and the 13 subsection headings. No substantive experimental claims were added beyond source-grounded clarifications.
+- Added an invisible Markdown author-review status note near the top of the new candidate, with **no** assertion that it is the final, approved or uploaded editorial response.
+
+**Verified after write:** new candidate re-fetched from GitHub; the reviewer-quote lines and section headings were compared directly against the original shorter draft, all 11 revised main `**Location:**` lines were inspected, and stale Table 1/ masking values were absent from the author-response text. The longer `RESPONSE_TO_REVIEWERS_DRAFT.md` remains unchanged and stale.
+
+**Still open:** author's choice and approval of which reply is canonical; whether the exact Supplementary Tables S1–S18 / Notes / figures correspond to the finally submitted supplement; whether any response has already been uploaded in Editorial Manager; and all author-side submission formatting/metadata checks. The GitHub Markdown candidate is a working file, **not** a submission action, and the archived R1 / frozen v70 have not been touched.
