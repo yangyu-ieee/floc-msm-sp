@@ -14,7 +14,7 @@ The source creates an unconstrained trainable scalar `p_raw` and appends it to t
 
 The objective exponent is parameterized by
 
-`p(u)=0.5+1.5*sigmoid(u)`, initialized with `u=log((1.5-0.5)/(2.0-1.5))=log(2)`, giving `p(0)=1.5` at its actual initial scalar `u_0=log(2)`.
+`p(u)=0.5+1.5*sigmoid(u)`, initialized with `u=log((1.5-0.5)/(2.0-1.5))=log(2)`, giving `p(u_0)=1.5` at the initial scalar `u_0=log(2)` (whereas `p(0)=1.25`).
 
 Hence `p` remains strictly in **(0.5, 2)** and receives backpropagated gradients from `mean(abs(r)**p)`; the code imposes **no** separate tail-index constraint `p<alpha`, no validation criterion for updating p, and no explicit regularizer in p. The encoder-only gradient clipping at norm 1.0 does **not** clip the scalar exponent's gradient. This is a correctly implemented joint scalar-parameter training loop for the stated raw objective, not a failure to register p.
 
