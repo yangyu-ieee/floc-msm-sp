@@ -57,6 +57,45 @@ Consequently, Huber's epoch-20 raw gradient q90 of 0.01618 vs MSE's 0.03282 (rat
 
 This matters for fair interpretation: Huber delta=1 in the core trial may operate largely as a rescaled quadratic loss after max-abs normalization. The independently validation-selected Huber delta=0.25 or 0.5 settings in Table 3 are different protocols, and their superiority/weakness cannot be inferred by mixing those tables.
 
+## 4A. Important quantitative distinction: p=1.2 boosts ordinary small residual scores while attenuating only its upper tail
+
+This subsequent audit evaluated the **existing loss derivatives at the same residual**, against the **per-seed** 128,000-coordinate held-out residual quantiles. It does not compare total network gradients or add any training runs.
+
+Under the exact archived loss normalizations `MSE(r)=r^2` and `L_1.2(r)=|r|^1.2`, the two residual-score magnitudes satisfy, for any `r!=0`,
+
+`|psi_1.2(r)| / |psi_MSE(r)| = (1.2/2)*|r|^(1.2-2) = 0.6*|r|^(-0.8).`
+
+The two scores are equal when `|r|=0.6^(1/0.8)=0.5280670421`. Below this threshold, **p=1.2 yields a larger residual-gradient magnitude than MSE on exactly the same residual**; above it, a smaller magnitude. This is a more informative description than an unqualified claim that lower-order loss 'reduces gradients'.
+
+For the **five p=1.2 checkpoints** in `results/diagnostics/actual_residuals/results.json`, held-out residual quantiles are:
+
+| Diagnostic at 20 epochs, by seed | Recorded q50 / q90 / q99 ranges | Same-residual p=1.2 : MSE score ratio at those quantiles |
+| --- | --- | --- |
+| `|r|` q50 | 0.072890–0.075678 | **4.731–4.875×** |
+| `|r|` q90 | 0.309227–0.325132 | **1.474–1.534×** |
+| `|r|` q99 | 0.788583–0.817338 | **0.705–0.726×** |
+
+The **five-run mean ratios evaluated at each run's quantile** are 4.802× at q50, 1.513× at q90, and approximately 0.715× at q99. They are not ratios of mean network gradients.
+
+Every p=1.2 run has `q90<0.52807<q99`. On each run's **held-out** residual coordinates, at least approximately 90% are therefore in the region where the p=1.2 score exceeds MSE's score at the same nonzero residual, while an upper-tail fraction (bounded roughly between 1% and 10% by the two quantiles) is in the attenuated region. The scores still vanish as `r->0` for `p>1`; the ratio diverges only because MSE's score vanishes *faster*.
+
+This resolves an apparent tension without claiming causal identification: p=1.2 can **reduce extreme score concentration** and yet produce **larger typical residual gradients**, consistent with the independently observed 19/20 stagewise larger held-out *total parameter-gradient q90s* relative to MSE. But the latter gradients involve separately trained weights, nonlinear Jacobians, vector cancellation, and different loss scales; the scalar score crossover is **not proof** of the parameter-gradient outcome.
+
+### Charbonnier epsilon=0.01 is very close to L1 away from zero
+
+The source implements `L_charb(r)=sqrt(r^2+0.01^2)` with residual-score magnitude
+`|psi_charb(r)|=|r|/sqrt(r^2+0.01^2)`. Compare to L1's score magnitude of one at every nonzero residual.
+
+The five Charbonnier checkpoints have residual median `|r|` **0.072526–0.075840**; their corresponding score median is **0.990628–0.991419**, mean **0.990990**. Their score q90 values are **0.999499–0.999546**, mean **0.999519**. These values were checked directly against the monotone score transformation applied to the archived residual quantiles.
+
+Consequently, for at least half of the held-out Charbonnier residual coordinates, the absolute residual-score magnitude is within **0.94% of L1's score magnitude 1**. At residual q90 it differs by only ~0.05%. This does **not** tell us the exact fraction within the smoothing region `|r|<=0.01`, since the archive contains quantiles, not raw coordinate vectors. Nor does it show that separately trained L1 and Charbonnier models are identical or statistically equivalent.
+
+The per-coordinate **loss-value** difference is always `0<=sqrt(r^2+epsilon^2)-|r|<=epsilon=0.01`. This is a numerical/objective-shape bound, not a statement about gradients, representation transfer or performance equivalence.
+
+**Interpretation for R1:** The chosen, fixed baseline constants inhabit largely overlapping shapes on the *observed normalized residual scale*: `Huber(delta=1)` is near **half-MSE** across its bulk (prior §4); `Charbonnier(epsilon=.01)` has **near-L1** scores around and above the residual median; and `p=1.2` reallocates weight between ordinary and upper-tail residuals. These are legitimate conventional baselines, but they should not be sold as independent validations of several distinct robustness mechanisms. The existing R1 caution about loss scaling and trained-parameter gradients remains correct. No changes to submitted R1, no GPU experiments.
+
+The corresponding numerical checks were added **in place** to `revision_audits/audit_stagewise_score_gradient_scale.py`; archived quantiles were independently evaluated directly via GitHub in this turn. The updated script has **not** been run in a complete local checkout.
+
 ## 5. A further diagnostic/protocol boundary: eval-mode dropout and no gradient clipping
 
 Within `evaluate(...)`, the code explicitly calls `enc.eval()` and `dec.eval()` and computes the held-out parameter gradients *after* a no-grad residual pass, using identical masked input batches. Dropout is disabled for the held-out gradient evaluation. Gradients are recomputed for all encoder, decoder and learned mask-token parameters without clipping.
