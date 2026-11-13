@@ -93,6 +93,39 @@ def verify() -> tuple[str, dict]:
 
 
 
+def audit_historical_alpha2_branch() -> None:
+    """The historical 'Gaussian alpha=2' label is actually jitter-only."""
+    source = FROZEN_SOURCE.read_text(encoding="utf-8")
+    helper = STABLE.read_text(encoding="utf-8")
+    historical = json.loads(
+        (ROOT / "tsp_loss_compare_summary.json").read_text(encoding="utf-8")
+    )
+    metadata = json.loads(METADATA.read_text(encoding="utf-8"))
+    # Both the unlabeled and the labeled/test generators skip the nominal
+    # stable noise injection entirely at alpha=2; only Gaussian jitter is left.
+    assert source.count("if alpha<2.0:") == 2
+    assert "sig+=0.02*np.random.randn(seq_len)" in source
+    assert "sig+=0.05*np.random.randn(seq_len)" in source
+    assert "sig+=noise.astype(np.float32)*0.15" in source
+    assert "sig+=noise.astype(np.float32)*0.3" in source
+    assert source.count("for alpha in [2.0,") == 3
+    # The mathematically correct S_alpha S alpha=2 convention is Gaussian
+    # with sigma=sqrt(2)*scale, NOT sigma=0.02 or sigma=0.05.
+    assert "np.sqrt(2.0) * scale" in helper
+    assert "alpha=2 requires Gaussian variates" in helper
+    assert metadata["alphas"] == [1.5, 1.0]
+    old = historical["best_by_alpha"]["2.0"]
+    assert set(old) == {"50", "100", "200", "500"}
+    for item in old.values():
+        assert item["best_mean"] == item["second_mean"] == 1.0
+    print("PASS historical alpha=2 source inspection: the two generators")
+    print("      skip the nominal alpha-stable/Gaussian noise branch at alpha=2.")
+    print("      They retain jitter SD=0.02 (pretrain), SD=0.05 (downstream).")
+    print("      Historical 100% top-two means are a JITTER-ONLY control,")
+    print("      NOT an alpha=2 Gaussian-injection result at scales 0.15/0.30.")
+    print("PASS the corrected archival multi-alpha sweep excludes alpha=2.")
+
+
 def audit_empirical_rank_margins() -> None:
     base = ARCHIVE / "results/multialpha/corrected_sweep"
     data = json.loads((base / "results.json").read_text(encoding="utf-8"))
@@ -186,6 +219,7 @@ def main() -> None:
     args = parser.parse_args()
     corrected, recorded = verify()
     audit_empirical_rank_margins()
+    audit_historical_alpha2_branch()
     if args.execute:
         if args.output_dir is None:
             parser.error("--execute requires --output-dir; frozen results never overwritten")
