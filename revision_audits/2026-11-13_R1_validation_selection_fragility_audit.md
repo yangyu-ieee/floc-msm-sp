@@ -44,7 +44,7 @@ These are *within-family hyperparameter-selection gaps*, not significance tests 
 
 ## 3. Implications for paper presentation
 
-Table 3 is a valid protocol-specific sensitivity comparison with predeclared candidate grids, not a global optimum-finding result. The selected Huber, Charbonnier, and MCC hyperparameters are allowed to differ by label budget because the archived selection rule explicitly did so; it would be wrong to imply one globally tuned setting was used across all budgets.
+Table 3 is a valid protocol-specific sensitivity comparison with recorded candidate grids, not a global optimum-finding result. The selected Huber, Charbonnier, and MCC hyperparameters are allowed to differ by label budget because the archived selection rule explicitly did so; it would be wrong to imply one globally tuned setting was used across all budgets.
 
 Suggested Section 4.4 addition for a *future editable R1*:
 
