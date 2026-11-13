@@ -31,7 +31,7 @@ Consequences:
 
 1. **Within a given budget and seed**, all losses restart NumPy and Torch random streams consistently, so their synthetic train/test realizations match. The paired five-seed sign-flip contrast remains substantively appropriate for those matched downstream experiments.
 2. **Across downstream seeds** within the same budget, the training sequences, 500-sample test sequences and noise draws, classification head initialization, and training/shuffling randomness change. Thus the reported SD is conditional on the pretrained checkpoint but **does not isolate fine-tuning randomness**.
-3. **Across label budgets**, the same seed does not guarantee the same test set: `gen_cls(n_train)` consumes a budget-dependent number of NumPy variates before `gen_cls(n_test)` runs. The training datasets are also newly generated rather than a nested finite sample. Do not interpret accuracy changes across budgets as a controlled nested-training-size ablation with common test realizations.
+3. **Across label budgets**, the generator *regenerates* training data after the same NumPy-seed reset, but its sequential per-example draws and rowwise normalization mean that the smaller training sample set is **prefix-nested within the larger training sample set for a fixed seed**. However, the 500-example test set **is not fixed**: `gen_cls(n_train)` consumes a budget-dependent number of NumPy variates before `gen_cls(n_test)` runs. Moreover, the 500-label budget uses **50 fine-tuning epochs**, whereas the 50/100/200-label budgets use **30**, so this is not a training-size-only ablation with a common test realization or fixed training duration.
 4. This does not make the main within-budget loss comparison invalid. It is a precision/reproducibility qualification; the current unmarked manuscript's "five matched fine-tuning seeds" is incomplete about what changed.
 
 ### Proposed exact replacement (Section 4.1, unmarked R1 PDF page 76)
@@ -111,6 +111,10 @@ Proposed precision sentence for next editable Section 4.4:
 > In the archived exact-count masking comparison, the random-token runs had higher mean accuracy in seven of eight loss–budget cells, with one tie. These are descriptive between-run differences conditional on the recorded protocols; the random-token arm's original executable source was not recovered in the public archive, so exact source equivalence cannot be independently verified. Each arm's downstream seeds also regenerate synthetic training/test examples, making its reported SD conditional on the pretrained encoder but not restricted to fine-tuning optimization variability.
 
 This addition **does not** allege that the different SHA values correspond to a material algorithm change. The difference merely prevents verification of strict source-equivalence without the missing runner.
+
+## Maintenance correction: training prefix nesting and epoch budget
+
+An earlier version of item 3 incorrectly asserted that the independently invoked smaller-budget training datasets were not nested. In fact, because `gen_cls` draws each example sequentially, the same seed produces identical **training prefixes** across label budgets. The associated test sets are still budget-dependent, and the 500-label case uses 50 rather than 30 fine-tuning epochs. The latter two factors prevent interpreting cross-budget accuracy differences as an isolated sample-size response. This correction affects prose only; the recorded results and within-budget paired comparisons are unchanged.
 
 ## Maintenance correction: finite-enumeration p values and their assumptions
 
