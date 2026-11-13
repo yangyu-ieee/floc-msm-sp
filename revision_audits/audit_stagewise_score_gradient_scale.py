@@ -9,7 +9,7 @@ No model training. These descriptive differences are NOT formal independent test
 from __future__ import annotations
 
 import json
-from math import isclose
+from math import isclose, sqrt
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parents[1] / "revision_v70_20261010"
@@ -103,6 +103,54 @@ def check() -> None:
     print("on abs(residual)<=1, Huber delta=1 has half the MSE gradient")
     print("under the archived MSE=r**2, Huber=0.5*r**2 conventions.")
     print("This scaling relation does not identify the full cross-model mechanism.")
+    # Evaluate the two loss score functions at the SAME hypothetical r:
+    #   MSE: 2*r; p=1.2: 1.2*sign(r)*abs(r)**0.2.
+    # Ratio is 0.6*abs(r)**(-0.8), >1 for abs(r)<0.6**1.25.
+    # The model-specific residual quantiles bound the fraction in either
+    # regime; they do NOT prove a summed parameter-gradient ordering.
+    crossover = 0.6 ** (1.0 / 0.8)
+    assert isclose(crossover, 0.528067042076036, abs_tol=1e-12)
+    p_rows = grouped(actual, "floc_1.2")
+    assert all(r["residual"]["abs_q90"] < crossover
+               < r["residual"]["abs_q99"] for r in p_rows)
+    ratio = lambda magnitude: 0.6 * magnitude ** (-0.8)
+    median_ratios = [ratio(r["residual"]["abs_q50"]) for r in p_rows]
+    q90_ratios = [ratio(r["residual"]["abs_q90"]) for r in p_rows]
+    q99_ratios = [ratio(r["residual"]["abs_q99"]) for r in p_rows]
+    assert 4.73 < min(median_ratios) <= max(median_ratios) < 4.88
+    assert 1.47 < min(q90_ratios) <= max(q90_ratios) < 1.54
+    assert 0.70 < min(q99_ratios) <= max(q99_ratios) < 0.73
+    print(f"p=1.2 versus MSE residual-score crossover: |r|={crossover:.6f}")
+    print(f"p=1.2 same-residual score ratios at its q50/q90/q99 "
+          f"(five-run means): {mean(median_ratios):.3f}, "
+          f"{mean(q90_ratios):.3f}, {mean(q99_ratios):.3f}")
+    print("PASS: every p=1.2 model has q90 below, q99 above the crossing;")
+    print("      about 90% or more of its 128,000 held-out coordinates have")
+    print("      a *larger* p=1.2 than MSE score at the same nonzero residual.")
+
+    # Charbonnier smooths L1 only close to r=0, for the chosen eps=0.01.
+    # Its score magnitude is |r|/sqrt(r**2 + eps**2). Since this is
+    # monotone, the per-run q50/q90 score quantiles can be checked directly.
+    charb = grouped(actual, "charbonnier")
+    for record in charb:
+        for r_quantile, s_quantile in (
+            ("abs_q50", "abs_q50"), ("abs_q90", "abs_q90")
+        ):
+            m = record["residual"][r_quantile]
+            expected = m / sqrt(m*m + 0.01**2)
+            assert isclose(expected, record["score"][s_quantile], abs_tol=1e-7)
+    medians = [r["score"]["abs_q50"] for r in charb]
+    nineties = [r["score"]["abs_q90"] for r in charb]
+    assert 0.9906 < min(medians) <= max(medians) < 0.9915
+    assert 0.99949 < min(nineties) <= max(nineties) < 0.99955
+    print(f"Charbonnier eps=0.01 median |score| mean={mean(medians):.6f},")
+    print(f"     q90 mean={mean(nineties):.6f} (L1 nonzero score=1).")
+    print("PASS: at least half of held-out coordinates have Charbonnier")
+    print("      score magnitude >=~0.991, but no inference is made about")
+    print("      the lower half or the exact fraction within abs(r)<=0.01.")
+    print("NOTE: all comparisons are score-shape calculations on the same")
+    print("      residual, not controlled gradient comparisons of trained models.")
+
     print("Held-out gradients are recomputed with dropout OFF and unclipped,")
     print("on 8 batches per seed; training uses dropout ON and encoder-only clipping.")
 
