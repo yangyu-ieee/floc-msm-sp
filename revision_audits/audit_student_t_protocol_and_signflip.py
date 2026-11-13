@@ -23,6 +23,7 @@ BUDGETS = ("50", "200", "500")
 METHODS = ("scratch", "mse", "l1", "huber", "charbonnier", "floc_1.2")
 EXPECTED_GAIN_PP = (1.92, 3.08, 1.84)
 EXPECTED_BEST = ("charbonnier", "charbonnier", "l1")
+EXPECTED_LEADER_MARGIN_COUNTS = (6, 6, 4)
 
 
 def enumerate_signflip(differences: list[float]) -> float:
@@ -60,6 +61,7 @@ def check_source() -> None:
     assert "torch.manual_seed(args.seed + 1)" in student
     assert "generator=torch.Generator().manual_seed(args.seed + 2)" in student
     assert student.count("torch.manual_seed(seed); np.random.seed(seed)") >= 2
+    assert "CONFIG['ft_epochs'] if n_labeled<=200 else max(CONFIG['ft_epochs'],50)" in student
     # Student-t masking: per-sequence Binomial(32,0.5), not exact 16-of-32.
     assert "mask=torch.rand(xb.shape[0],tok.shape[1],1,device=device)<0.5" in student
     assert "random_order=torch.rand(xb.shape[0],tok.shape[1],1,device=device).argsort(dim=1)" in stable
@@ -78,7 +80,7 @@ def audit_results() -> None:
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
     results = json.loads(RESULTS.read_text(encoding="utf-8"))
     assert set(results) == set(METHODS)
-    for budget, expected_gain, best in zip(BUDGETS, EXPECTED_GAIN_PP, EXPECTED_BEST):
+    for budget, expected_gain, best, expected_lead in zip(BUDGETS, EXPECTED_GAIN_PP, EXPECTED_BEST, EXPECTED_LEADER_MARGIN_COUNTS):
         for method in METHODS:
             vals = results[method][budget]["seeds"]
             assert len(vals) == 5
@@ -89,6 +91,15 @@ def audit_results() -> None:
             assert all(count_correct(x, cfg["n_test"]) >= 0 for x in vals)
         winner = max(METHODS, key=lambda m: results[m][budget]["mean"])
         assert winner == best, (budget, winner, best)
+        pooled_correct = {
+            method: sum(count_correct(val, cfg["n_test"])
+                        for val in results[method][budget]["seeds"])
+            for method in METHODS
+        }
+        descending = sorted(pooled_correct.values(), reverse=True)
+        assert descending[0] - descending[1] == expected_lead, (
+            budget, pooled_correct, expected_lead
+        )
         p12 = results["floc_1.2"][budget]["seeds"]
         mse = results["mse"][budget]["seeds"]
         differences = [x-y for x, y in zip(p12, mse)]
@@ -102,7 +113,9 @@ def audit_results() -> None:
         print(f"Student-t nu=1.5, n={budget}: top={winner}, "
               f"p=1.2 vs MSE={gain_pp:+.2f} pp, wins=5/5, "
               f"exhaustive sign-flip p={p:.4f}, correct-count diffs={gains_count}")
-    print("PASS: 18 loss/budget cells; 5-seed averages, SDs, masks and rankings.")
+    print("PASS: 18 loss/budget cells; 5-seed means, SDs and rankings.")
+    print("PASS: top-two margins are 6/2500, 6/2500, 4/2500 correct.")
+    print("CAUTION: 500 labels also gets 50 FT epochs vs 30 for 50/200.")
     print("Do NOT pool the 15 seed-by-budget differences as independent experiments.")
 
 
