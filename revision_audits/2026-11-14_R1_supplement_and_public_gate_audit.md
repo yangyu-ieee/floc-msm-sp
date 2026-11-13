@@ -50,3 +50,15 @@ It intentionally prints a `SKIP` for the **full** Supplementary Materials audit 
 
 **Manuscript disposition:** no correction of the current Table 1 or Table 3 values is warranted; no new GPU experiment required. The useful distinction is **verified selected numeric evidence ≠ independently verified entire supplementary source package**. Any portal-submission status must be confirmed separately and is not inferable from a local PDF.
 
+
+## 4. Editorial Manager assembled-R1 evidence (2026-11-14 addendum)
+
+A separate read of the **94-page combined** `SIGPRO-D-26-02622_R1.pdf` establishes that this is not merely a local anonymous PDF: **assembled page 1** explicitly displays manuscript number `SIGPRO-D-26-02622R1` with an `Editorial Manager® and ProduXion Manager®` footer; **page 3** advertises an attached/linked supplementary item named **`Supplementary_Material_v73.pdf`**; page 4 is the revised cover letter, page 5 Highlights, and later pages contain marked/unmarked manuscripts. The cover letter states that the original alpha=1.5 results were withdrawn, the historical L1 inconsistency was documented, and the corrected `0.4–1.5 pp` gain is descriptive.
+
+Thus, a journal-system **R1 assembly/preview artifact** and named supplementary upload slot are evidenced. This is not proof that the portal's **final submission step** was completed or that its supplementary bytes can be independently inspected. The assembled PDF's one-page filename reference does **not** reproduce the complete `Supplementary_Material_v73.pdf` pages. The named supplement could not be resolved as a separate readable Library/GitHub resource in the current audit. A subsequent programmatic materialization of the combined R1 PDF returned a temporary 429 upstream capacity error, so it did not establish whether an embedded-file object exists; **no absence claim** about embedded attachments should be made on that basis.
+
+The proper distinction is:
+- **Verified:** a journal-system R1 assembly exists and references a supplementary artifact by exact filename;
+- **Unverified:** the supplementary file's contents, hashes, its final S1–S18 table/figure pagination, which response letter is attached, and the portal's completed-submission status.
+
+Do not confuse `Supplementary_Material_v73.pdf` (a separately named editorial-system attachment) with the frozen public `revision_v70_20261010/` archive (a code/results release containing no manuscript TeX). No other file was silently substituted for the supplement. The 28/28 clean core-table checks remain valid with their stated limited scope.
