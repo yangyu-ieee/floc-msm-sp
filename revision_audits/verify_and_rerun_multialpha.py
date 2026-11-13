@@ -92,6 +92,51 @@ def verify() -> tuple[str, dict]:
     return corrected, recorded
 
 
+
+def audit_empirical_rank_margins() -> None:
+    base = ARCHIVE / "results/multialpha/corrected_sweep"
+    data = json.loads((base / "results.json").read_text(encoding="utf-8"))
+    phase = json.loads((base / "phase_map_summary.json").read_text(encoding="utf-8"))
+    close = []
+    print("Alpha, labeled N, top loss, second loss, gap in correct predictions / 2500")
+    for alpha in ("1.5", "1.0"):
+        for n in ("50", "100", "200", "500"):
+            key = f"alpha={alpha}/n={n}"
+            record = phase["cells"][key]
+            def ncorrect(loss: str) -> int:
+                vals = data[f"a={alpha}/loss={loss}/n={n}"]["seeds"]
+                assert len(vals) == 5
+                counts = [round(500 * val) for val in vals]
+                assert all(abs(c/500 - val) < 1e-7
+                           for c, val in zip(counts, vals))
+                return sum(counts)
+            first = ncorrect(record["best_loss"])
+            second = ncorrect(record["second_loss"])
+            gap = first - second
+            assert gap >= 0
+            assert abs(gap/2500 - record["best_second_margin"]) < 1e-6
+            print(f"{alpha} {n}: {record['best_loss']} vs "
+                  f"{record['second_loss']}, gap {gap}/2500")
+            if gap <= 2:
+                close.append((alpha, n))
+    assert close == [("1.5", "100"), ("1.5", "500")]
+    print("PASS: top-loss rankings have two near-ties (2/2500 each).")
+
+    # The targeted alpha=1.0 runner is exact Cauchy at alpha=1,
+    # despite retaining the historically incorrect general-alpha transform.
+    target = (ARCHIVE / "code/alpha1_training_dynamics"
+              / "targeted_alpha10_fullseed.py").read_text(encoding="utf-8")
+    cauchy_cfg = json.loads(
+        (ARCHIVE / "results/cauchy_level/config.json").read_text(encoding="utf-8")
+    )
+    assert cauchy_cfg["alpha"] == 1.0 and cauchy_cfg["seeds"] == 10
+    assert 'parser.add_argument("--alpha", type=float, default=1.0)' in target
+    assert "np.sin(alpha * u)" in target and "np.cos(u) / w" in target
+    print("PASS: archived targeted run is alpha=1, where the legacy formula")
+    print("      algebraically equals tan(U). Do NOT use that target script at alpha!=1.")
+
+
+
 def rerun(corrected: str, recorded: dict, output_dir: Path) -> None:
     destination = output_dir.expanduser().resolve()
     if ARCHIVE.resolve() == destination or ARCHIVE.resolve() in destination.parents:
@@ -140,6 +185,7 @@ def main() -> None:
                         help="Mandatory fresh folder outside frozen v70 for --execute")
     args = parser.parse_args()
     corrected, recorded = verify()
+    audit_empirical_rank_margins()
     if args.execute:
         if args.output_dir is None:
             parser.error("--execute requires --output-dir; frozen results never overwritten")
