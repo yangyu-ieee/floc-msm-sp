@@ -1,18 +1,18 @@
 # SIGPRO-D-26-02622 R1: main-seed scope, test-set pairing, and restricted multiplicity correction
 
 Date: 2026-11-13.
-Status: post-R1 prospective quality audit. The assembled R1 manuscript and frozen \`revision_v70_20261010\` archive **remain unchanged**.
+Status: post-R1 prospective quality audit. The assembled R1 manuscript and frozen `revision_v70_20261010` archive **remain unchanged**.
 Primary files:
-- \`revision_v70_20261010/code/floc_msm_main_corrected.py\`
-- \`revision_v70_20261010/code/provenance/run_main_table_reconciliation_executed_20261009.py\`
-- \`revision_v70_20261010/results/main_table_reconciliation_20261009/results.json\`
-- \`revision_v70_20261010/code/alpha1_training_dynamics/targeted_alpha10_fullseed.py\`
-- \`revision_v70_20261010/code/audit_cauchy_unpaired_welch.py\`
+- `revision_v70_20261010/code/floc_msm_main_corrected.py`
+- `revision_v70_20261010/code/provenance/run_main_table_reconciliation_executed_20261009.py`
+- `revision_v70_20261010/results/main_table_reconciliation_20261009/results.json`
+- `revision_v70_20261010/code/alpha1_training_dynamics/targeted_alpha10_fullseed.py`
+- `revision_v70_20261010/code/audit_cauchy_unpaired_welch.py`
 - R1 Editorial Manager assembly, **unmarked manuscript**, PDF pages 76–78 and 85 (not the deleted material displayed in marked-up pages).
 
 ## Finding A. The main five seeds vary synthetic test data, not only downstream initialization
 
-In \`floc_msm_main_corrected.py\`, per budget and per downstream seed, the runner resets
+In `floc_msm_main_corrected.py`, per budget and per downstream seed, the runner resets
 
     torch.manual_seed(seed); np.random.seed(seed)
 
@@ -25,13 +25,13 @@ which constructs a new encoder/head and then calls
     Xtr,ytr = gen_cls(n_train,128,1.5)
     Xte,yte = gen_cls(n_test,128,1.5)
 
-The \`gen_cls\` function draws a separate Gaussian jitter vector and corrected CMS noise for each generated sequence. The pretraining corpus is generated once before the loss loop, and **one pretrained checkpoint per loss** is retained across all budgets and five downstream seeds.
+The `gen_cls` function draws a separate Gaussian jitter vector and corrected CMS noise for each generated sequence. The pretraining corpus is generated once before the loss loop, and **one pretrained checkpoint per loss** is retained across all budgets and five downstream seeds.
 
 Consequences:
 
 1. **Within a given budget and seed**, all losses restart NumPy and Torch random streams consistently, so their synthetic train/test realizations match. The paired five-seed sign-flip contrast remains substantively appropriate for those matched downstream experiments.
 2. **Across downstream seeds** within the same budget, the training sequences, 500-sample test sequences and noise draws, classification head initialization, and training/shuffling randomness change. Thus the reported SD is conditional on the pretrained checkpoint but **does not isolate fine-tuning randomness**.
-3. **Across label budgets**, the same seed does not guarantee the same test set: \`gen_cls(n_train)\` consumes a budget-dependent number of NumPy variates before \`gen_cls(n_test)\` runs. The training datasets are also newly generated rather than a nested finite sample. Do not interpret accuracy changes across budgets as a controlled nested-training-size ablation with common test realizations.
+3. **Across label budgets**, the same seed does not guarantee the same test set: `gen_cls(n_train)` consumes a budget-dependent number of NumPy variates before `gen_cls(n_test)` runs. The training datasets are also newly generated rather than a nested finite sample. Do not interpret accuracy changes across budgets as a controlled nested-training-size ablation with common test realizations.
 4. This does not make the main within-budget loss comparison invalid. It is a precision/reproducibility qualification; the current unmarked manuscript's "five matched fine-tuning seeds" is incomplete about what changed.
 
 ### Proposed exact replacement (Section 4.1, unmarked R1 PDF page 76)
@@ -45,11 +45,11 @@ Proposed future manuscript sentence:
 
 > Corrected-CMS α=1.5 comparison: test accuracy (percent), mean ± population standard deviation over five matched downstream data-generation and training seeds, conditional on one pretrained checkpoint per loss. The synthetic train/test realizations match across losses within a label budget and seed, but test samples are regenerated across budgets. The p=1 row is omitted because its reconstruction objective equals L1.
 
-The masking-sensitivity subsection also describes "fine-tuning, not pretraining, variability" (unmarked R1 page 84), but the same main-runner \`eval_downstream\` procedure implies variation in synthetic examples and their test noise, **not only the fine-tuning process**, if that runner generated its results. The sensitivity provenance should be checked against its exact runner before changing that subsection.
+The masking-sensitivity subsection also describes "fine-tuning, not pretraining, variability" (unmarked R1 page 84), but the same main-runner `eval_downstream` procedure implies variation in synthetic examples and their test noise, **not only the fine-tuning process**, if that runner generated its results. The sensitivity provenance should be checked against its exact runner before changing that subsection.
 
 ## Finding B. Exact five-seed sign-flip p-values can be reported instead of only the resolution bound
 
-From the frozen main reconciliation \`results.json\`, enumerating all 32 sign assignments to paired per-seed differences:
+From the frozen main reconciliation `results.json`, enumerating all 32 sign assignments to paired per-seed differences:
 
 | Labels | p=1.2 minus MSE mean (pp) | 2-sided exact sign-flip p vs MSE | 2-sided exact sign-flip p vs L1 |
 | --- | ---: | ---: | ---: |
@@ -63,11 +63,11 @@ The p=1.2 versus L1 comparisons use the same five matched seed IDs and are also 
 **Recommended prose**: retain the concise "minimum possible p=0.0625" statement in the abstract but, if space permits, put the four actual p values in the main comparison paragraph or a Supplementary note. This avoids a reader mistaking the resolution limitation for an absence of computation.
 
 New reproducible (standard-library) verifier:
-\`revision_audits/audit_main_seed_scope_and_signflip.py\`
+`revision_audits/audit_main_seed_scope_and_signflip.py`
 
 ## Finding C. Targeted α=1 Welch + Holm findings are conditional on a limited family
 
-Archived script \`audit_cauchy_unpaired_welch.py\` defines four independent-sample, two-sided Welch comparisons of **fixed p=1.2 versus MSE**, at budgets 50/100/200/500, and applies Holm step-down correction across precisely **those four hypotheses**.
+Archived script `audit_cauchy_unpaired_welch.py` defines four independent-sample, two-sided Welch comparisons of **fixed p=1.2 versus MSE**, at budgets 50/100/200/500, and applies Holm step-down correction across precisely **those four hypotheses**.
 
 The archived script's expected p-values, from its directly coded assertions:
 
@@ -97,17 +97,25 @@ Avoid the word "preregistered" or a global familywise-error-control claim unless
 
 ## Finding D. Masking-sensitivity replication scope is now source-confirmed; missing random-arm source is already disclosed
 
-We further inspected \`code/provenance/mask_strategy_contiguous_block_v2_runner.py\`,
-\`results/masking/random_token_exact/config.json\`,
-\`results/masking/contiguous_block_v2/config.json\`,
+We further inspected `code/provenance/mask_strategy_contiguous_block_v2_runner.py`,
+`results/masking/random_token_exact/config.json`,
+`results/masking/contiguous_block_v2/config.json`,
 and the **frozen v70 README**.
 
-- The contiguous-block runner uses the *same* \`eval_downstream\` implementation as the canonical main runner: for each budget and seed it regenerates \`gen_cls(n_train)\` followed by \`gen_cls(n_test)\`, after resetting NumPy and Torch seeds. Thus the R1 masking paragraph's wording “the SD captures fine-tuning, not pretraining, variability” is **incomplete**: it includes the newly generated downstream training/test data and noise.
-- Random-token config records \`code_sha256=5b0315ff29b8eaff269f3902c24a94e55741bb265ead2a6a44705b43aea2f803\`; contiguous-block config records \`880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104\`. These are **different executed script digests**.
-- The frozen \`revision_v70_20261010/README.md\` explicitly says the historical exact-count random-token masking runner **was not recovered**; its archived configuration/output are not a fully rerunnable source release. Therefore the provenance gap was already disclosed, not newly discovered in this audit.
+- The contiguous-block runner uses the *same* `eval_downstream` implementation as the canonical main runner: for each budget and seed it regenerates `gen_cls(n_train)` followed by `gen_cls(n_test)`, after resetting NumPy and Torch seeds. Thus the R1 masking paragraph's wording “the SD captures fine-tuning, not pretraining, variability” is **incomplete**: it includes the newly generated downstream training/test data and noise.
+- Random-token config records `code_sha256=5b0315ff29b8eaff269f3902c24a94e55741bb265ead2a6a44705b43aea2f803`; contiguous-block config records `880fbd11139d81d5abe462cd5190a28c973dee1c54e7932d7f629a9c7b541104`. These are **different executed script digests**.
+- The frozen `revision_v70_20261010/README.md` explicitly says the historical exact-count random-token masking runner **was not recovered**; its archived configuration/output are not a fully rerunnable source release. Therefore the provenance gap was already disclosed, not newly discovered in this audit.
 - Archive results remain suitable for describing which group has a higher mean. Without source equality/diff validation of the missing random-token runner, the observed difference must **not** be asserted as a clean causal mask-topology-only effect.
 
 Proposed precision sentence for next editable Section 4.4:
 > In the archived exact-count masking comparison, the random-token runs had higher mean accuracy in seven of eight loss–budget cells, with one tie. These are descriptive between-run differences conditional on the recorded protocols; the random-token arm's original executable source was not recovered in the public archive, so exact source equivalence cannot be independently verified. Each arm's downstream seeds also regenerate synthetic training/test examples, making its reported SD conditional on the pretrained encoder but not restricted to fine-tuning optimization variability.
 
 This addition **does not** allege that the different SHA values correspond to a material algorithm change. The difference merely prevents verification of strict source-equivalence without the missing runner.
+
+## Maintenance correction: finite-enumeration p values and their assumptions
+
+The five-pair sign-flip procedure enumerates all 2^5 sign configurations, and the p values above are **computationally exact for this statistic**. Formal exact Type-I error control is conditional on sign-exchangeability/symmetry of the paired differences under the relevant null (for example, the sharp null of no loss effect under a genuinely randomizable treatment assignment). Matching pseudorandom seeds and using common synthetic data across losses does not, by itself, establish this stochastic condition. Therefore treat the resulting p values as transparent finite-sample descriptive diagnostics, **not** distribution-free confirmatory evidence under arbitrary composite nulls. The observation that no possible p value is below 0.0625 for five nonzero paired differences still holds as a combinatorial resolution limit.
+
+The reconstructed two-sided p values should not be described as a formal equivalence test, nor should the absence of p < 0.05 be taken as evidence that losses are equivalent. In any prospective revision, use wording such as "exhaustive sign-flip diagnostic" when the exchangeability assumption has not been established.
+
+This note supersedes any more categorical characterization of the five-seed sign-flip calculations elsewhere in the audit set; it changes neither the data nor the computed p values.
