@@ -9,6 +9,7 @@ random seeds as matched pairs.
 """
 from __future__ import annotations
 
+from itertools import combinations
 import hashlib
 import json
 import math
@@ -39,6 +40,31 @@ def holm_adjust(raw):
         running_max = max(running_max, (len(raw) - rank) * raw[ix])
         adjusted[ix] = min(1.0, running_max)
     return adjusted
+
+
+def exact_independent_permutation_count(a, b):
+    """Enumerate all C(20,10) assignments under a distribution-exchangeable null.
+
+    Use integer correct counts out of 500 to avoid floating point tie errors.
+    This is a distribution-null sensitivity analysis, not an exact Welch test
+    of equality of means under arbitrary heterogeneous variances.
+    """
+    aa = [round(float(x) * 500) for x in a]
+    bb = [round(float(x) * 500) for x in b]
+    assert len(aa) == len(bb) == 10
+    assert all(abs(float(x)-k/500) < 1e-7
+               for x,k in zip([*a,*b], [*aa,*bb]))
+    pooled = aa + bb
+    total = sum(pooled)
+    observed = abs(sum(aa) - sum(bb))
+    extreme, enumerated = 0, 0
+    for indices in combinations(range(20), 10):
+        selected = sum(pooled[i] for i in indices)
+        enumerated += 1
+        if abs(2 * selected - total) >= observed:
+            extreme += 1
+    assert enumerated == 184756
+    return extreme, enumerated
 
 
 def audit():
@@ -117,6 +143,44 @@ def audit():
         assert all(p > 0.05 for p in vals), (other, vals)
         print(f"Unadjusted Welch p vs {other}:",
               ", ".join(f"{p:.5f}" for p in vals))
+    print("Exact independent-group permutation sensitivity (10+10; 184,756 assignments):")
+    perm_rows = {}
+    selected_raw = []
+    all_raw = []
+    for budget in BUDGETS:
+        aa = results[f"loss=floc_1.2/n={budget}"]["seeds"]
+        for baseline in ("mse", "l1", "charbonnier"):
+            bb = results[f"loss={baseline}/n={budget}"]["seeds"]
+            extreme, total = exact_independent_permutation_count(aa, bb)
+            pv = extreme / total
+            perm_rows[(budget, baseline)] = (extreme, pv)
+            all_raw.append(pv)
+            if baseline == "mse":
+                selected_raw.append(pv)
+            print(f"  n={budget}, p=1.2 vs {baseline}: {extreme}/{total} = {pv:.9f}")
+    assert [perm_rows[(budget,"mse")][0] for budget in BUDGETS] == [2,4,2,16]
+    assert all(perm_rows[(budget,baseline)][1] > .05
+               for budget in BUDGETS
+               for baseline in ("l1","charbonnier"))
+    selected_holm = holm_adjust(selected_raw)
+    assert all(p < .001 for p in selected_holm)
+    assert [round(x*184756,8) for x in selected_holm] == [8,8,8,16]
+    # Re-index Holm across all 12 comparisons, not just four MSE contrasts.
+    all_holm = holm_adjust(all_raw)
+    mse_positions = (0, 3, 6, 9)
+    mse_12_holm = [all_holm[i] for i in mse_positions]
+    assert [round(x*184756,8) for x in mse_12_holm] == [24,40,24,144]
+    assert all(p < .001 for p in mse_12_holm)
+    print("4-MSE-family Holm (50/100/200/500):",
+          ", ".join(f"{p:.9f}" for p in selected_holm))
+    print("12-contrast-family Holm vs MSE:",
+          ", ".join(f"{p:.9f}" for p in mse_12_holm))
+    print("PASS: four MSE gains remain below 0.001 under either illustrative")
+    print("      multiplicity family; neither L1 nor Charbonnier is significant.")
+    print("NOTE: ordinary permutation test assumes equal group distributions")
+    print("      under H0; this is NOT a distribution-free Welch p-value, and")
+    print("      exploratory prior model/hypothesis selection is not corrected.")
+
     print("CAUTION: comparing loss-specific streams does not hold test")
     print("         realizations fixed. The 40 budget-by-seed observations")
     print("         reuse 10 pretraining runs and are not independent.")
