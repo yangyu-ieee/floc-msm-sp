@@ -63,6 +63,60 @@ Suggested scope statement:
 
 These amendments are more important than another mask-ratio accuracy bar chart: they define what the study actually tests.
 
+## 4A. New audit: the 25%/75% mask-ratio sensitivity actually uses Bernoulli tokens
+
+**2026-11-14 additional audit of frozen evidence, no rerun.** The manuscript's clean R1 §4.4 (assembled PDF page 83) accurately states that increasing the nominal mask ratio from 0.25 to 0.75 lowers accuracy by **3.7–6.0 pp at 50 labels, 1.0–2.3 pp at 200, and 0.2–0.4 pp at 500**, without implying an optimal ratio. However, the two endpoint runs use **independent Bernoulli** token masks, not the exact-count (16 of 32 tokens) masks of the primary Table 1.
+
+Sources: `revision_v70_20261010/code/provenance/r4_mask_ratio_audit.py`; `results/mask_ratio/025/{config.json,results.json}` and `results/mask_ratio/075/{config.json,results.json}`; clean assembled manuscript PDF page 83. Both ratio configs record the same executed source digest `964e2b27e44788ad64fb148f8a1ff24eb9a3dd6f51ec6de172944f5fec3c0960`, the same master seed `20261007`, and one pretrained encoder per loss, with five downstream seed indices. This does not demonstrate byte-identical execution or identical checkpoints.
+
+### Token ratio is not raw-coordinate concealment
+
+The ratio runner samples `mask=torch.rand(batch,32,1,device=device)<q`, with independent token masks of probability q. In the Conv1D k=8, stride=4, pad=2 tokenizer on 128 raw samples, **four** raw coordinates feed one token and **124** feed two tokens. Under the strictly structural definition 'a raw coordinate has no path into any unmasked token', the expectation is
+
+`E[fully_concealed_raw(q)] = 4*q + 124*q^2.`
+
+| Protocol | Mean masked tokens out of 32 | Expected directly fully concealed raw coordinates out of 128 | Raw concealment share |
+| --- | ---: | ---: | ---: |
+| Bernoulli q=.25 endpoint | 8 | **8.75** | **6.83594%** |
+| Fixed-count exactly 16-of-32 main | 16 | **32.00** | **25.00000%** |
+| Bernoulli q=.75 endpoint | 24 | **72.75** | **56.83594%** |
+
+The endpoint gap in **expected direct raw concealment is 50.0 percentage points**, not merely an observed 50-point change in nominal token mask probability. The endpoints' masked-token count is Binomial(32,q), not fixed; the common SD in masked-token count is `sqrt(32*.25*.75)=sqrt(6)≈2.449`, so different individual sequences have different mask counts.
+
+Do **not** translate 6.84% or 56.84% into missing signal entropy or irrecoverable information; these are graph-support observations only. The primary .50 exact-count condition cannot be connected to the Bernoulli endpoints into a strictly controlled three-point accuracy curve.
+
+### Exact archived accuracy contrasts (25% minus 75%, pp)
+
+All mean differences below were reconstructed as integers from 5 seeds × 500 held-out predictions per cell:
+
+| Objective | 50 labels | 200 labels | 500 labels |
+| --- | ---: | ---: | ---: |
+| MSE | **+4.12** | **+0.96** | **+0.24** |
+| L1 | **+6.00** | **+2.04** | **+0.36** |
+| Huber δ=1 | **+3.68** | **+1.16** | **+0.44** |
+| p-moment p=1.2 | **+4.76** | **+2.32** | **+0.40** |
+| Scratch (no pretraining) | **+1.24** | **+0.92** | **0.00** |
+
+This reproduces the clean R1 summary to one decimal place and shows that under the extreme 75% Bernoulli mask ratio, **p=1.2 is not uniformly superior to MSE**: at 200 labels its mean is **94.52%** versus MSE **95.60%**, i.e. **−1.08 pp**. At the 25% ratio and 200 labels, p=1.2 exceeds MSE by **+0.28 pp**. No cross-condition superiority or significance claim follows from these five-seed means.
+
+### Essential negative control: scratch also changes across the two ratio runs
+
+**The most important qualification** is that the archival difference cannot be interpreted as an *isolated controlled mask-ratio effect*. In `r4_mask_ratio_audit.py`, `CONFIG['mask_ratio']` is consumed only in the *pretraining* mask draw, and `scratch` explicitly skips pretraining and calls `eval_downstream(None, ...)`. At each downstream budget and seed, the runner resets PyTorch and NumPy seeds. Nevertheless, the **scratch results change for 14 of 15** seed × budget positions between the .25 and .75 archives:
+
+- 50 labels: 81.16% versus 79.92% (difference **+1.24 pp**, all 5 seeds differ);
+- 200 labels: 90.20% versus 89.28% (**+0.92 pp**, all 5 seeds differ);
+- 500 labels: both means 96.32%, but **4 of 5 seeds** differ.
+
+Since scratch uses **no pretrained checkpoint and no masks**, its changes cannot result *directly* from the mask-ratio parameter through the recorded model computation. They imply run-level variability or an unobserved execution/provenance difference; the archived data do **not** identify which (GPU runtime/backend state, unarchived input bytes, and unlogged environmental variations are possible, not proven). The original test tensors and initial weights were not archived, and equal seed labels are not proof of identical numerical execution.
+
+Therefore the recorded lower mean accuracies at .75 are valid *descriptive differences between two archived run conditions*, but the reported margins cannot be attributed uniquely and quantitatively to a controlled change of mask ratio. The clean R1 says only 'audit found' and 'does not identify an optimum'; there is **no internal transcription error**. If a future proofread is permitted, add a concise qualifier that both endpoints use Bernoulli masking and form separate, not bitwise-matched, executions, while the primary 0.50 arm uses fixed-count masking.
+
+Minimal prospective wording:
+
+> In this separate endpoint audit, 25% and 75% masking are implemented by independent Bernoulli token draws, rather than fixed token counts as in our primary benchmark. Due to overlapping convolutional receptive fields, their expected directly fully concealed raw-sample shares are 6.84% and 56.84%, respectively. We report the cross-run accuracy differences descriptively; the archived scratch control also varies across the runs despite having no masking, so these margins should not be interpreted as pure mask-ratio treatment effects or as identifying a globally optimal ratio.
+
+The existing `revision_audits/audit_main_seed_and_mask_geometry.py` checker is extended in place to reproduce both geometry and the five-seed integer-count differences, including the 14/15 scratch negative-control discrepancy. The archived arrays and code path were separately audited with live GitHub reads; the updated Python source has **not** been executed in a full local checkout. Neither frozen v70 nor the submitted R1 was changed.
+
 ## 5. Reproducibility and risk grading
 
 - A new non-training structural check is available at `revision_audits/audit_mask_geometry_and_position_identity.py` (requires CPU-capable PyTorch, and validates both geometry and masked-input/output identity against fixed architecture).
