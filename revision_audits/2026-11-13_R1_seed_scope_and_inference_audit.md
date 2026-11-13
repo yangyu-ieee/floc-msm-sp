@@ -135,6 +135,33 @@ The existing standard-library `revision_audits/audit_main_seed_scope_and_signfli
 
 **Disposition:** one definite archived-wrapper path defect; one reproducibility/variance caveat; **no** evidence of numerical misreporting in R1 Table 1 and **no** justification for replacing published values or starting a new GPU sweep just to re-rank ties.
 
+## Finding F. Stronger control: cross-run differences also occur without any self-supervised pretraining
+
+The cross-run main-table discrepancy above **cannot be explained solely by loss-list order or pretrained-encoder variation**. The main source resets PyTorch and NumPy seeds before every downstream call, and the scratch branch invokes `eval_downstream(None, ...)`, which initializes an encoder from scratch without loading pretrained weights. At each label budget and seed, the same code regenerates the synthetic training/test arrays. Their original array bytes were **not archived**, so exact cross-run input equality has not been checked independently, though the source and NumPy version are recorded as the same.
+
+Recomputing the five-seed correct counts in the **scratch** arm yields:
+
+| Total labels | Earlier scratch mean ± population SD (%) | R1 Table 1 reconciliation scratch mean ± SD (%) | Reconciliation minus earlier (pp) |
+| ---: | ---: | ---: | ---: |
+| 50 | 81.32 ± 1.27 | 81.56 ± 4.37 | **+0.24** |
+| 100 | 76.44 ± 21.06 | 80.16 ± 15.91 | **+3.72** |
+| 200 | 90.60 ± 1.08 | 90.16 ± 1.81 | **−0.44** |
+| 500 | 96.56 ± 1.28 | 96.84 ± 1.26 | **+0.28** |
+
+At **100 total labels, seed index 2**, scratch correct predictions change from **175/500 (35.0%)** to **242/500 (48.4%)**, a **13.4-percentage-point** difference at that one test realization. This single seed accounts for a substantial portion, but not all, of the +3.72-point shift in the across-seed mean. In the archived source, scratch uses 80 supervised epochs and is evaluated with the same code path in both archives. Its instability makes the *numerical size* of a 'pretraining versus scratch' gap especially run-conditional. It does not invalidate using the designated R1 values as a descriptive historical result.
+
+A second source-level control is the **first trained loss**: the earlier config begins with `scratch,mse,...`, but the runner **skips** `scratch` in its pretraining loop. The reconciliation config begins with `mse,...`. Therefore `mse` is the **first actual SSL pretraining** in both. The two archived MSE first-epoch mean losses are already nonidentical: `0.0684799393521` versus `0.0684800391333` (absolute difference ~9.98×10⁻⁸). This shows the initial divergence occurs **before any earlier trained loss can affect global stochastic state**. It does not alone identify whether different kernel behavior, environment, unrecorded flags, hardware runtime, artifact provenance or other causes are responsible.
+
+Both runs record `torch.use_deterministic_algorithms` status as **true** and list the same Python/PyTorch/NumPy/GPU family. Only the reconciliation `run_metadata.json` explicitly records `cudnn_deterministic=true` and `cudnn_benchmark=false`. The older metadata lacks these fields; **absence of a recorded value must not be interpreted as proof that a flag was false**. Source SHA and deterministic-algorithm status are not complete byte-for-byte execution fingerprints.
+
+**What can be concluded:** at least one uncontrolled or unobserved execution/provenance dimension separates the two saved numerical runs, or the artifacts were not created under otherwise identical conditions. Existing archive outputs cannot identify which. Neither the different loss list nor prior encoder pretraining alone explains the scratch discrepancy. It would be scientifically unsound to report this as proven GPU nondeterminism or as misconduct, and wrong to merge/average/choose the better table.
+
+**Minimal future reproduction log, if an authorized independent run is ever required:** use the canonical runner in an output directory outside frozen v70, and save hashes of (i) unlabeled pretraining inputs, (ii) at least one downstream 500-example test tensor for each budget/seed, (iii) freshly initialized model parameters, (iv) epoch-1 / epoch-20 checkpoint state dicts; also record complete CUDA, cuDNN, driver and TF32/determinism flags, environment variables related to CUDA determinism, and the exact command line. These discriminators are needed to distinguish data, initialization, numeric runtime and optimizer trajectories. This is a reproducibility *recommendation*, not a request to execute a new GPU sweep now.
+
+The `revision_audits/audit_main_seed_scope_and_signflip.py` checker was expanded in place to assert the scratch shifts, the 100-label seed-2 count change, the first-trained-MSE property and the difference in metadata completeness. Live archived JSON and source text were independently rechecked through the repository connector; the updated Python script has **not been run in a full local checkout**.
+
+**Severity:** reproducibility/provenance investigation warranted if an editor or external reproducer requests precise rerun matching; **no demonstrated Table 1 transcription error, no established statistical significance improvement, no reason to alter submitted R1.**
+
 ## Audit disposition and prioritization
 
 - Main numerical accuracy figures remain unchanged; within-budget main comparisons are matched and valid as descriptive evidence.
