@@ -71,6 +71,36 @@ Condition-wise leaders: scratch **1/16**, MSE **5/16**, L1 **8/16**, p=1.2 **2/1
 
 The 16 cells share eight underlying datasets, and test sizes/class balances differ widely. Their mean is a **macro-mean of accuracies at the dataset/budget level**, not a micro-average pooled over test samples or a probability that one optimizer is superior on a new dataset. The five replicate IDs share datasets and source recordings; do not run a naive 16- or 80-independent-trial significance calculation.
 
+## 2A. Follow-up: NOISEX ranking stability across full-pipeline seeds and 8 dataset-level contrasts
+
+**Archived-data follow-up, 2026-11-14 (no new GPU experiment).** The reported `8/16` L1 wins count is a **mean-over-five-seeds, dataset×shot** ranking and is correct. But a ranking of *means* does not imply that the same loss won most individual full-pipeline repetitions. All 16 means were re-expressed as integers using the actual per-dataset official test cardinalities saved in `results/noisex/run_metadata.json`, and each per-seed, per-loss ranking was determined within a **matched** dataset, shot budget and master seed. The test examples were reused across the loss arms within that replicate; ties in integer correct counts were **not** credited as strict wins.
+
+- Exactly **7/16** of the per-condition mean winners were strict single-seed leaders on **at least three of the five** full-pipeline seeds. The remaining **9/16** were not strict-majority winners. Across all 16 cells, the distribution of how many seeds the mean winner strictly won was: `0:1, 1:5, 2:3, 3:5, 4:1, 5:1`.
+- **ECG200, 5-shot:** The highest mean is **L1 = 68.8%** versus **p=1.2 = 68.4%**, a difference of **two correct predictions over five independent 100-example test evaluations**. Nevertheless L1 strictly wins **0/5** seedwise comparisons among the four methods; its superior mean arises from the magnitude of seedwise outcomes, not frequent individual wins. This is not a data inconsistency.
+- **FaceAll, 10-shot:** L1 is the highest mean (**46.509%**) and strictly wins **all 5/5** seeds. Hence mean-winner stability genuinely varies by condition.
+
+These calculations do **not** estimate how often the same method would win on a new independent dataset; each dataset provides only five coupled replicate outcomes, and testing four models for a maximum also creates selection effects.
+
+### Independent full-pipeline replication is stronger than independent dataset count
+
+The source's `derive_seed(master_seed,dataset,stage,substage)` and explicit `seed_all(...)` calls show that five master seeds each re-mix recorded noise, construct new augmented SSL data, initialize and train an encoder separately for each loss, sample matched few-shot indices and fine-tune. Within the same master seed, *losses* share the noisy train/test realization and pretrained corpus, and downstream initialisation seeds are aligned. These five replicates are valid for **within-dataset pipeline variability**. But two shot budgets and five runs per dataset still share the same underlying eight selected UCR datasets and official test-set records. Thus the evidence does **not** become 16 or 80 independent tasks.
+
+To preserve dataset as the comparison unit, first average the 5-shot and 10-shot accuracies for each objective **within each dataset** (each has five complete pipeline replicate averages). Let `d_i=mean_{shots,seeds}(accuracy_{p=1.2}-accuracy_baseline)` for eight datasets, then enumerate all `2^8=256` sign assignments to the eight paired effects:
+
+| p=1.2 minus | Equal-dataset effect (pp) | Dataset wins/losses | Two-sided signflip extreme/256 | Exploratory p |
+| --- | ---: | ---: | ---: | ---: |
+| MSE | **−0.21685** | 4/4 | **192/256** | **0.750000** |
+| L1 | **−0.12243** | 3/5 | **202/256** | **0.7890625** |
+| Scratch | **+6.09054** | 7/1 | **4/256** | **0.015625** |
+
+A Holm step-down across the **two robust comparators** MSE and L1 makes both adjusted p-values **1.0**. The nominal scratch difference is not a clean measure of reconstruction-loss benefit: **scratch trains for 80 supervised epochs while pretrained approaches fine-tune for 50**, and shot conditions remain coupled. Do not make a post-hoc confirmatory pretraining-versus-scratch claim from this exploratory test.
+
+The exact-allocation values are arithmetic facts of the archived dataset-level effect vector; their *formal* test interpretation requires paired-effect sign symmetry/exchangeability under an appropriate null. These are **eight deliberately selected datasets**, not a sample from a well-defined random population of industrial signal tasks. The pairings across full-pipeline seeds do not establish those cross-dataset assumptions. Lack of significance versus MSE/L1 does **not** establish loss equivalence.
+
+**Disposition:** The submitted R1's L1 `8/16` win count remains correct; its conservative "mixed winners, no universal loss" conclusion is reinforced. For any future editor-facing passage, distinguish a winner **of five-seed means** from a reliable **per-seed majority** and limit the eight-dataset comparison accordingly. No change to frozen v70, R1 Table S2/S3, or experimental results is justified.
+
+The existing `revision_audits/audit_external_cwru_noisex_evidence.py` was extended in place to recompute per-dataset correct counts, all 16 mean-winner strict-seed outcomes and the 256-way dataset-level contrasts. Its mathematical results were independently recomputed from live GitHub JSON. The updated Python script has **not** been executed within a full local repository checkout.
+
 ## 3. Manuscript disposition: preserve what is already correct
 
 The unmarked assembled R1 main paper, Section 4.5 (PDF pages 85–86) and Discussion (page 87), already states:
