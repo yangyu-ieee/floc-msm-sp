@@ -152,6 +152,46 @@ def audit_two_archived_main_runs() -> None:
             print(f"{loss:>10}, n={n}: previous={old_count/25:.2f}%, "
                   f"Table1={new_count/25:.2f}%, shift={expected_shift:+.2f}pp")
 
+    # A stronger cross-run discrepancy is visible in SCRATCH, which
+    # initializes from None and never loads a pretrained encoder.
+    # Therefore loss-list order/pretraining trajectory cannot be the
+    # *sole* mechanism behind the two-run differences.
+    source_text = SRC.read_text(encoding="utf-8")
+    assert earlier_cfg["losses"][:2] == ["scratch", "mse"]
+    assert canonical_cfg["losses"][0] == "mse"
+    assert "if loss_type=='scratch': continue" in source_text
+    assert "torch.manual_seed(args.seed + 1)" in source_text
+    assert "generator=torch.Generator().manual_seed(args.seed + 2)" in source_text
+    assert "a=eval_downstream(None,n_labeled" in source_text
+    assert source_text.count("torch.manual_seed(seed); np.random.seed(seed)") >= 2
+    # In both archives MSE is the first trained loss; the earlier
+    # apparent "scratch" preceding MSE is skipped in the pretrain loop.
+    # Consequently MSE pretraining trajectory differences are not
+    # explained by loss objectives trained before MSE.
+    scratch_shifts = (+.24, +3.72, -.44, +.28)
+    for n, expected_shift in zip(BUDGETS, scratch_shifts):
+        old_s = earlier["scratch"][n]["seeds"]
+        new_s = canonical["scratch"][n]["seeds"]
+        assert len(old_s) == len(new_s) == 5
+        old_counts = [round(v*500) for v in old_s]
+        new_counts = [round(v*500) for v in new_s]
+        shift = (sum(new_counts)-sum(old_counts))/25
+        assert isclose(shift, expected_shift, abs_tol=1e-10)
+        assert old_counts != new_counts
+        print(f"SCRATCH, n={n}: prior={sum(old_counts)/25:.2f}%, "
+              f"Table1={sum(new_counts)/25:.2f}%, shift={shift:+.2f}pp")
+        if n == "100":
+            assert old_counts[2] == 175 and new_counts[2] == 242
+            assert new_counts[2]-old_counts[2] == 67
+    assert canonical_meta["cudnn_deterministic"] is True
+    assert canonical_meta["cudnn_benchmark"] is False
+    assert "cudnn_deterministic" not in earlier_meta
+    assert "cudnn_benchmark" not in earlier_meta
+    print("PASS: SCRATCH differs at every budget despite no pretrained weights.")
+    print("      Earliest trained objective MSE is first in both archives.")
+    print("      Backend flag coverage is incomplete in earlier metadata.")
+    print("      Neither the GPU cause nor bitwise input identity is proven.")
+
     for loss in ("mse", "floc_1.2"):
         old_curve = json.loads((parent /
             f"main_alpha15/pretraining_trajectory_{loss}.json").read_text(encoding="utf-8"))
