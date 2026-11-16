@@ -1,61 +1,43 @@
-> [!IMPORTANT]
-> **The root-level scripts below are the historical pre-revision release.** They are retained for provenance and must not be used to reproduce the revised manuscript.
->
-> The original submission's synthetic Chambers–Mallows–Stuck sampler did not implement the stated symmetric alpha-stable law for the affected alpha=1.5 experiments. The original alpha=1.5 results and associated significance claims were withdrawn during revision. The scripts and results below are retained as a record of the initial submission only.
->
-> The corrected, versioned code and selected archived results for the revised manuscript are now provided in [`revision_v70_20261010/`](revision_v70_20261010/README.md). This is a public reproducibility snapshot, not a claim that every archived GPU experiment was independently rerun.
-
 # FLOC-MSM: Robust Masked Signal Modeling under Impulsive Noise
 
-The root-level files document the original submission of “Robust Masked Signal Modeling under Impulsive Noise: A Fractional Lower-Order Perspective” to *Signal Processing* (Elsevier). They are preserved as historical records. Use the versioned release above for the revised results.
+**Manuscript:** “Robust Masked Signal Modeling under Impulsive Noise: A Fractional Lower-Order Perspective”  
+**Journal:** *Signal Processing* (Elsevier)  
+**Manuscript ID:** SIGPRO-D-26-02622
 
-## Requirements
+## Start here
 
-```bash
-conda create -n floc-msm python=3.12
-conda activate floc-msm
-pip install torch numpy scipy scikit-learn matplotlib aeon
-```
+- [R1 revision status and evidence map](REVISION_STATUS.md) — current verified/unverified status, claim boundaries, missing source inputs and repository maintenance findings.
+- [R1 audit index](revision_audits/README.md) — navigation across the 18 topic-specific audit records.
+- [Corrected v70 code/results archive](revision_v70_20261010/README.md) — versioned corrected sampler, experiment runners, selected archived outputs, tests and manifest.
 
-GPU recommended (RTX 5060 Ti 16GB used in paper). CPU fallback works but slower.
+## Repository version boundaries
 
-## Quick Start
+There are three distinct layers:
 
-```bash
-# Original pre-revision experiment (alpha=1.5, 10 seeds; superseded)
-python code/floc_10seed.py
+1. **Root-level scripts:** historical pre-revision submission code. The affected original alpha=1.5 CMS sampler used the wrong angular factor, cos(U) instead of cos((1-alpha)U). The affected original alpha=1.5 results and associated significance claims were withdrawn. These files are retained for provenance only.
+2. **revision_v70_20261010/:** frozen corrected code and selected archived results. This is a public reproducibility snapshot, not the full manuscript/rebuttal/supplement package and not proof that every GPU experiment was independently rerun.
+3. **revision_audits/:** post-assembly source, protocol, statistical and editorial audits. These notes do not silently amend the frozen v70 data or the assembled R1 manuscript.
 
-# Original multi-alpha robust loss comparison (superseded)
-python code/floc_tsp_loss_compare_fixed.py
+Do not use the root-level scripts to reproduce the revised results. The old scripts include machine-specific paths and/or superseded experimental logic; they are not a portable clean-checkout entrypoint. In particular, the former README commands prefixed them with a non-existent code/ directory. No legacy Quick Start command is provided here.
 
-# Original UCR benchmark with NOISEX-92 real impulsive noise (superseded)
-python code/noisex92_ucr.py
+## Reproducing the corrected public snapshot
 
-# Original statistical analysis (superseded)
-python code/stats_analysis.py
-```
+Follow the environment, test and audit commands in [revision_v70_20261010/README.md](revision_v70_20261010/README.md). Run those commands from inside revision_v70_20261010/, not from the repository root.
 
-## Original Result Mapping (Historical Only)
+The narrow public-core Table 1/Table 3 checker is [revision_audits/audit_public_R1_core_table_gate.py](revision_audits/audit_public_R1_core_table_gate.py). It checks selected clean-R1 numeric cells only; it is not a complete paper or Supplementary Materials audit.
 
-| Figure/Table | Script | Output |
-|---|---|---|
-| Original Table 1 (alpha=1.5; superseded) | `code/floc_10seed.py` | `results/floc_10seed/` |
-| Original Table 2 (multi-alpha; superseded) | `code/floc_tsp_loss_compare_fixed.py` | `results/tsp_loss_compare_fixed/` |
-| Original Table 3 (UCR benchmark; superseded) | `code/ucr_all_losses.py` | `results/ucr_all_losses/` |
-| Original Figure 5 (NOISEX-92 check) | `code/noisex92_ucr.py` | `results/noisex92_ucr/` |
-| Original statistical analysis | `code/stats_analysis.py` | stdout |
+## What is not included in this Git repository
 
-## Data
+The public tree does not contain the complete clean R1 manuscript source/PDF, the separately named Supplementary_Material_v73.pdf, all supplementary TeX/table fragments, the full source-provenance map, or all large intermediate diagnostic arrays. The 94-page Editorial Manager assembly and the exact final portal state are not established by the code archive alone. See [REVISION_STATUS.md](REVISION_STATUS.md) before making any claim about submission readiness.
 
-- **UCR datasets**: auto-downloaded via `aeon` package
-- **CWRU bearing data**: Case Western Reserve University Bearing Data Center (public)
-- **NOISEX-92**: public noise corpus (bundled with most signal processing toolboxes)
-- **Synthetic data**: generated on-the-fly by the legacy scripts
+## Data and licensing
 
-## License
+- UCR datasets are loaded through aeon; obtain them from their original source and follow their terms.
+- CWRU bearing data and NOISEX-92 are not redistributed in this repository.
+- Synthetic experiments generate their signals/noise through the archived code.
 
-MIT License — see LICENSE file.
+The repository is licensed under the MIT License; see [LICENSE](LICENSE).
 
 ## Citation
 
-If you use this historical code for the original, superseded results, cite the manuscript as appropriate. Do not cite this repository as the reproducibility release for the revised results.
+If using the corrected code/results snapshot, cite the associated revised manuscript and identify the exact archive version and experiment protocol. Do not cite the root-level historical scripts as the source of the revised results.
