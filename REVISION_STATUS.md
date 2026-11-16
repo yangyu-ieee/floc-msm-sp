@@ -79,6 +79,8 @@ The public v70 tree intentionally omits several inputs required for full source-
 - results/diagnostics/epoch20_score_samples.npz;
 - the exact historical source/hash for the dedicated exact-count random-token masking sensitivity arm.
 
+The public primary runner has a configurable mask-strategy option, but that does not establish byte-level provenance for the separate historical masking-sensitivity run. The identically named provenance-path copy is the same generic runner blob, not an independent recovered implementation.
+
 Consequently, code/audit_supplement_tables.py cannot initialize against the public v70 tree, and code/audit_release.py cannot run as a whole-release gate there. This is a declared public-package dependency limitation, not evidence that the clean-R1 Table 1 or Table 3 values are wrong. The public-core checker is deliberately narrower.
 
 Still unverified:
