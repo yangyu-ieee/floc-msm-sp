@@ -30,7 +30,7 @@ This directory contains post-assembly, mostly read-only audits. The notes are ev
 | [Preprocessing scale](2026-11-13_R1_preprocessing_relative_noise_scale_audit.md) | Global-RMS preprocessing changes effective impulsive-noise scale, so it is not a normalization-only ablation | Separate Table 2 interpretation |
 | [Mask position and coverage](2026-11-13_R1_mask_position_and_coverage_audit.md) | Token-mask fraction differs from raw-sample concealment; endpoint runs and scratch-control variation limit mask-ratio attribution | Detailed masking geometry |
 | [Local geometry](2026-11-13_R1_local_geometry_fixed_mask_and_slice_audit.md) | Fixed-mask local-loss geometry and slice-level diagnostics | Diagnostic only; not a new optimizer result |
-| [Pretraining control and STAR-MAE](2026-11-13_R1_pretraining_control_and_STAR-MAE_prior_art.md) | Core objective arms share a pretraining realization; one checkpoint per objective; STAR-MAE is adjacent 2026 prior art | Prior-art boundary and pretraining-control detail |
+| [Pretraining control and STAR-MAE](2026-11-13_R1_pretraining_control_and_STARMAE_prior_art.md) | Core objective arms share a pretraining realization; one checkpoint per objective; STAR-MAE is adjacent 2026 prior art | Prior-art boundary and pretraining-control detail |
 
 ## 4. External-data evidence and interpretation
 
